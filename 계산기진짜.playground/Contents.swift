@@ -6,83 +6,82 @@ class Calculator { //메인 계산기
     var mainA: Int = 0
     var mainB: Int = 0
     
-    init(a: Int, b: Int) {
-        self.mainA = a
-        self.mainB = b
+    init(inputNumber1: Int, inputNumber2: Int) {
+        self.mainA = inputNumber1
+        self.mainB = inputNumber2
     }
-    
-    var addF = AddOperation()
-    var subF = SubstractOperation()
-    var mulF = MultiplyOperation()
-    var divF = DivideOperation()
-    
     
     //계산기 내부에는 사칙연산 기능이 있고
     //기능 내부에는 실제 로직이 들어가 있음
     
     func add() {
-        addF.add(a: mainA, b: mainB)
+        AddOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
     }
     
     func sub() {
-        subF.sub(a: mainA, b: mainB)
+        SubstractOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
     }
     
     func mul() {
-        mulF.mul(a: mainA, b: mainB)
+        MultiplyOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
     }
     
     func div() {
-        
-        divF.div(a: mainA, b: mainB)
+        DivideOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
     }
-
     
     
 }
 
-//레벨3 클래스 만들고, 관계 고래서 메인클래스와 관계 맺기
-//메인클래스를 실행해야만 나머지 클래스들이 실행되는
-
-class AddOperation {
+//더하기
+class AddOperation: AbstractOperation {
     
-    
-    func add(a: Int, b: Int) {
-        
-        print(a+b)
-    }
-        
-}
-
-
-class SubstractOperation { //빼기
-    func sub(a: Int, b:Int)  {
-        
-        print("빼기 \(a+b)")
-    }
-
-    
-}
-
-class MultiplyOperation  { //곱하기
-    func mul(a: Int, b:Int) {
-        
-        print("곱하기 \(a*b)")
+    static func NumberForBasicOperation(num1: Int, num2: Int) -> Int {
+        return num1 + num2
     }
 }
 
-class DivideOperation  { //나누기
-    
-    func div(a: Int, b:Int)  {
-        
-        print("나누기 \(a/b)")
+
+//빼기
+class SubstractOperation: AbstractOperation  {
+    static func NumberForBasicOperation(num1: Int, num2: Int) -> Int {
+        return num1 - num2
+    }
+}
+
+//곱하기
+class MultiplyOperation: AbstractOperation  {
+    static func NumberForBasicOperation(num1: Int, num2: Int) -> Int {
+        return num1 * num2
+    }
+}
+
+
+//나누기
+class DivideOperation: AbstractOperation  {
+    static func NumberForBasicOperation(num1: Int, num2: Int) -> Int {
+        return num1 / num2
     }
 }
 
 
 
-let realCalculator = Calculator(a: 5, b: 4)
+let realCalculator = Calculator(inputNumber1: 10, inputNumber2: 3)
 realCalculator.add() //계산기의 더하기 기능에 접근
+
+
+
+
+protocol AbstractOperation {
+    //프로토콜
+    //기존의 클래스들과 관계를 맺어야한다. 해당 프로토콜을 채택해야된다.
+    //프로토콜은 내부에 요구사항을 정의 해줘야한다.
+    
+    static func NumberForBasicOperation(num1 : Int, num2: Int) -> Int
+    //사칙연산을 위한 숫자를 받는 요구사항.
+    
+    
+}
 
 
 //실패원인 - 클래스 상속 개념 미흡, 부모, 자식클래스의 개념에 대해 다시 공부할것
