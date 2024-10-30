@@ -3,31 +3,31 @@ import UIKit
 
 class Calculator { //메인 계산기
     
-    var mainA: Int = 0
-    var mainB: Int = 0
+    var intialNum1: Int = 0
+    var intialNum2: Int = 0
     
     init(inputNumber1: Int, inputNumber2: Int) {
-        self.mainA = inputNumber1
-        self.mainB = inputNumber2
+        self.intialNum1 = inputNumber1
+        self.intialNum2 = inputNumber2
     }
     
     //계산기 내부에는 사칙연산 기능이 있고
     //기능 내부에는 실제 로직이 들어가 있음
     
     func add() {
-        AddOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
+        AddOperation.NumberForBasicOperation(num1: intialNum1, num2: intialNum2)
     }
     
     func sub() {
-        SubstractOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
+        SubstractOperation.NumberForBasicOperation(num1: intialNum1, num2: intialNum2)
     }
     
     func mul() {
-        MultiplyOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
+        MultiplyOperation.NumberForBasicOperation(num1: intialNum1, num2: intialNum2)
     }
     
     func div() {
-        DivideOperation.NumberForBasicOperation(num1: mainA, num2: mainB)
+        DivideOperation.NumberForBasicOperation(num1: intialNum1, num2: intialNum2)
     }
     
     
@@ -92,3 +92,5 @@ protocol AbstractOperation {
 //계산기 내부에는 사칙연산 기능이 들어간다.
 //아 너무 어렵게 생각했었음...
 //관계를 맺는다는게 메인 클래스내에 다른 클래스가 들어가도 관계를 맺는거나 마찬가지..
+
+
