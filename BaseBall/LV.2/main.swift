@@ -58,7 +58,7 @@ class BaseBallGame {
         if randomNumber == inputNum {
             print("숫자가 동일하다.")
         } else {
-            print("동일하지 않다.")
+            print("동일하지 않다.2")
         }
     }
     
