@@ -20,7 +20,6 @@
 
 /* Begin PBXFileReference section */
 		E28E08EC2CD889260072CA6D /* BaseBall */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BaseBall; sourceTree = BUILT_PRODUCTS_DIR; };
-		E28E09152CD8F0A70072CA6D /* BaseBall(LV.2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "BaseBall(LV.2.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -54,13 +53,6 @@
 			isa = PBXGroup;
 			children = (
 				E28E08EC2CD889260072CA6D /* BaseBall */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E28E09172CD8F0A70072CA6D /* Products */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,12 +109,6 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E28E08ED2CD889260072CA6D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E28E09172CD8F0A70072CA6D /* Products */;
-					ProjectRef = E28E09152CD8F0A70072CA6D /* BaseBall(LV.2.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E28E08EB2CD889260072CA6D /* BaseBall */,
