@@ -21,34 +21,45 @@ class BaseBallGame {
 
     func start() {
         print(#function)
-        randomArray = getRadomNumberArray()
+        getRadomNumberArray()
         BaseBallGameLogic()
     }
     
-    //랜덤값 추출로직
-    func getRadomNumberArray() -> [Int] {
+    func createRadomNumber() -> Int {
+        var randomInt = 0
         print(#function)
-        randomNumber = Int.random(in: 111...999)
-        var ran2 = 0
         repeat {
-            // 세자리수중 0이 없는 숫자들 추출하기
-            if (randomNumber%10 != 0) && ((randomNumber/10)%10 != 0) {
-                ran2 = randomNumber
-                while(ran2 > 0) {
-                    randomArray += [ran2%10]
-                    ran2 /= 10
-                }
-                //조건문이 true라면 반복문을 벗어남.
+            // 세자리수중 10의자리 0, 1의자리 0이 나오는것들 제외하는 로직
+            randomNumber = Int.random(in: 100...999)
+            if (randomNumber%100 != 0 && randomNumber > 100) {
+                randomInt = randomNumber
                 break
-            } else { //랜덤숫자중 0이 껴있으면 숫자를 다시생성
-                randomNumber = Int.random(in: 111...999)
-                continue
-            }
-            //ran2 값이 0인경우 -> 초기화 되지 않은경우
-        }while(ran2 == 0)
+                }
+            continue
         
-        print("랜덤숫자 : \(randomNumber)")
-        return randomArray.reversed()
+        }while(true)
+        print("createRadomNumber() \(randomInt)")
+        return randomInt
+    }
+    
+    //랜덤값 추출로직
+    func getRadomNumberArray() {
+
+        repeat {
+            var creatRandom = createRadomNumber()
+            randomArray = [] // 랜덤 숫자를 생성한다면, 기존배열 초기화
+            
+                while(creatRandom > 0) { //랜덤 숫자를 배열에 담는 로직.
+                    randomArray += [creatRandom%10]
+                    creatRandom /= 10
+                }
+                randomArray = randomArray.reversed()
+
+            // 세자리수중 겹치는 수가 존재한다면, 로직반복
+        }while(Set(randomArray).count != 3)
+        
+        
+        print("랜덤숫자 : \(randomArray)")
     }
     
     //유저의 입력값 검증
