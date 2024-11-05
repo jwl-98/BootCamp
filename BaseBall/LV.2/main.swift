@@ -72,7 +72,7 @@ class BaseBallGame {
         if let inString = Stringinput { //입력값이 존재한다면.
             if let numString = Int(inString){
                 inputNum = numString
-                if inputNum < 1000 && ((inputNum%10 != 0) && ((inputNum/10)%10 != 0)) {
+                if inputNum < 1000 && inputNum > 100 {
                     //세자리 수를 초과하지 않고, 0이 껴있는 세자리 수가 아니라면 true반환
                     print("입력한 수는 \(inputNum)")
                     //입력된 수를 배열로 변경해주기 위한 함수 호출
