@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E28E08EB2CD889260072CA6D"
-               BuildableName = "BaseBall"
-               BlueprintName = "BaseBall"
+               BlueprintIdentifier = "E28E09422CD8FCEA0072CA6D"
+               BuildableName = "LV.2"
+               BlueprintName = "LV.2"
                ReferencedContainer = "container:BaseBall.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E28E08EB2CD889260072CA6D"
-            BuildableName = "BaseBall"
-            BlueprintName = "BaseBall"
+            BlueprintIdentifier = "E28E09422CD8FCEA0072CA6D"
+            BuildableName = "LV.2"
+            BlueprintName = "LV.2"
             ReferencedContainer = "container:BaseBall.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,12 +62,21 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E28E08EB2CD889260072CA6D"
-            BuildableName = "BaseBall"
-            BlueprintName = "BaseBall"
+            BlueprintIdentifier = "E28E09422CD8FCEA0072CA6D"
+            BuildableName = "LV.2"
+            BlueprintName = "LV.2"
             ReferencedContainer = "container:BaseBall.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E28E09422CD8FCEA0072CA6D"
+            BuildableName = "LV.2"
+            BlueprintName = "LV.2"
+            ReferencedContainer = "container:BaseBall.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -20,14 +20,14 @@ class BaseBallGame {
     
 
     func start() {
-        print(#function)
+//        print(#function)
         getRadomNumberArray()
         BaseBallGameLogic()
     }
     
     func createRadomNumber() -> Int {
         var randomInt = 0
-        print(#function)
+//        print(#function)
         repeat {
             // 세자리수중 10의자리 0, 1의자리 0이 나오는것들 제외하는 로직
             randomNumber = Int.random(in: 100...999)
@@ -38,7 +38,6 @@ class BaseBallGame {
             continue
         
         }while(true)
-        print("createRadomNumber() \(randomInt)")
         return randomInt
     }
     
@@ -59,7 +58,6 @@ class BaseBallGame {
         }while(Set(randomArray).count != 3)
         
         
-        print("랜덤숫자 : \(randomArray)")
     }
     
     //유저의 입력값 검증
@@ -74,7 +72,7 @@ class BaseBallGame {
                 inputNum = numString
                 if inputNum < 1000 && inputNum > 100 {
                     //세자리 수를 초과하지 않고, 0이 껴있는 세자리 수가 아니라면 true반환
-                    print("입력한 수는 \(inputNum)")
+                    
                     //입력된 수를 배열로 변경해주기 위한 함수 호출
                     setUserNumberToArray(input: inputNum)
                     return true
@@ -90,7 +88,7 @@ class BaseBallGame {
     }
     
     func setUserNumberToArray(input: Int) {
-        print(#function)
+//        print(#function)
         var n = input //입력된 수를 저장하는 변수
         userNumberArray = [] //다시호출되면 배열 초기화
         while(n > 0) {
@@ -117,7 +115,7 @@ class BaseBallGame {
             if checkUserInput() == true {
                 //랜덤숫자의 인덱스와 요소를 튜플의 형태로 추출
                 for (Index, Element) in randomArray.enumerated() {
-                    print(userNumberArray)
+        
                     
                     //유저배열의 인덱스 넘버를 기반으로 요소를 추출
                     //랜덤숫자의 요소와 동일하다면 스트라이크 카운트 1증가
@@ -136,14 +134,37 @@ class BaseBallGame {
                 if countStrike == 0 && countBall == 0 {
                     print("Nothing")
                 }else if countStrike == 3 {
-                    print("정답")
+                    print("정답!")
+                    userInterFace()
                     break
                 }
             }
         }while (true)
     }
+    
+    
 }
 
-let game = BaseBallGame()
-game.start()
+func userInterFace() {
+    let game = BaseBallGame()
+    
+        print("환영합니다! 원하시는 번호를 입력해주세요!")
+        print("1. 게임시작하기 2. 게임기록보기 3. 종료하기")
+        let menuInputNum = readLine()
 
+        switch menuInputNum {
+        case "1" :
+            print("<게임을 시작합니다.>")
+            game.start()
+        case "2" :
+            print("게임기록")
+        case "3" :
+            print("종료")
+        default :
+            print("올바른 숫자를 입력해주세요!")
+        }
+        
+   
+}
+
+userInterFace()

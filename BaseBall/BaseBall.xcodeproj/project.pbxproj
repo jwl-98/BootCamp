@@ -16,82 +16,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		E28E09412CD8FCEA0072CA6D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		E28E094F2CD8FE380072CA6D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E28E08EC2CD889260072CA6D /* BaseBall */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BaseBall; sourceTree = BUILT_PRODUCTS_DIR; };
-		E28E09432CD8FCEA0072CA6D /* LV.2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LV.2; sourceTree = BUILT_PRODUCTS_DIR; };
-		E28E09512CD8FE380072CA6D /* LV.1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LV.1; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E28E096B2CD900D80072CA6D /* Exceptions for "BaseBall" folder in "LV.1" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				LV.1/main.swift,
-			);
-			target = E28E09502CD8FE380072CA6D /* LV.1 */;
-		};
-		E28E096C2CD900DD0072CA6D /* Exceptions for "BaseBall" folder in "BaseBall" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				LV.1/main.swift,
-			);
-			target = E28E08EB2CD889260072CA6D /* BaseBall */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E28E08EE2CD889260072CA6D /* BaseBall */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				E28E096C2CD900DD0072CA6D /* Exceptions for "BaseBall" folder in "BaseBall" target */,
-				E28E096B2CD900D80072CA6D /* Exceptions for "BaseBall" folder in "LV.1" target */,
-			);
 			path = BaseBall;
-			sourceTree = "<group>";
-		};
-		E28E09442CD8FCEA0072CA6D /* LV.2 */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LV.2;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E28E08E92CD889260072CA6D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28E09402CD8FCEA0072CA6D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28E094E2CD8FE380072CA6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -105,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				E28E08EE2CD889260072CA6D /* BaseBall */,
-				E28E09442CD8FCEA0072CA6D /* LV.2 */,
 				E28E08ED2CD889260072CA6D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,8 +53,6 @@
 			isa = PBXGroup;
 			children = (
 				E28E08EC2CD889260072CA6D /* BaseBall */,
-				E28E09432CD8FCEA0072CA6D /* LV.2 */,
-				E28E09512CD8FE380072CA6D /* LV.1 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,47 +82,6 @@
 			productReference = E28E08EC2CD889260072CA6D /* BaseBall */;
 			productType = "com.apple.product-type.tool";
 		};
-		E28E09422CD8FCEA0072CA6D /* LV.2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E28E09472CD8FCEA0072CA6D /* Build configuration list for PBXNativeTarget "LV.2" */;
-			buildPhases = (
-				E28E093F2CD8FCEA0072CA6D /* Sources */,
-				E28E09402CD8FCEA0072CA6D /* Frameworks */,
-				E28E09412CD8FCEA0072CA6D /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				E28E09442CD8FCEA0072CA6D /* LV.2 */,
-			);
-			name = LV.2;
-			packageProductDependencies = (
-			);
-			productName = LV.2;
-			productReference = E28E09432CD8FCEA0072CA6D /* LV.2 */;
-			productType = "com.apple.product-type.tool";
-		};
-		E28E09502CD8FE380072CA6D /* LV.1 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E28E09552CD8FE380072CA6D /* Build configuration list for PBXNativeTarget "LV.1" */;
-			buildPhases = (
-				E28E094D2CD8FE380072CA6D /* Sources */,
-				E28E094E2CD8FE380072CA6D /* Frameworks */,
-				E28E094F2CD8FE380072CA6D /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LV.1;
-			packageProductDependencies = (
-			);
-			productName = LV.1;
-			productReference = E28E09512CD8FE380072CA6D /* LV.1 */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,12 +93,6 @@
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					E28E08EB2CD889260072CA6D = {
-						CreatedOnToolsVersion = 16.1;
-					};
-					E28E09422CD8FCEA0072CA6D = {
-						CreatedOnToolsVersion = 16.1;
-					};
-					E28E09502CD8FE380072CA6D = {
 						CreatedOnToolsVersion = 16.1;
 					};
 				};
@@ -222,28 +112,12 @@
 			projectRoot = "";
 			targets = (
 				E28E08EB2CD889260072CA6D /* BaseBall */,
-				E28E09422CD8FCEA0072CA6D /* LV.2 */,
-				E28E09502CD8FE380072CA6D /* LV.1 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E28E08E82CD889260072CA6D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28E093F2CD8FCEA0072CA6D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28E094D2CD8FE380072CA6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -389,42 +263,6 @@
 			};
 			name = Release;
 		};
-		E28E09482CD8FCEA0072CA6D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		E28E09492CD8FCEA0072CA6D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		E28E09562CD8FE380072CA6D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		E28E09572CD8FE380072CA6D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -442,24 +280,6 @@
 			buildConfigurations = (
 				E28E08F42CD889260072CA6D /* Debug */,
 				E28E08F52CD889260072CA6D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E28E09472CD8FCEA0072CA6D /* Build configuration list for PBXNativeTarget "LV.2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E28E09482CD8FCEA0072CA6D /* Debug */,
-				E28E09492CD8FCEA0072CA6D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E28E09552CD8FE380072CA6D /* Build configuration list for PBXNativeTarget "LV.1" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E28E09562CD8FE380072CA6D /* Debug */,
-				E28E09572CD8FE380072CA6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
