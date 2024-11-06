@@ -31,8 +31,8 @@ class BaseBallGame {
         print("환영합니다! 원하시는 번호를 입력해주세요!")
         print("1. 게임시작하기 2. 게임기록보기 3. 종료하기")
         let menuInputNum = readLine()
-        checkMenuNumber(MunuNum: menuInputNum)
-        
+            checkMenuNumber(MunuNum: menuInputNum)
+    
     }
     
     func checkMenuNumber(MunuNum: String?) {
@@ -44,6 +44,7 @@ class BaseBallGame {
             case "2" :
                 print("게임기록")
                 printRecord()
+                userInterface()
             case "3" :
                 print("종료")
                 
