@@ -8,17 +8,38 @@
 //import Foundation
 //
 ////데이터 처리를 위한 구조체
+
+
+//게임 횟수, 시도횟수를 저장하기위한 구조체 입니다.
 //
-//class Data {
-//    static var saveGameCountarr: [Int] = []
-//    static var tryCountNum = 0 //전역변수의 설정, 시도횟수 넘버는 공통으로 공유를 위함
-//    static var gameCount = 0 //게임 횟수
-//    
-//    
-//    static func saveRecord() {
-//        //시도횟수를 차곡차곡 배열에 담는다.
-//        BaseBallGame.saveGameCountarr += [BaseBallGame.tryCountNum]
-//    }
-//    
-//    
-//}
+
+
+class Data {
+     var saveGameCountArr: [Int] = []
+     var saveTryCountNumArr: [Int] = []
+     var tryCountNum = 0 //시도횟수 넘버는 공통으로 공유를 위함
+     var gameCount = 0 //게임 횟수
+    
+ 
+    func saveRecord() {
+       //시도횟수를 차곡차곡 배열에 담는다.
+        print(#function)
+        saveTryCountNumArr += [tryCountNum]
+        saveGameCountArr += [gameCount]
+   }
+    
+    func printRecord() {
+        print(#function)
+        for i in 0..<saveGameCountArr.count {
+            print("\(saveGameCountArr[i])번째 게임 : 시도횟수 - \(saveTryCountNumArr[i])")
+        }
+    }
+    
+    //해당함수 호출시 카운트 초기화
+    func endGame() {
+        print(#function)
+        tryCountNum = 0
+        gameCount = 0
+    }
+    
+}
