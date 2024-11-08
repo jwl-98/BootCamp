@@ -10,17 +10,16 @@ import Foundation
 class BaseBallGame {
     
     let ui = UserInterface()
-    let menuInputData = UserInputData()
     let randomLogic = RandomNumberLogic()
-    let logic: GameLogic
+    let logic:  GameLogic
+    let menuInputData : UserInputData
     
     let data = Data()
     
     //생성자를 통해서 랜덤숫자 미리 생성
     init() {
-            let randomArray = randomLogic.getRadomNumberArray()
-        //게임 로직이 생성되면 데이터, 랜덤배열의 전달
-            logic = GameLogic(data: data, userInputData: menuInputData, randomArray: randomArray)
+        self.logic = GameLogic(copyData: data)
+        self.menuInputData = UserInputData(copyeData: data)
         }
     
     //시작하면 유저 인터페이스를 불러옵니다
@@ -39,7 +38,7 @@ class BaseBallGame {
         
         menuInputData.inputMenuNumber()
         data.gameCount += 1
-        logic.BaseBallGameLogic()
+        logic.baseBallGameLogic()
     }
     
 }

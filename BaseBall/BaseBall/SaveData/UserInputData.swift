@@ -11,20 +11,22 @@ import Foundation
 class UserInputData {
     
     let ui = UserInterface()
-    let data = Data()
+    let data : Data
     
     
     var inputNum = 0
     var userNumberArray:[Int] = [] //세자리 수를 배열에 담기위한 배열
     
-//    
-    func inputMenuNumber() {
+    init(copyeData: Data) {
+        self.data = copyeData
+    }
+     func inputMenuNumber() {
         print(#function)
         let menuInputNum = readLine()
         checkMenuNumber(menuNum: menuInputNum)
     }
 //    
-    func checkMenuNumber(menuNum: String?) {
+     func checkMenuNumber(menuNum: String?) {
         print(#function)
             switch menuNum {
             case "1" :

@@ -13,13 +13,13 @@ import Foundation
 struct UserInterface {
     
     //메뉴출력 함수
-    func printMenu() {
+     func printMenu() {
         print("환영합니다! 원하시는 번호를 입력해주세요!")
         print("1. 게임시작하기 2. 게임기록보기 3. 종료하기")
     }
     
     //메뉴넘버 출력함수
-    func printMenuNumber(menuNumberInput: String?) {
+     func printMenuNumber(menuNumberInput: String?) {
         
         switch menuNumberInput {
         case "1" :
@@ -36,7 +36,7 @@ struct UserInterface {
     }
     
     
-    func printStartText() {
+     func printStartText() {
         print("숫자를 입력하세요 : ")
     }
     
