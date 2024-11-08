@@ -24,8 +24,6 @@ class BaseBallGame {
     
     //시작하면 유저 인터페이스를 불러옵니다
     func start() {
-        
-        ui.printMenu()
         gameSet()
 
     }

@@ -22,6 +22,7 @@ class UserInputData {
     }
      func inputMenuNumber() {
         print(#function)
+         ui.printMenu()
         let menuInputNum = readLine()
         checkMenuNumber(menuNum: menuInputNum)
     }
@@ -31,11 +32,9 @@ class UserInputData {
             switch menuNum {
             case "1" :
                 ui.printMenuNumber(menuNumberInput: menuNum)
-                return
             case "2" :
                 ui.printMenuNumber(menuNumberInput: menuNum)
                 data.printRecord()
-                ui.printMenu()
                 inputMenuNumber()
             case "3" :
                 ui.printMenuNumber(menuNumberInput: menuNum)

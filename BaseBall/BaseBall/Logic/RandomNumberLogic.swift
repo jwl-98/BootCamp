@@ -36,6 +36,7 @@ class RandomNumberLogic {
         print(#function)
         
         repeat {
+            createRadomNumber()
             randomArray = [] // 랜덤 숫자를 생성한다면, 기존배열 초기화
             
             while(saveRandomNum > 0) { //랜덤 숫자를 배열에 담는 로직.

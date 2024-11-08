@@ -19,7 +19,7 @@ class GameLogic {
     init(copyData: Data) {
         self.data = copyData
         self.userInputData = UserInputData(copyeData: data)
-        randomLogic.createRadomNumber() // 로직이 실행되면 랜덤 넘버 실행
+//        randomLogic.createRadomNumber() // 로직이 실행되면 랜덤 넘버 실행
         self.randomArray = randomLogic.getRadomNumberArray() //랜덤배열 생성후 저장
     }
     
@@ -61,7 +61,6 @@ class GameLogic {
                     data.saveRecord()
                     data.tryCountNum = 0
                     ui.printCorrect()
-                    ui.printMenu()
                     userInputData.inputMenuNumber()
                     break
                 }
