@@ -14,10 +14,13 @@ class GameLogic {
     let randomLogic = RandomNumberLogic()
     let data : Data
     
+    var randomArray : [Int]
     
     init(copyData: Data) {
         self.data = copyData
         self.userInputData = UserInputData(copyeData: data)
+        randomLogic.createRadomNumber() // 로직이 실행되면 랜덤 넘버 실행
+        self.randomArray = randomLogic.getRadomNumberArray() //랜덤배열 생성후 저장
     }
     
     
@@ -35,7 +38,7 @@ class GameLogic {
             if userInputData.checkUserInput() == true {
                 data.tryCountNum += 1
                 //랜덤숫자의 인덱스와 요소를 튜플의 형태로 추출
-                for (Index, Element) in randomLogic.getRadomNumberArray().enumerated() {
+                for (Index, Element) in randomArray.enumerated() {
                     
                     //유저배열의 인덱스 넘버를 기반으로 요소를 추출
                     //랜덤숫자의 요소와 동일하다면 스트라이크 카운트 1증가

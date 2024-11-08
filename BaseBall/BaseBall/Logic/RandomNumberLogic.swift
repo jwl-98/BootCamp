@@ -13,16 +13,17 @@ class RandomNumberLogic {
     var randomNumber = 0
     var randomArray:[Int] = []
 
- 
+    var saveRandomNum = 0
     
-    func createRadomNumber() -> Int {
+    func createRadomNumber() {
         print(#function)
         repeat {
             // 세자리수중 10의자리 0, 1의자리 0이 나오는것들 제외하는 로직
             randomNumber = Int.random(in: 100...999)
             if (randomNumber%100 != 0 && randomNumber > 100) {
                 print(randomNumber)
-                return randomNumber
+                saveRandomNum = randomNumber
+                return
             }
             continue
             
@@ -34,14 +35,12 @@ class RandomNumberLogic {
     func getRadomNumberArray() -> [Int] {
         print(#function)
         
-        let createRadomNumber = createRadomNumber()
-        var saveRandimNumber = createRadomNumber
         repeat {
             randomArray = [] // 랜덤 숫자를 생성한다면, 기존배열 초기화
             
-            while(saveRandimNumber > 0) { //랜덤 숫자를 배열에 담는 로직.
-                randomArray += [saveRandimNumber%10]
-                saveRandimNumber /= 10
+            while(saveRandomNum > 0) { //랜덤 숫자를 배열에 담는 로직.
+                randomArray += [saveRandomNum%10]
+                saveRandomNum /= 10
             }
             randomArray = randomArray.reversed()
             
