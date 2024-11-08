@@ -32,6 +32,7 @@ class UserInputData {
             switch menuNum {
             case "1" :
                 ui.printMenuNumber(menuNumberInput: menuNum)
+                break
             case "2" :
                 ui.printMenuNumber(menuNumberInput: menuNum)
                 data.printRecord()

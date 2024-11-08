@@ -25,7 +25,7 @@ class GameLogic {
     
     
     func baseBallGameLogic() {
-        
+    
 
         print(#function)
         
@@ -61,7 +61,7 @@ class GameLogic {
                     data.saveRecord()
                     data.tryCountNum = 0
                     ui.printCorrect()
-                    userInputData.inputMenuNumber()
+                   // userInputData.inputMenuNumber()
                     break
                 }
             }else {
