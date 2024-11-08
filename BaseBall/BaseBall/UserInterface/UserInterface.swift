@@ -32,7 +32,6 @@ struct UserInterface {
             print("올바른 숫자를 입력해주세요!")
         }
         
-        return
     }
     
     

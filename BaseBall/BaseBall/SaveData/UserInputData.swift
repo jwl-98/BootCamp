@@ -41,6 +41,7 @@ class UserInputData {
                 data.endGame()
             default :
                 ui.printMenuNumber(menuNumberInput: menuNum)
+                inputMenuNumber()
             }
     }
 //    
