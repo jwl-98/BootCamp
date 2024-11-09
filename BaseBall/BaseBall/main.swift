@@ -7,6 +7,9 @@
 
 import Foundation
 
+
 let game = BaseBallGame()
 game.start()
 
+let data = Data()
+let data2 = data
