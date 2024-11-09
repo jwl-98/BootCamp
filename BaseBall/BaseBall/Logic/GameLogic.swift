@@ -28,7 +28,6 @@ class GameLogic {
         print(#function)
         
         repeat {
-            
             //카운트 수가 누적되지 않게 반복문에 들어서면 카운트 초기화가 됩니다.
             var countStrike = 0
             var countBall = 0

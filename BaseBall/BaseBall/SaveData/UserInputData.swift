@@ -20,31 +20,7 @@ class UserInputData {
     init(copyeData: Data) {
         self.data = copyeData
     }
-     func inputMenuNumber() {
-        print(#function)
-         ui.printMenu()
-        let menuInputNum = readLine()
-        checkMenuNumber(menuNum: menuInputNum)
-    }
-//    
-     func checkMenuNumber(menuNum: String?) {
-        print(#function)
-            switch menuNum {
-            case "1" :
-                ui.printMenuNumber(menuNumberInput: menuNum)
-                break
-            case "2" :
-                ui.printMenuNumber(menuNumberInput: menuNum)
-                data.printRecord()
-                inputMenuNumber()
-            case "3" :
-                ui.printMenuNumber(menuNumberInput: menuNum)
-                data.endGame()
-            default :
-                ui.printMenuNumber(menuNumberInput: menuNum)
-                inputMenuNumber()
-            }
-    }
+    
 //    
     
     func checkUserInput() -> Bool {
