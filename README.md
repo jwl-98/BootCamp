@@ -75,4 +75,15 @@ switch문을 통한 분기처리를 통해 구현했습니다.
 2번을 누르면  userInterface() 함수를 호출해서 다시 메뉴화면이 뜨게끔 구현했습니다.
 endGame() 이라는 함수를 생성해서 카운트를 0으로 초기화 시키는 코드를 작성했습니다.
 3번을 누르면 endGame() 함수가 호출 됩니다.
-=======
+
+## 파일 디렉토리 분리 2024.11.07~2024.11.09
+main.swift - 게임의 인스턴스를 생성 합니다
+BaseBall.swift - 메뉴 넘버를 switch문으로 받아 각 넘버에 따른 기능을 실행시킵니다. 
+UserInterface 폴더 - 메뉴화면과 문구 등과 같이 실제로 print 문을 통해 출력되는 것들은 이곳에 있습니다. 
+SaveData 폴더 
+Data.swift - 게임 횟수, 시도횟수를 저장합니다. 
+UserInputData - 유저의 입력값을 받아 처리하는 로직이 담겨있습니다. 
+
+Logic 폴더 
+BaseBallGameLogic.swift  - 게임 로직이 담겨있습니다. 
+RandomArrayLogic.swift - 랜덤숫자(답)의 생성과 랜덤숫자배열을 생성하는 로직이 담겨있습니다.
