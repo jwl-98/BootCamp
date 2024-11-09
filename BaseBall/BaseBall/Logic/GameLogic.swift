@@ -14,22 +14,21 @@ class GameLogic {
     let randomLogic = RandomNumberLogic()
     let data : Data
     
-    var randomArray : [Int]
+    var randomArray : [Int] = []
     
     init(copyData: Data) {
         self.data = copyData
         self.userInputData = UserInputData(copyeData: data)
-//        randomLogic.createRadomNumber() // 로직이 실행되면 랜덤 넘버 실행
-        self.randomArray = randomLogic.getRadomNumberArray() //랜덤배열 생성후 저장
     }
     
     
     func baseBallGameLogic() {
-    
+        self.randomArray = randomLogic.getRadomNumberArray() //랜덤배열 생성후 저장
 
         print(#function)
         
         repeat {
+            
             //카운트 수가 누적되지 않게 반복문에 들어서면 카운트 초기화가 됩니다.
             var countStrike = 0
             var countBall = 0
@@ -61,8 +60,7 @@ class GameLogic {
                     data.saveRecord()
                     data.tryCountNum = 0
                     ui.printCorrect()
-                   // userInputData.inputMenuNumber()
-                    break
+                    return
                 }
             }else {
                 // 조건 이외의 입력값이 입력되면 에러메세지 출력

@@ -24,8 +24,23 @@ class BaseBallGame {
     
     //시작하면 유저 인터페이스를 불러옵니다
     func start() {
-        gameSet()
-
+        while true {
+            ui.printMenu()
+            let menuInput = readLine()
+            switch menuInput {
+            case "1":
+                data.gameCount += 1
+                logic.baseBallGameLogic()
+            case "2":
+                data.printRecord()
+            case "3":
+                data.endGame()
+                return
+            default:
+                ui.printErrorUserIn()
+            }
+        }
+        
     }
     
     //게임을 준비하는함수입니다.
@@ -36,7 +51,6 @@ class BaseBallGame {
         
         menuInputData.inputMenuNumber()
         data.gameCount += 1
-        logic.baseBallGameLogic()
     }
     
 }
