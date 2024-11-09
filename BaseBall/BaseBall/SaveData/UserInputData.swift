@@ -8,6 +8,12 @@
 import Foundation
 
 
+/*
+ 유저 인풋 데이터
+  게임을 시작하고 사용자가 세자리수를 입력했을때 세자리수를 검증하는 클래스입니다.
+ */
+
+
 class UserInputData {
     
     let ui = UserInterface()
@@ -21,7 +27,11 @@ class UserInputData {
         self.data = copyeData
     }
     
-//    
+  /*  checkUserInput()
+    해당 함수의 실행 시점은
+    baseBallGameLogic()내 if문 입니다.
+    실행하여 리턴 되는 Bool값에 따라 게임 로직이 실행되거나 실행되지 않습니다.
+   */
     
     func checkUserInput() -> Bool {
         print(#function)
@@ -43,6 +53,11 @@ class UserInputData {
         
         return false
     }
+    
+    /*checkUserInput() 내에서 실행되는 함수입니다.
+     유저 넘버를 받아서 수를 분리해 내어 배열로 변경후
+     배열을 뒤집어 리턴합니다.
+     */
     
     func setUserNumberToArray(input: Int) {
         print(#function)
