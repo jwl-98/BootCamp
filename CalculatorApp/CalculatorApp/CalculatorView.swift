@@ -21,6 +21,36 @@ class CalculatorView: UIView {
         return label
     }()
     
+      var calculatorButton: [UIButton] = {
+        var buttonLabel : [String] = ["7","8","9","+"]
+        var saveButtonToArray: [UIButton] = []
+        
+        for i in 1...buttonLabel.count {
+            let button = UIButton()
+            button.titleLabel?.font = .boldSystemFont(ofSize: 30)
+            button.backgroundColor =  UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
+            button.frame.size.height = 80
+            button.frame.size.width = 80
+           // button.layer.cornerRadius = 40
+            button.setTitle(buttonLabel[i-1], for: .normal)
+            
+            saveButtonToArray.append(button)
+        }
+        
+        return saveButtonToArray
+        
+    }()
+    
+    lazy var horizontalStackView: UIStackView = {
+        let hSV = UIStackView(arrangedSubviews: calculatorButton)
+        
+        hSV.axis = .horizontal
+        hSV.backgroundColor = .black
+        hSV.spacing = 10
+        hSV.distribution = .fillEqually
+    
+        return hSV
+    }()
     
     func setMainLabelAutoLayout() {
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -33,10 +63,27 @@ class CalculatorView: UIView {
         ])
     }
     
+    func setHorizontalStackViewAutoLayout() {
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            horizontalStackView.heightAnchor.constraint(equalToConstant: 80),
+            horizontalStackView.widthAnchor.constraint(equalToConstant: 350),
+          horizontalStackView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 60),
+            horizontalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+
+         ])
+        
+    }
+    
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(mainLabel)
         setMainLabelAutoLayout()
+        addSubview(horizontalStackView)
+        setHorizontalStackViewAutoLayout()
     }
     
     required init?(coder: NSCoder) {
