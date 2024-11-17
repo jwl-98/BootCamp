@@ -17,7 +17,7 @@ class CalculatorView: UIView {
         label.text = "12345"
         label.textAlignment = .right
         label.font = .boldSystemFont(ofSize: 60)
-        
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
