@@ -43,6 +43,7 @@ class CalculatorView: UIView {
             button = changeButtonColor(button: button)
             
             button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
             saveButtonToArray.append(button)
         }
         
@@ -59,19 +60,29 @@ class CalculatorView: UIView {
         return button
     }
     
+    
     var accumulateNumberButton: String = "" //버튼넘버를 누적시켜 저장시키기 위한 변수
     @objc func numberButtonTapped(numberButton: UIButton){
-        accumulateNumberButton += numberButton.currentTitle!
+        guard let numberButton = Int(numberButton.currentTitle!) else { return } //숫자 버튼인 경우만 하단 로직실행
+        
+        accumulateNumberButton += String(numberButton)
         mainLabel.text = accumulateNumberButton
+    }
+    
+    @objc func resetButtonTapped(resetButton: UIButton) {
+        
+        if resetButton.currentTitle ==  "AC" {
+            mainLabel.text = "0"
+        }
     }
     
     
     lazy var horizontalStackView: [UIStackView] = {
-        var saveButton : [UIButton] = []
+        var saveButton: [UIButton] = []
         var fourButtonStackView: [UIStackView] = []
         
         for i in 0..<4 { //4개의 버튼을 스택뷰에 담습니다.
-            saveButton  = Array(calculatorButton[i*4..<(i*4)+4])
+            saveButton = Array(calculatorButton[i*4..<(i*4)+4])
             let hSV = UIStackView(arrangedSubviews: saveButton)
             
             
@@ -89,7 +100,7 @@ class CalculatorView: UIView {
         return fourButtonStackView
     }()
     
-    lazy var verticalStackView : UIStackView = {
+    lazy var verticalStackView: UIStackView = {
         let vSV = UIStackView(arrangedSubviews: horizontalStackView)
         
         vSV.axis = .vertical
