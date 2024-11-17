@@ -3,13 +3,13 @@
 //  CalculatorApp
 //
 //  Created by 진욱의 Macintosh on 11/15/24.
-//
+
 
 import UIKit
 
 class CalculatorView: UIView {
     
-    var mainLabel: UILabel = {
+    lazy var mainLabel: UILabel = {
         let label = UILabel()
         
         label.backgroundColor = .black
@@ -21,17 +21,24 @@ class CalculatorView: UIView {
         return label
     }()
     
-      var calculatorButton: [UIButton] = {
-        var buttonLabel : [String] = ["7","8","9","+"]
-        var saveButtonToArray: [UIButton] = []
+    lazy var calculatorButton: [UIButton] = {
         
+        var saveButtonToArray: [UIButton] = []
+        var buttonLabel: [String] = [
+            "7","8","9","+",
+            "4","5","6","-",
+            "1","2","3","*",
+            "AC","0","=","/"
+        ]
+        
+        //버튼을 생성하는 로직
         for i in 1...buttonLabel.count {
             let button = UIButton()
             button.titleLabel?.font = .boldSystemFont(ofSize: 30)
             button.backgroundColor =  UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
             button.frame.size.height = 80
             button.frame.size.width = 80
-           // button.layer.cornerRadius = 40
+            // button.layer.cornerRadius = 40
             button.setTitle(buttonLabel[i-1], for: .normal)
             
             saveButtonToArray.append(button)
@@ -41,15 +48,40 @@ class CalculatorView: UIView {
         
     }()
     
-    lazy var horizontalStackView: UIStackView = {
-        let hSV = UIStackView(arrangedSubviews: calculatorButton)
+    lazy var horizontalStackView: [UIStackView] = {
+        var saveButton : [UIButton] = []
+        var fourButtonStackView: [UIStackView] = []
         
-        hSV.axis = .horizontal
-        hSV.backgroundColor = .black
-        hSV.spacing = 10
-        hSV.distribution = .fillEqually
+        for i in 0..<4 { //4개의 버튼을 스택뷰에 담습니다.
+            saveButton  = Array(calculatorButton[i*4..<(i*4)+4])
+            let hSV = UIStackView(arrangedSubviews: saveButton)
+            
+            
+            hSV.axis = .horizontal
+            hSV.backgroundColor = .black
+            hSV.spacing = 10
+            hSV.distribution = .fillEqually
+            
+            
+            fourButtonStackView.append(hSV)
+            print("확인")
+            print(fourButtonStackView.count)
+        }
+        
+        return fourButtonStackView
+    }()
     
-        return hSV
+    lazy var verticalStackView : UIStackView = {
+        let vSV = UIStackView(arrangedSubviews: horizontalStackView)
+        
+        vSV.axis = .vertical
+        vSV.backgroundColor = . black
+        vSV.spacing = 10
+        vSV.distribution = .fillEqually
+        
+        
+        return vSV
+        
     }()
     
     func setMainLabelAutoLayout() {
@@ -64,16 +96,23 @@ class CalculatorView: UIView {
     }
     
     func setHorizontalStackViewAutoLayout() {
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            horizontalStackView.heightAnchor.constraint(equalToConstant: 80),
-            horizontalStackView.widthAnchor.constraint(equalToConstant: 350),
-          horizontalStackView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 60),
-            horizontalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-
-         ])
+        for hSV in horizontalStackView {
+            hSV.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                hSV.heightAnchor.constraint(equalToConstant: 80),
+                hSV.widthAnchor.constraint(equalToConstant: 350),
+                hSV.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            ])
+            
+        }
+    }
+    
+    func setVerticalStackViewAutoLayout() {
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         
+        verticalStackView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 60).isActive = true
+        verticalStackView.heightAnchor.constraint(equalToConstant: 350).isActive = true
     }
     
     
@@ -82,8 +121,10 @@ class CalculatorView: UIView {
         super.init(frame: frame)
         addSubview(mainLabel)
         setMainLabelAutoLayout()
-        addSubview(horizontalStackView)
+        addSubview(verticalStackView)
+        setVerticalStackViewAutoLayout()
         setHorizontalStackViewAutoLayout()
+        
     }
     
     required init?(coder: NSCoder) {
