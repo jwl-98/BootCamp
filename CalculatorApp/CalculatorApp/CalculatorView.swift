@@ -38,7 +38,7 @@ class CalculatorView: UIView {
             button.backgroundColor =  UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
             button.frame.size.height = 80
             button.frame.size.width = 80
-            // button.layer.cornerRadius = 40
+            button.layer.cornerRadius = button.frame.width / 2
             button.setTitle(buttonLabel[i-1], for: .normal)
             button = changeButtonColor(button: button)
             
