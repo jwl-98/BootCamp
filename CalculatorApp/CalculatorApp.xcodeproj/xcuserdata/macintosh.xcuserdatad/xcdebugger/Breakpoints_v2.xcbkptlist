@@ -14,8 +14,8 @@
             filePath = "CalculatorApp/CalculatorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "horizontalStackView"
             landmarkType = "24">
          </BreakpointContent>

@@ -48,4 +48,13 @@ VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.
 기존에 verticalStackView에 있던 mainLabel을 기준으로 한 규약은 VerticalStackView를 추가하면서 기준을 다시 잡아야 한다고 생각해 VerticalStackView의 오토레이아웃 설정에 넣어줬습니다.
 동시에 높이 규약도 설정해줬습니다.
 
+## LV.4 2023.11.17 
 
+/var/folders/2b/p7nrjt991053r2k6pdp6s7p80000gn/T/TemporaryItems/NSIRD_screencaptureui_cExPtA/스크린샷 2024-11-17 오후 7.42.06.png
+
+### 구현 
+버튼색상을 변경해주는 함수를 추가했습니다.
+파라미터로 UIButton타입을 받아서 색상을 변경하고 return해주는 함수입니다.
+함수 구현 시점은 버튼의 레이블이 전부 설정된 상태에서 함수를 호출한후. 
+함수내에서 현재의 타이틀(레이블)을 검사합니다.  
+버튼에 있는 레이블이 Int형으로 형변환이 불가능하면 버튼을 오렌지 색으로 변경합니다.

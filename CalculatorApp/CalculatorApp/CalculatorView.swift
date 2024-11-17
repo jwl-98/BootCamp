@@ -33,13 +33,14 @@ class CalculatorView: UIView {
         
         //버튼을 생성하는 로직
         for i in 1...buttonLabel.count {
-            let button = UIButton()
+            var button = UIButton()
             button.titleLabel?.font = .boldSystemFont(ofSize: 30)
             button.backgroundColor =  UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
             button.frame.size.height = 80
             button.frame.size.width = 80
             // button.layer.cornerRadius = 40
             button.setTitle(buttonLabel[i-1], for: .normal)
+            button = changeButtonColor(button: button)
             
             saveButtonToArray.append(button)
         }
@@ -47,6 +48,16 @@ class CalculatorView: UIView {
         return saveButtonToArray
         
     }()
+    
+    func changeButtonColor(button: UIButton) -> UIButton{
+        if Int(button.currentTitle!) == nil {
+            button.backgroundColor = .orange
+            
+            return button
+        }
+        return button
+    }
+    
     
     lazy var horizontalStackView: [UIStackView] = {
         var saveButton : [UIButton] = []
