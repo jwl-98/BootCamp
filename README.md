@@ -67,3 +67,14 @@ tree브랜치에서 작업을 시작했습니다.
 
 ### 구현
 cornerRadius속성에 정사각형의 버튼의 절반 값을 할당하여 원형 버튼을 구현했습니다.
+
+
+## LV.6 2024.11.17
+<img width="724" alt="스크린샷 2024-11-17 오후 8 54 35" src="https://github.com/user-attachments/assets/193f5573-cd7b-4c44-94d7-4fc881c1d589">
+
+#### [커밋58492a3](https://github.com/jwl-98/3W-CalculatorApp/commit/58492a33a73703f33052ba259562211c47620e97)
+### 구현
+버튼을 누르는대로 표시해야하기에 뭔가 누적시켜 저장해야 될 변수가 필요하다고 생각했습니다.  
+accumulateNumberButton을 함수 외부에 선언시켜줬습니다.  
+버튼의 타이틀을 전달받아 해당 변수에 누적 시켜 저장합니다.
+버튼의 동작연결은 addTarget메서드로 구현했습니다.
