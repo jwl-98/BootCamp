@@ -49,8 +49,10 @@ VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.
 동시에 높이 규약도 설정해줬습니다.
 
 ## LV.4 2023.11.17 
+<img width="741" alt="스크린샷 2024-11-17 오후 8 00 58" src="https://github.com/user-attachments/assets/04bda86b-3664-45cc-bdaa-88fafe6e40c4">
 
-/var/folders/2b/p7nrjt991053r2k6pdp6s7p80000gn/T/TemporaryItems/NSIRD_screencaptureui_cExPtA/스크린샷 2024-11-17 오후 7.42.06.png
+#### [커밋74f7099](https://github.com/jwl-98/3W-CalculatorApp/commit/74f709917966e089de0289917fc0619eec70ae61)
+tree브랜치에서 작업을 시작했습니다.
 
 ### 구현 
 버튼색상을 변경해주는 함수를 추가했습니다.
