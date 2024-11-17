@@ -28,3 +28,24 @@ view를 관리하는 메서드중 하나인 loadView 메서드를 재정의해�
 반복문을 통해서 레이블의 갯수만큼 버튼을 생성했습니다.   
 생성과 동시에 레이블이 입력됩니다.  
 생성한 버튼을 `[UIButton]` 타입으로 담아서 반환합니다.
+
+
+## LV.3 2023.11.17 
+<img width="711" alt="스크린샷 2024-11-17 오후 5 05 09" src="https://github.com/user-attachments/assets/0637dcf4-cae9-4acc-ae8f-98d4cfb9f4a0">
+
+#### [커밋1e70e0c](https://github.com/jwl-98/3W-CalculatorApp/commit/1e70e0ce3d5f3d8ff821f7e2d27a107b8b210efd)
+
+### 구현
+verticalStackView를 생성했습니다.
+horizontalStackView에서 4개의 버튼씩 스택뷰에 추가합니다. 반복문을 통해서 4개의 스택뷰를 생성했습니다.  
+이 반복문을 기준으로 내부에 saveButton 변수에는 버튼의 인덱스 넘버를 기반으로 버튼들을 저장합니다.
+그리고 verticalStackView에서 스택뷰 인스턴스 생성시 horizontalStackView를 서브뷰로 추가해 verticalStackView를 생성했습니다.
+
+## 오토레이아웃 설정변경
+<img width="927" alt="스크린샷 2024-11-17 오후 5 14 46" src="https://github.com/user-attachments/assets/7f9a038c-1154-4184-8c09-d4b3808de8a2">
+horizontalStackView 높이, 너비 규약을 유지하고자 반복문을 추가해줬습니다.
+VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.  
+기존에 verticalStackView에 있던 mainLabel을 기준으로 한 규약은 VerticalStackView를 추가하면서 기준을 다시 잡아야 한다고 생각해 VerticalStackView의 오토레이아웃 설정에 넣어줬습니다.
+동시에 높이 규약도 설정해줬습니다.
+
+
