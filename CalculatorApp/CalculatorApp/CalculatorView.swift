@@ -42,6 +42,7 @@ class CalculatorView: UIView {
             button.setTitle(buttonLabel[i-1], for: .normal)
             button = changeButtonColor(button: button)
             
+            button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
             saveButtonToArray.append(button)
         }
         
@@ -56,6 +57,12 @@ class CalculatorView: UIView {
             return button
         }
         return button
+    }
+    
+    var accumulateNumberButton: String = "" //버튼넘버를 누적시켜 저장시키기 위한 변수
+    @objc func numberButtonTapped(numberButton: UIButton){
+        accumulateNumberButton += numberButton.currentTitle!
+        mainLabel.text = accumulateNumberButton
     }
     
     
