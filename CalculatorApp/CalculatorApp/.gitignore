@@ -1,0 +1,10 @@
+
+# Ignore Xcode user state files
+*.xcuserstate
+
+# Ignore Xcode breakpoint files
+*.xcbkptlist
+
+# Ignore build artifacts and temporary files
+DerivedData/
+build/

@@ -42,8 +42,7 @@ class CalculatorView: UIView {
             button.setTitle(buttonLabel[i-1], for: .normal)
             button = changeButtonColor(button: button)
             
-            button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
-            button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
             saveButtonToArray.append(button)
         }
         
@@ -60,20 +59,28 @@ class CalculatorView: UIView {
         return button
     }
     
+    var accumulateButton: String = "" //버튼값을 저장하기 위한 변수
     
-    var accumulateNumberButton: String = "" //버튼넘버를 누적시켜 저장시키기 위한 변수
-    @objc func numberButtonTapped(numberButton: UIButton){
-        guard let numberButton = Int(numberButton.currentTitle!) else { return } //숫자 버튼인 경우만 하단 로직실행
-        
-        accumulateNumberButton += String(numberButton)
-        mainLabel.text = accumulateNumberButton
+    @objc func buttonTapped(button: UIButton) {
+        let buttonTitle = button.currentTitle!
+        switch buttonTitle {
+        case "0"..."9":
+            accumulateButton += buttonTitle
+            mainLabel.text! = accumulateButton
+        case "AC":
+            accumulateButton = resetAll(accumlateButton: &accumulateButton) //변수의 원본을 저장
+            print("초기화 버턴")
+            print(accumulateButton)
+        default:
+            print("연산자")
+        }
     }
     
-    @objc func resetButtonTapped(resetButton: UIButton) {
+    func resetAll(accumlateButton: inout String) -> String { //AC버튼을 누르면 실행되는 함수
+        accumlateButton = ""
+        mainLabel.text = "0"
         
-        if resetButton.currentTitle ==  "AC" {
-            mainLabel.text = "0"
-        }
+        return accumlateButton
     }
     
     
