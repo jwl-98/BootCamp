@@ -78,3 +78,22 @@ cornerRadius속성에 정사각형의 버튼의 절반 값을 할당하여 원�
 accumulateNumberButton을 함수 외부에 선언시켜줬습니다.  
 버튼의 타이틀을 전달받아 해당 변수에 누적 시켜 저장합니다.
 버튼의 동작연결은 addTarget메서드로 구현했습니다.
+
+
+## LV.7 2024.11.17 ~ 18
+<img width="739" alt="스크린샷 2024-11-18 오후 1 17 02" src="https://github.com/user-attachments/assets/0495eb3c-9c90-45f8-8dfc-2dcd97b43296">
+
+이슈 발견전
+#### [커밋840e644](https://github.com/jwl-98/3W-CalculatorApp/commit/840e64436e2560d0b087a9dfb3a06b1b06bab4d6)
+이슈 발견후
+#### [커밋b422b50](https://github.com/jwl-98/3W-CalculatorApp/commit/b422b50d3a8374d93d0754a35613aa45899174ff)
+
+### 구현
+처음에는 단순히 버튼을 누르면 mainLabel 이 0으로 표시되게 로직을 추가했습니다.
+하지만 이렇게 구현하다 보니 실제로는 값이 초기화가 되지 않고 값이 누적되어 표기되는 현상을 발견했어요.
+[이슈넘버#2](https://github.com/jwl-98/3W-CalculatorApp/issues/2)  
+그래서 따로 초기화 시키는 함수를 구현해서  
+파라미터로 inout 키워드를 사용해 버튼의 입력값을 누적시키는 변수의 원본값을 받아서 원본값을 변경해주는 방식으로 초기화를 구현했어요!
+
+
+
