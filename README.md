@@ -1,15 +1,21 @@
-# 3W-CalculatorApp
-3주차 계산기앱
-
+# 3W-CalculatorApp 3주차과제 계산기앱
+# 🧮프로젝트 소개
 <img width="714" alt="스크린샷 2024-11-15 오후 12 21 28" src="https://github.com/user-attachments/assets/b0dd299e-9d8f-4d82-a69a-6eca372b8487">
 
-LV.1 ~ LV.5 까지는 필수 구현으로 UI 작업입니다.  
-LV.6 ~ Lv.8 까지는 도전 구현으로 계산기의 기본적인 로직을 추가하는 작업입니다.  
-
+**LV.1 ~ LV.5 까지는 필수 구현작업으로 계산기의 기본적인 UI 작업입니다.**  
+**LV.6 ~ Lv.8 까지는 도전 구현으로 계산기의 기본적인 로직을 추가하는 작업입니다.** 
 Swift 와 UIkit을 통해 작업했습니다.
 
+# 📆개발기간  
+2024년 11월 15일 ~ 
 
-## LV.1 2024.11.15
+# 👨‍💻개발환경
+* Develop Machine: MacBookAir M2 (16GB, 256GB) - 쿠팡에서구입  
+* IDE: xcode 16.1  
+* Language: swift 5  
+* Framework: UIKit, CocoaToch 
+
+## 📍LV.1 2024.11.15
 <img width="704" alt="스크린샷 2024-11-15 오후 12 23 42" src="https://github.com/user-attachments/assets/caa0d0c8-fca8-4047-b3ca-12d4892c758c">
 
 ### 구현
@@ -20,7 +26,7 @@ Swift 와 UIkit을 통해 작업했습니다.
 view를 관리하는 메서드중 하나인 loadView 메서드를 재정의해서 기존에 존재하는 view를 CalculatorView로 할당해줬습니다.
 ****
 
-## LV.2 2024.11.15
+## 📍LV.2 2024.11.15
 <img width="722" alt="스크린샷 2024-11-15 오후 3 33 04" src="https://github.com/user-attachments/assets/b32d9295-043e-4b7d-8450-d9c339f7410b">
 
 ### 구현
@@ -30,7 +36,7 @@ view를 관리하는 메서드중 하나인 loadView 메서드를 재정의해�
 생성한 버튼을 `[UIButton]` 타입으로 담아서 반환합니다.
 
 
-## LV.3 2024.11.17 
+## 📍LV.3 2024.11.17 
 <img width="711" alt="스크린샷 2024-11-17 오후 5 05 09" src="https://github.com/user-attachments/assets/0637dcf4-cae9-4acc-ae8f-98d4cfb9f4a0">
 
 #### [커밋1e70e0c](https://github.com/jwl-98/3W-CalculatorApp/commit/1e70e0ce3d5f3d8ff821f7e2d27a107b8b210efd)
@@ -48,7 +54,7 @@ VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.
 기존에 verticalStackView에 있던 mainLabel을 기준으로 한 규약은 VerticalStackView를 추가하면서 기준을 다시 잡아야 한다고 생각해 VerticalStackView의 오토레이아웃 설정에 넣어줬습니다.
 동시에 높이 규약도 설정해줬습니다.
 
-## LV.4 2024.11.17 
+## 📍LV.4 2024.11.17 
 <img width="741" alt="스크린샷 2024-11-17 오후 8 00 58" src="https://github.com/user-attachments/assets/04bda86b-3664-45cc-bdaa-88fafe6e40c4">
 
 #### [커밋74f7099](https://github.com/jwl-98/3W-CalculatorApp/commit/74f709917966e089de0289917fc0619eec70ae61)
@@ -62,14 +68,14 @@ tree브랜치에서 작업을 시작했습니다.
 버튼에 있는 레이블이 Int형으로 형변환이 불가능하면 버튼을 오렌지 색으로 변경합니다.
 
 
-## LV.5 2024.11.17 
+## 📍LV.5 2024.11.17 
 <img width="738" alt="스크린샷 2024-11-17 오후 8 33 15" src="https://github.com/user-attachments/assets/d917edc2-77b1-44d6-bf47-58e690c7f370">
 
 ### 구현
 cornerRadius속성에 정사각형의 버튼의 절반 값을 할당하여 원형 버튼을 구현했습니다.
 
 
-## LV.6 2024.11.17
+## 📍LV.6 2024.11.17
 <img width="724" alt="스크린샷 2024-11-17 오후 8 54 35" src="https://github.com/user-attachments/assets/193f5573-cd7b-4c44-94d7-4fc881c1d589">
 
 #### [커밋58492a3](https://github.com/jwl-98/3W-CalculatorApp/commit/58492a33a73703f33052ba259562211c47620e97)
@@ -80,12 +86,12 @@ accumulateNumberButton을 함수 외부에 선언시켜줬습니다.
 버튼의 동작연결은 addTarget메서드로 구현했습니다.
 
 
-## LV.7 2024.11.17 ~ 18
+## 📍LV.7 2024.11.17 ~ 18
 <img width="739" alt="스크린샷 2024-11-18 오후 1 17 02" src="https://github.com/user-attachments/assets/0495eb3c-9c90-45f8-8dfc-2dcd97b43296">
 
 이슈 발견전
 #### [커밋840e644](https://github.com/jwl-98/3W-CalculatorApp/commit/840e64436e2560d0b087a9dfb3a06b1b06bab4d6)
-이슈 발견후
+📌이슈 발견후
 #### [커밋b422b50](https://github.com/jwl-98/3W-CalculatorApp/commit/b422b50d3a8374d93d0754a35613aa45899174ff)
 
 ### 구현
