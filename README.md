@@ -30,7 +30,7 @@ view를 관리하는 메서드중 하나인 loadView 메서드를 재정의해�
 생성한 버튼을 `[UIButton]` 타입으로 담아서 반환합니다.
 
 
-## LV.3 2023.11.17 
+## LV.3 2024.11.17 
 <img width="711" alt="스크린샷 2024-11-17 오후 5 05 09" src="https://github.com/user-attachments/assets/0637dcf4-cae9-4acc-ae8f-98d4cfb9f4a0">
 
 #### [커밋1e70e0c](https://github.com/jwl-98/3W-CalculatorApp/commit/1e70e0ce3d5f3d8ff821f7e2d27a107b8b210efd)
@@ -48,4 +48,33 @@ VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.
 기존에 verticalStackView에 있던 mainLabel을 기준으로 한 규약은 VerticalStackView를 추가하면서 기준을 다시 잡아야 한다고 생각해 VerticalStackView의 오토레이아웃 설정에 넣어줬습니다.
 동시에 높이 규약도 설정해줬습니다.
 
+## LV.4 2024.11.17 
+<img width="741" alt="스크린샷 2024-11-17 오후 8 00 58" src="https://github.com/user-attachments/assets/04bda86b-3664-45cc-bdaa-88fafe6e40c4">
 
+#### [커밋74f7099](https://github.com/jwl-98/3W-CalculatorApp/commit/74f709917966e089de0289917fc0619eec70ae61)
+tree브랜치에서 작업을 시작했습니다.
+
+### 구현 
+버튼색상을 변경해주는 함수를 추가했습니다.
+파라미터로 UIButton타입을 받아서 색상을 변경하고 return해주는 함수입니다.
+함수 구현 시점은 버튼의 레이블이 전부 설정된 상태에서 함수를 호출한후. 
+함수내에서 현재의 타이틀(레이블)을 검사합니다.  
+버튼에 있는 레이블이 Int형으로 형변환이 불가능하면 버튼을 오렌지 색으로 변경합니다.
+
+
+## LV.5 2024.11.17 
+<img width="738" alt="스크린샷 2024-11-17 오후 8 33 15" src="https://github.com/user-attachments/assets/d917edc2-77b1-44d6-bf47-58e690c7f370">
+
+### 구현
+cornerRadius속성에 정사각형의 버튼의 절반 값을 할당하여 원형 버튼을 구현했습니다.
+
+
+## LV.6 2024.11.17
+<img width="724" alt="스크린샷 2024-11-17 오후 8 54 35" src="https://github.com/user-attachments/assets/193f5573-cd7b-4c44-94d7-4fc881c1d589">
+
+#### [커밋58492a3](https://github.com/jwl-98/3W-CalculatorApp/commit/58492a33a73703f33052ba259562211c47620e97)
+### 구현
+버튼을 누르는대로 표시해야하기에 뭔가 누적시켜 저장해야 될 변수가 필요하다고 생각했습니다.  
+accumulateNumberButton을 함수 외부에 선언시켜줬습니다.  
+버튼의 타이틀을 전달받아 해당 변수에 누적 시켜 저장합니다.
+버튼의 동작연결은 addTarget메서드로 구현했습니다.
