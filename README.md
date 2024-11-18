@@ -13,16 +13,16 @@ Swift 와 UIkit을 통해 작업했습니다.
 * Develop Machine: MacBookAir M2 (16GB, 256GB) - 쿠팡에서구입  
 * IDE: xcode 16.1  
 * Language: swift 5  
-* Framework: UIKit, CocoaToch 
+* Framework: UIKit, CocoaTouch 
 
 ## 📍LV.1 2024.11.15
 <img width="704" alt="스크린샷 2024-11-15 오후 12 23 42" src="https://github.com/user-attachments/assets/caa0d0c8-fca8-4047-b3ca-12d4892c758c">
 
 ### 구현
 #### [커밋a7994ac](https://github.com/jwl-98/3W-CalculatorApp/commit/a7994aca081f01493e810d3dc58df1123a5a2389)
-코드베이스로 UI작업을 하기위한 UIView를 상속한 CocoaTouch클래스를 이용했습니다.  
-상속했기에 기본 뷰의 설정을 재정의 해서 init(frame: CGRect) 커스텀한 설정들을 추가하도록 구현했습니다.  
-실행됐을때 바로 설정한 화면을 표시하기 위해서  ViewController 내에서 
+코드베이스로 UI작업을 하기위한 UIView를 상속한 CocoaTouch클래스를 이용했습니다.   
+상속했기에 기본 뷰의 설정을 재정의 해서 init(frame: CGRect) 커스텀한 설정들을 추가하도록 구현했습니다.    
+실행됐을때 바로 설정한 화면을 표시하기 위해서  ViewController 내에서  
 view를 관리하는 메서드중 하나인 loadView 메서드를 재정의해서 기존에 존재하는 view를 CalculatorView로 할당해줬습니다.
 ****
 
@@ -42,14 +42,14 @@ view를 관리하는 메서드중 하나인 loadView 메서드를 재정의해�
 #### [커밋1e70e0c](https://github.com/jwl-98/3W-CalculatorApp/commit/1e70e0ce3d5f3d8ff821f7e2d27a107b8b210efd)
 
 ### 구현
-verticalStackView를 생성했습니다.
+verticalStackView를 생성했습니다.  
 horizontalStackView에서 4개의 버튼씩 스택뷰에 추가합니다. 반복문을 통해서 4개의 스택뷰를 생성했습니다.  
-이 반복문을 기준으로 내부에 saveButton 변수에는 버튼의 인덱스 넘버를 기반으로 버튼들을 저장합니다.
+이 반복문을 기준으로 내부에 saveButton 변수에는 버튼의 인덱스 넘버를 기반으로 버튼들을 저장합니다.  
 그리고 verticalStackView에서 스택뷰 인스턴스 생성시 horizontalStackView를 서브뷰로 추가해 verticalStackView를 생성했습니다.
 
 ## 오토레이아웃 설정변경
 <img width="927" alt="스크린샷 2024-11-17 오후 5 14 46" src="https://github.com/user-attachments/assets/7f9a038c-1154-4184-8c09-d4b3808de8a2">
-horizontalStackView 높이, 너비 규약을 유지하고자 반복문을 추가해줬습니다.
+horizontalStackView 높이, 너비 규약을 유지하고자 반복문을 추가해줬습니다.  
 VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.  
 기존에 verticalStackView에 있던 mainLabel을 기준으로 한 규약은 VerticalStackView를 추가하면서 기준을 다시 잡아야 한다고 생각해 VerticalStackView의 오토레이아웃 설정에 넣어줬습니다.
 동시에 높이 규약도 설정해줬습니다.
@@ -61,9 +61,9 @@ VerticalStackView의 오토레이아웃 설정을 추가해줬습니다.
 tree브랜치에서 작업을 시작했습니다.
 
 ### 구현 
-버튼색상을 변경해주는 함수를 추가했습니다.
-파라미터로 UIButton타입을 받아서 색상을 변경하고 return해주는 함수입니다.
-함수 구현 시점은 버튼의 레이블이 전부 설정된 상태에서 함수를 호출한후. 
+버튼색상을 변경해주는 함수를 추가했습니다.  
+파라미터로 UIButton타입을 받아서 색상을 변경하고 return해주는 함수입니다.  
+함수 구현 시점은 버튼의 레이블이 전부 설정된 상태에서 함수를 호출한후, 
 함수내에서 현재의 타이틀(레이블)을 검사합니다.  
 버튼에 있는 레이블이 Int형으로 형변환이 불가능하면 버튼을 오렌지 색으로 변경합니다.
 
@@ -89,9 +89,9 @@ accumulateNumberButton을 함수 외부에 선언시켜줬습니다.
 ## 📍LV.7 2024.11.17 ~ 18
 <img width="739" alt="스크린샷 2024-11-18 오후 1 17 02" src="https://github.com/user-attachments/assets/0495eb3c-9c90-45f8-8dfc-2dcd97b43296">
 
-이슈 발견전
+😡이슈 발견전
 #### [커밋840e644](https://github.com/jwl-98/3W-CalculatorApp/commit/840e64436e2560d0b087a9dfb3a06b1b06bab4d6)
-📌이슈 발견후
+🤤이슈 발견후
 #### [커밋b422b50](https://github.com/jwl-98/3W-CalculatorApp/commit/b422b50d3a8374d93d0754a35613aa45899174ff)
 
 ### 구현
