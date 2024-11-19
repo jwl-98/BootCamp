@@ -68,12 +68,12 @@ class CalculatorView: UIView {
         case "0"..."9":
             accumulateButton(buttonText: buttonTitle)
             userTypingNumberButton = true
-        case "AC":
-            accumulateButton = resetAll(accumlateButton: &accumulateButton) //변수의 원본을 저장
-            print("버튼값: \(accumulateButton)")
         case "=":
-            print("=")
-        default:
+            mainLabel.text! = String(calculate(expression: accumulateButton)!)
+        case "AC":
+            accumulateButton = resetAll(accumlateButton: &accumulateButton)
+            print("버튼값: \(accumulateButton)")
+        default: //연산자 기호 처리 case
             print(userTypingNumberButton)
             if userTypingNumberButton {
                 operatorButton(operatorButtonText: buttonTitle)
@@ -111,6 +111,20 @@ class CalculatorView: UIView {
         
         return accumlateButton
     }
+    
+    
+    func operationCalculator() {
+        
+    }
+    func calculate(expression: String) -> Int? {
+            let expression = NSExpression(format: expression)
+        if let result = expression.expressionValue(with: nil, context: nil) as? Int {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
     
     
     lazy var horizontalStackView: [UIStackView] = { //가로 스택뷰 생성
