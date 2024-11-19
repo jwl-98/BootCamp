@@ -59,21 +59,50 @@ class CalculatorView: UIView {
         return button
     }
     
-    var accumulateButton: String = "" //버튼값을 저장하기 위한 변수
-    
-    @objc func buttonTapped(button: UIButton) {
+   
+    var userTypingNumberButton = false
+    @objc func buttonTapped(button: UIButton) { //버튼이 눌리면 실행되는 로직
+       
         let buttonTitle = button.currentTitle!
         switch buttonTitle {
         case "0"..."9":
-            accumulateButton += buttonTitle
-            mainLabel.text! = accumulateButton
+            accumulateButton(buttonText: buttonTitle)
+            userTypingNumberButton = true
+        case "=":
+            mainLabel.text! = String(calculate(expression: accumulateButton)!)
         case "AC":
-            accumulateButton = resetAll(accumlateButton: &accumulateButton) //변수의 원본을 저장
-            print("초기화 버턴")
-            print(accumulateButton)
-        default:
-            print("연산자")
+            accumulateButton = resetAll(accumlateButton: &accumulateButton)
+            print("버튼값: \(accumulateButton)")
+        default: //연산자 기호 처리 case
+            print(userTypingNumberButton)
+            if userTypingNumberButton {
+                operatorButton(operatorButtonText: buttonTitle)
+                userTypingNumberButton = false
+            }
         }
+    }
+    
+    func operatorButton (operatorButtonText: String) {
+        switch operatorButtonText {
+        case "+":
+            accumulateButton(buttonText: operatorButtonText)
+        case "-":
+            accumulateButton(buttonText: operatorButtonText)
+        case "*":
+            accumulateButton(buttonText: operatorButtonText)
+        case "/":
+            accumulateButton(buttonText: operatorButtonText)
+        default:
+            break
+        }
+    }
+    var accumulateButton: String = "" //버튼값을 저장하기   위한 변수
+    @discardableResult
+    func accumulateButton(buttonText: String) -> String { //버튼의 레이블을 누적시겨 저장하는 함수
+        accumulateButton += buttonText
+        mainLabel.text! = accumulateButton
+        
+        return accumulateButton
     }
     
     func resetAll(accumlateButton: inout String) -> String { //AC버튼을 누르면 실행되는 함수
@@ -84,11 +113,25 @@ class CalculatorView: UIView {
     }
     
     
-    lazy var horizontalStackView: [UIStackView] = {
+    func operationCalculator() {
+        
+    }
+    func calculate(expression: String) -> Int? {
+            let expression = NSExpression(format: expression)
+        if let result = expression.expressionValue(with: nil, context: nil) as? Int {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    
+    
+    lazy var horizontalStackView: [UIStackView] = { //가로 스택뷰 생성
         var saveButton: [UIButton] = []
         var fourButtonStackView: [UIStackView] = []
         
-        for i in 0..<4 { //4개의 버튼을 스택뷰에 담습니다.
+        for i in 0..<4 {
             saveButton = Array(calculatorButton[i*4..<(i*4)+4])
             let hSV = UIStackView(arrangedSubviews: saveButton)
             
@@ -107,7 +150,7 @@ class CalculatorView: UIView {
         return fourButtonStackView
     }()
     
-    lazy var verticalStackView: UIStackView = {
+    lazy var verticalStackView: UIStackView = { //세로 스택뷰 생성
         let vSV = UIStackView(arrangedSubviews: horizontalStackView)
         
         vSV.axis = .vertical
