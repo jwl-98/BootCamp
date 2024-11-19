@@ -45,11 +45,10 @@ class CalculatorView: UIView {
             button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
             saveButtonToArray.append(button)
         }
-        
         return saveButtonToArray
-        
     }()
     
+    //버튼 색상변경
     func changeButtonColor(button: UIButton) -> UIButton{
         if Int(button.currentTitle!) == nil {
             button.backgroundColor = .orange
@@ -59,10 +58,11 @@ class CalculatorView: UIView {
         return button
     }
     
-   
+    
     var userTypingNumberButton = false
-    @objc func buttonTapped(button: UIButton) { //버튼이 눌리면 실행되는 로직
-       
+    //버튼이 눌리면 실행되는 로직
+    @objc func buttonTapped(button: UIButton) {
+        
         let buttonTitle = button.currentTitle!
         switch buttonTitle {
         case "0"..."9":
@@ -81,7 +81,7 @@ class CalculatorView: UIView {
             }
         }
     }
-    
+    //연산자기호 처리
     func operatorButton (operatorButtonText: String) {
         switch operatorButtonText {
         case "+":
@@ -96,28 +96,29 @@ class CalculatorView: UIView {
             break
         }
     }
-    var accumulateButton: String = "" //버튼값을 저장하기   위한 변수
+    
+    //버튼값을 저장하기   위한 변수
+    var accumulateButton: String = ""
+    //버튼의 레이블을 누적시겨 저장하는 함수
     @discardableResult
-    func accumulateButton(buttonText: String) -> String { //버튼의 레이블을 누적시겨 저장하는 함수
+    func accumulateButton(buttonText: String) -> String {
         accumulateButton += buttonText
         mainLabel.text! = accumulateButton
         
         return accumulateButton
     }
     
-    func resetAll(accumlateButton: inout String) -> String { //AC버튼을 누르면 실행되는 함수
+    //AC버튼을 누르면 실행되는 함수
+    func resetAll(accumlateButton: inout String) -> String {
         accumlateButton = ""
         mainLabel.text = "0"
         
         return accumlateButton
     }
     
-    
-    func operationCalculator() {
-        
-    }
+    //주어진 코드
     func calculate(expression: String) -> Int? {
-            let expression = NSExpression(format: expression)
+        let expression = NSExpression(format: expression)
         if let result = expression.expressionValue(with: nil, context: nil) as? Int {
             return result
         } else {
@@ -125,9 +126,8 @@ class CalculatorView: UIView {
         }
     }
     
-    
-    
-    lazy var horizontalStackView: [UIStackView] = { //가로 스택뷰 생성
+    //가로 스택뷰 생성
+    lazy var horizontalStackView: [UIStackView] = {
         var saveButton: [UIButton] = []
         var fourButtonStackView: [UIStackView] = []
         
@@ -150,7 +150,8 @@ class CalculatorView: UIView {
         return fourButtonStackView
     }()
     
-    lazy var verticalStackView: UIStackView = { //세로 스택뷰 생성
+    //세로 스택뷰 생성
+    lazy var verticalStackView: UIStackView = {
         let vSV = UIStackView(arrangedSubviews: horizontalStackView)
         
         vSV.axis = .vertical
@@ -163,6 +164,7 @@ class CalculatorView: UIView {
         
     }()
     
+    //메인레이블 오토레이아웃
     func setMainLabelAutoLayout() {
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -173,7 +175,7 @@ class CalculatorView: UIView {
             mainLabel.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-    
+    //가로 스택뷰 오토레이아웃
     func setHorizontalStackViewAutoLayout() {
         
         for hSV in horizontalStackView {
@@ -183,13 +185,11 @@ class CalculatorView: UIView {
                 hSV.widthAnchor.constraint(equalToConstant: 350),
                 hSV.centerXAnchor.constraint(equalTo: self.centerXAnchor)
             ])
-            
         }
     }
-    
+    //세로 스택뷰 오토레이아웃
     func setVerticalStackViewAutoLayout() {
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        
         verticalStackView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 60).isActive = true
         verticalStackView.heightAnchor.constraint(equalToConstant: 350).isActive = true
     }
