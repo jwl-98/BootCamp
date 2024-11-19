@@ -61,19 +61,34 @@ class CalculatorView: UIView {
     
     var accumulateButton: String = "" //버튼값을 저장하기 위한 변수
     
-    @objc func buttonTapped(button: UIButton) {
+    @objc func buttonTapped(button: UIButton) { //버튼이 눌리면 실행되는 로직
         let buttonTitle = button.currentTitle!
         switch buttonTitle {
         case "0"..."9":
-            accumulateButton += buttonTitle
-            mainLabel.text! = accumulateButton
+            accumulateButton(buttonText: buttonTitle)
         case "AC":
             accumulateButton = resetAll(accumlateButton: &accumulateButton) //변수의 원본을 저장
             print("초기화 버턴")
             print(accumulateButton)
-        default:
-            print("연산자")
+        case "+":
+            accumulateButton(buttonText: buttonTitle)
+        case "-":
+            accumulateButton(buttonText: buttonTitle)
+        case "*":
+            accumulateButton(buttonText: buttonTitle)
+        case "/":
+            accumulateButton(buttonText: buttonTitle)
+        default :
+            accumulateButton(buttonText: buttonTitle)
         }
+    }
+    
+    @discardableResult
+    func accumulateButton(buttonText: String) -> String {
+        accumulateButton += buttonText
+        mainLabel.text! = accumulateButton
+        
+        return accumulateButton
     }
     
     func resetAll(accumlateButton: inout String) -> String { //AC버튼을 누르면 실행되는 함수
