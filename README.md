@@ -7,7 +7,7 @@
 Swift 와 UIkit을 통해 작업했습니다.
 
 # 📆개발기간  
-2024년 11월 15일 ~ 
+2024년 11월 15일 ~ 11월 22일
 
 # 👨‍💻개발환경
 * Develop Machine: MacBookAir M2 (16GB, 256GB) - 쿠팡에서구입  
@@ -101,9 +101,11 @@ accumulateNumberButton을 함수 외부에 선언시켜줬습니다.
 그래서 따로 초기화 시키는 함수를 구현해서  
 파라미터로 inout 키워드를 사용해 버튼의 입력값을 누적시키는 변수의 원본값을 받아서 원본값을 변경해주는 방식으로 초기화를 구현했어요!
 
+
 ## 📍LV.8 2024.11.19
 <img width="720" alt="스크린샷 2024-11-19 오후 4 14 00" src="https://github.com/user-attachments/assets/da0fb0be-b885-4584-b483-4d9bfb7b7fa1">
-#### [커밋7ec00fb](https://github.com/jwl-98/3W-CalculatorApp/commit/7ec00fb0e3320ce2f6e9564f2beb9b39f0d39614)
+
+#### [커밋7ec00fb](https://github.com/jwl-98/3W-CalculatorApp/commit/7ec00fb0e3320ce2f6e9564f2beb9b39f0d39614)  
 ### 구현
 누적된 String 즉, accumulateButton을 주어진 함수의 파라미터로 전달 하고, MainLabel에 표시되도록 했습니다.
 
