@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EB5BE952-C8CD-4061-81AD-C3671A5AF3CE"
+            uuid = "D8F62A31-64F1-4752-BB78-CCCB958A29DD"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalculatorApp/CalculatorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "horizontalStackView"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "verticalStackView"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
