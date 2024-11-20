@@ -9,6 +9,8 @@ import UIKit
 
 class CalculatorView: UIView {
     
+    let calculaorError = CancellationError()
+    
     lazy var mainLabel: UILabel = {
         let label = UILabel()
         
@@ -59,7 +61,8 @@ class CalculatorView: UIView {
     }
     
     
-    var userTypingNumberButton = false
+    var numberButtonTapped = false
+    var operationButtonTapped = false
     //버튼이 눌리면 실행되는 로직
     @objc func buttonTapped(button: UIButton) {
         
@@ -67,20 +70,23 @@ class CalculatorView: UIView {
         switch buttonTitle {
         case "0"..."9":
             accumulateButton(buttonText: buttonTitle)
-            userTypingNumberButton = true
+            numberButtonTapped = true
         case "=":
-            mainLabel.text! = String(calculate(expression: accumulateButton)!)
+            if numberButtonTapped && operationButtonTapped {
+                mainLabel.text = String(calculate(expression: accumulateButtonString)!)
+                operationButtonTapped = false
+            }
         case "AC":
-            accumulateButton = resetAll(accumlateButton: &accumulateButton)
-            print("버튼값: \(accumulateButton)")
+            accumulateButtonString = resetAll(accumulateButton: &accumulateButtonString)
         default: //연산자 기호 처리 case
-            print(userTypingNumberButton)
-            if userTypingNumberButton {
+            if numberButtonTapped {
                 operatorButton(operatorButtonText: buttonTitle)
-                userTypingNumberButton = false
+                operationButtonTapped = true
+                numberButtonTapped = false
             }
         }
     }
+    
     //연산자기호 처리
     func operatorButton (operatorButtonText: String) {
         switch operatorButtonText {
@@ -98,23 +104,24 @@ class CalculatorView: UIView {
     }
     
     //버튼값을 저장하기   위한 변수
-    var accumulateButton: String = ""
+    var accumulateButtonString: String = ""
     //버튼의 레이블을 누적시겨 저장하는 함수
     @discardableResult
     func accumulateButton(buttonText: String) -> String {
-        accumulateButton += buttonText
-        mainLabel.text! = accumulateButton
+        accumulateButtonString += buttonText
+        mainLabel.text! = accumulateButtonString
+        
+        return accumulateButtonString
+    }
+    
+    //AC버튼을 누르면 실행되는 함수
+    func resetAll(accumulateButton: inout String) -> String {
+        accumulateButton = ""
+        mainLabel.text = "0"
         
         return accumulateButton
     }
     
-    //AC버튼을 누르면 실행되는 함수
-    func resetAll(accumlateButton: inout String) -> String {
-        accumlateButton = ""
-        mainLabel.text = "0"
-        
-        return accumlateButton
-    }
     
     //주어진 코드
     func calculate(expression: String) -> Int? {
@@ -209,4 +216,5 @@ class CalculatorView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
