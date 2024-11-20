@@ -19,7 +19,5 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         calculatorView.mainLabel.text = "0" //기본텍스트 0
     }
-
-
 }
 
