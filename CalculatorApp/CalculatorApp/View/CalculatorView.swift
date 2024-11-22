@@ -88,7 +88,7 @@ class CalculatorView: UIView {
         switch buttonTitle {
         case "0"..."9":
             accumulateButton(buttonText: buttonTitle)
-            numberButtonTapped.toggle()
+            numberButtonTapped = true
         case "=":
             if numberButtonTapped && operationButtonTapped {
                 mainLabel.text = String(calculate(expression: accumulateButtonString)!)
@@ -100,7 +100,7 @@ class CalculatorView: UIView {
         default: //연산자 기호 처리 case
             if numberButtonTapped {
                 operatorButton(operatorButtonText: buttonTitle)
-                operationButtonTapped.toggle()
+                operationButtonTapped = true
                 numberButtonTapped = false
             }
         }
