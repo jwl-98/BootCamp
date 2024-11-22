@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let calculatorView = CalculatorView()
+    
     override func loadView() {
         view = calculatorView
     }
@@ -17,7 +18,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        calculatorView.mainLabel.text = "0" //기본텍스트 0
     }
 }
 

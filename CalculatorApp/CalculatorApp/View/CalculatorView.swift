@@ -9,20 +9,41 @@ import UIKit
 
 class CalculatorView: UIView {
     
-    let calculaorError = CancellationError()
+    //버튼의 눌림 상태를 저장하는 변수
+    var numberButtonTapped = false
+    var operationButtonTapped = false
     
+    //버튼레이블을 누적저장하기 위한 변수
+    var accumulateButtonString: String = ""
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(mainLabel)
+        setMainLabelAutoLayout()
+        addSubview(verticalStackView)
+        setVerticalStackViewAutoLayout()
+        setHorizontalStackViewAutoLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: 메인레이블 설정
     lazy var mainLabel: UILabel = {
         let label = UILabel()
         
         label.backgroundColor = .black
         label.textColor = .white
-        label.text = "12345"
+        label.text = "0"
         label.textAlignment = .right
         label.font = .boldSystemFont(ofSize: 60)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
+    //MARK: 계산기 버튼 설정
     lazy var calculatorButton: [UIButton] = {
         
         var saveButtonToArray: [UIButton] = []
@@ -50,7 +71,7 @@ class CalculatorView: UIView {
         return saveButtonToArray
     }()
     
-    //버튼 색상변경
+    //MARK: 버튼색 변경 함수
     func changeButtonColor(button: UIButton) -> UIButton{
         if Int(button.currentTitle!) == nil {
             button.backgroundColor = .orange
@@ -60,17 +81,14 @@ class CalculatorView: UIView {
         return button
     }
     
-    
-    var numberButtonTapped = false
-    var operationButtonTapped = false
-    //버튼이 눌리면 실행되는 로직
+    //MARK: 버튼 실행 로직
     @objc func buttonTapped(button: UIButton) {
         
         let buttonTitle = button.currentTitle!
         switch buttonTitle {
         case "0"..."9":
             accumulateButton(buttonText: buttonTitle)
-            numberButtonTapped = true
+            numberButtonTapped.toggle()
         case "=":
             if numberButtonTapped && operationButtonTapped {
                 mainLabel.text = String(calculate(expression: accumulateButtonString)!)
@@ -78,16 +96,23 @@ class CalculatorView: UIView {
             }
         case "AC":
             accumulateButtonString = resetAll(accumulateButton: &accumulateButtonString)
+            buttonStatusInitial()
         default: //연산자 기호 처리 case
             if numberButtonTapped {
                 operatorButton(operatorButtonText: buttonTitle)
-                operationButtonTapped = true
+                operationButtonTapped.toggle()
                 numberButtonTapped = false
             }
         }
     }
     
-    //연산자기호 처리
+    //버튼 상태 초기화
+    func buttonStatusInitial() {
+        numberButtonTapped = false
+        operationButtonTapped = false
+    }
+    
+    //MARK: 연산자 기호처리 로직
     func operatorButton (operatorButtonText: String) {
         switch operatorButtonText {
         case "+":
@@ -103,8 +128,6 @@ class CalculatorView: UIView {
         }
     }
     
-    //버튼값을 저장하기   위한 변수
-    var accumulateButtonString: String = ""
     //버튼의 레이블을 누적시겨 저장하는 함수
     @discardableResult
     func accumulateButton(buttonText: String) -> String {
@@ -133,7 +156,7 @@ class CalculatorView: UIView {
         }
     }
     
-    //가로 스택뷰 생성
+    //MARK: 가로스택뷰 설정
     lazy var horizontalStackView: [UIStackView] = {
         var saveButton: [UIButton] = []
         var fourButtonStackView: [UIStackView] = []
@@ -157,7 +180,7 @@ class CalculatorView: UIView {
         return fourButtonStackView
     }()
     
-    //세로 스택뷰 생성
+    //MARK: 세로 스택뷰 설정
     lazy var verticalStackView: UIStackView = {
         let vSV = UIStackView(arrangedSubviews: horizontalStackView)
         
@@ -171,7 +194,7 @@ class CalculatorView: UIView {
         
     }()
     
-    //메인레이블 오토레이아웃
+    //MARK: 메인레이블 오토레이아웃
     func setMainLabelAutoLayout() {
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -182,7 +205,7 @@ class CalculatorView: UIView {
             mainLabel.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-    //가로 스택뷰 오토레이아웃
+    //MARK: 가로스택뷰 오토레이아웃
     func setHorizontalStackViewAutoLayout() {
         
         for hSV in horizontalStackView {
@@ -194,27 +217,11 @@ class CalculatorView: UIView {
             ])
         }
     }
-    //세로 스택뷰 오토레이아웃
+    //MARK: 세로 스택뷰 오토레이아웃
     func setVerticalStackViewAutoLayout() {
+        
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 60).isActive = true
         verticalStackView.heightAnchor.constraint(equalToConstant: 350).isActive = true
     }
-    
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(mainLabel)
-        setMainLabelAutoLayout()
-        addSubview(verticalStackView)
-        setVerticalStackViewAutoLayout()
-        setHorizontalStackViewAutoLayout()
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
