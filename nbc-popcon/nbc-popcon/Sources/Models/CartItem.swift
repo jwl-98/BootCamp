@@ -8,5 +8,7 @@
 import Foundation
 
 struct CartItem {
-    
+    let name: String
+    let price: Int
+    var quantity: Int
 }
