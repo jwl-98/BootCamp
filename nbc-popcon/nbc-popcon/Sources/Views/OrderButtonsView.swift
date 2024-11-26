@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 
 class ButtonsView: UIView {
-    let theme = ThemeManager()
-    
+    let themeManager = ThemeManager()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,9 +26,9 @@ class ButtonsView: UIView {
         let button = UIButton()
         
         button.setTitle("취소하기", for: .normal)
-        button.titleLabel?.font = theme.fonts.h4
+        button.titleLabel?.font = themeManager.fonts.bold
         button.layer.cornerRadius = 30
-        button.backgroundColor = theme.colors.grey1
+        button.backgroundColor = themeManager.colors.grey1
         button.frame.size.width = 70
 
         return button
@@ -39,9 +38,9 @@ class ButtonsView: UIView {
         let button = UIButton()
         
         button.setTitle("결제하기", for: .normal)
-        button.titleLabel?.font = theme.fonts.h4
+        button.titleLabel?.font = themeManager.fonts.bold
         button.layer.cornerRadius = 30
-        button.backgroundColor = theme.colors.blue
+        button.backgroundColor = themeManager.colors.blue
         button.frame.size.width = 70
 
         return button
@@ -51,16 +50,16 @@ class ButtonsView: UIView {
         let st = UIStackView(arrangedSubviews: [cancelButton, purchaseButton])
         st.axis = .horizontal
         st.distribution = .fillEqually
-        st.backgroundColor = theme.colors.red
-        st.spacing = theme.numbers.padding
+        st.backgroundColor = themeManager.colors.red
+        st.spacing = themeManager.numbers.padding
         return st
     }()
     
     func setStackViewAutoLayOut() {
         buttonStackView.snp.makeConstraints {
-            $0.leading.equalTo(self.snp.leading).inset(theme.numbers.paddingSmall)
-            $0.trailing.equalTo(self.snp.trailing).inset(theme.numbers.paddingSmall)
-            $0.bottom.equalTo(self.snp.bottom).inset(50)
+            $0.leading.equalTo(self.snp.leading).inset(themeManager.numbers.paddingSmall)
+            $0.trailing.equalTo(self.snp.trailing).inset(themeManager.numbers.paddingSmall)
+            $0.bottom.equalTo(self.snp.bottom).inset(60)
             $0.height.equalTo(50)
         }
     }
