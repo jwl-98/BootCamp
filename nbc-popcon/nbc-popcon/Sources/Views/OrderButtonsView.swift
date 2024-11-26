@@ -63,7 +63,8 @@ class ButtonsView: UIView {
             $0.height.equalTo(50)
         }
     }
-    
-
 }
 
+#Preview {
+  ViewController()
+}
