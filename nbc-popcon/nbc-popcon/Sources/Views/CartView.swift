@@ -18,7 +18,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     // 상단 장바구니 요약 View
     private let summaryView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
+        view.backgroundColor = .systemPink
         return view
     }()
     
@@ -27,7 +27,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         let button = UIButton()
         button.setTitle("닫기 X", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .gray
+//        button.backgroundColor = .lightGray
         return button
     }()
     
@@ -36,7 +36,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         let label = UILabel()
         label.text = "장바구니 : \(totalCount) 개"
         label.textColor = .white
-        label.backgroundColor = .gray
+//        label.backgroundColor = .lightGray
         label.textAlignment = .left
         return label
     }()
@@ -46,7 +46,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         let label = UILabel()
         label.text = "합계금액 : \(totalPrice) 원"
         label.textColor = .white
-        label.backgroundColor = .gray
+//        label.backgroundColor = .lightGray
         label.textAlignment = .right
         return label
     }()
@@ -89,7 +89,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         // 상단바 닫기버튼 Layout
         closeButton.snp.makeConstraints {
             $0.top.equalTo(summaryView.snp.top)
-            $0.trailing.equalTo(summaryView.snp.trailing)
+            $0.trailing.equalTo(summaryView.snp.trailing).inset(10)
             $0.width.height.equalTo(50)
         }
         

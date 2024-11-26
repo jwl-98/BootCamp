@@ -24,8 +24,8 @@ class JeffTestViewController: UIViewController {
         sample.snp.makeConstraints {
             $0.leading.equalTo(view.snp.leading).inset(10)
             $0.trailing.equalTo(view.snp.trailing).inset(10)
-            $0.bottom.equalTo(view.snp.bottom).inset(50)
-            $0.height.equalTo(671)
+            $0.bottom.equalTo(view.snp.bottom).inset(100)
+            $0.height.equalTo(571)
         }
     }
 }
