@@ -27,8 +27,8 @@ class MenuItemButtonCell : UICollectionViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "item name"
-        label.font = ThemeManager.shared.fonts.p
-        label.textColor = ThemeManager.shared.colors.black
+        label.font = ThemeFonts.p
+        label.textColor = ThemeColors.black
 
         return label
     }()
@@ -37,8 +37,8 @@ class MenuItemButtonCell : UICollectionViewCell {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.text = "1,000원"
-        label.font = ThemeManager.shared.fonts.small
-        label.textColor = ThemeManager.shared.colors.blue
+        label.font = ThemeFonts.small
+        label.textColor = ThemeColors.blue
 
         return label
     }()
@@ -60,10 +60,10 @@ class MenuItemButtonCell : UICollectionViewCell {
             stackView.addArrangedSubview($0)
         }
 
-        self.backgroundColor = ThemeManager.shared.colors.white
+        self.backgroundColor = ThemeColors.white
         self.layer.borderWidth = 7
         self.layer.borderColor = UIColor.systemYellow.cgColor
-        self.layer.cornerRadius = ThemeManager.shared.numbers.raidus
+        self.layer.cornerRadius = ThemeNumbers.radius
         self.clipsToBounds = true
 
         stackView.snp.makeConstraints() {

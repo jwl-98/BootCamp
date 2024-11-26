@@ -17,10 +17,10 @@ class MenuView: UIView {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let rowCount: CGFloat = 2
-        let itemSize = (UIScreen.main.bounds.width - (2 * ThemeManager.shared.numbers.paddingSmall + (rowCount - 1) * ThemeManager.shared.numbers.itemSpacing)) / rowCount
+        let itemSize = (UIScreen.main.bounds.width - (2 * ThemeNumbers.paddingSmall + (rowCount - 1) * ThemeNumbers.itemSpacing)) / rowCount
         layout.itemSize.width = itemSize
         layout.itemSize.height = itemSize
-        layout.minimumInteritemSpacing = ThemeManager.shared.numbers.itemSpacing
+        layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
