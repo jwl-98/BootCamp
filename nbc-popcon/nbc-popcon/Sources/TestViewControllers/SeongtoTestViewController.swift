@@ -1,5 +1,5 @@
 //
-//  SeongtoTextViewController.swift
+//  SeongtoTestViewController.swift
 //  nbc-popcon
 //
 //  Created by MaxBook on 11/26/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SeongtoTextViewController: UIViewController {
+class SeongtoTestViewController: UIViewController {
     
     let testLabel: UILabel = UILabel()
     
@@ -25,18 +25,19 @@ class SeongtoTextViewController: UIViewController {
         testLabel.textColor = ThemeColors.white
         testLabel.backgroundColor = ThemeColors.red
         testLabel.setLineSpacing(lineSpacing: 0, lineHeightMultiple: 7)
-        testLabel.baselineAdjustment = .alignCenters
+        testLabel.baselineAdjustment = .alignBaselines
         
         view.addSubview(testLabel)
         
         testLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(view.snp.top).inset(200)
+            $0.height.equalTo(500)
         }
         
     }
 }
 
 #Preview {
-    SeongtoTextViewController()
+    SeongtoTestViewController()
 }
