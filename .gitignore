@@ -10,8 +10,8 @@
 xcuserdata/
 xcuserdata/**/*
 project.xcworkspace/
-/nbc-popcon/nbc-popcon/Sources/TestViewControllers/*
-!/nbc-popcon/nbc-popcon/Sources/TestViewControllers/.gitkeep
+test-vcs/*
+!test-vcs/.gitkeep
 
 .DS_Store
 .Trashes
