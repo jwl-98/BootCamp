@@ -20,7 +20,7 @@ class HeaderView: UIView {
         return titleLabel
     }()
     
-    private let bellButton: UIButton = {
+    private let callButton: UIButton = {
         let callButton = UIButton()
         
         let callImage = UIImage(systemName: "bell.fill")
@@ -32,16 +32,20 @@ class HeaderView: UIView {
         return callButton
     }()
     
+    var onCallStaff: (() -> (Void))? = nil
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUpUI()
+        configureCallButtonAction()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         setUpUI()
+        configureCallButtonAction()
     }
 }
 
@@ -51,7 +55,7 @@ extension HeaderView {
     
     private func setUpUI() {
         setUpTitleLabel()
-        setUpBellButton()
+        setUpCallButton()
         self.backgroundColor = .red
     }
     
@@ -63,17 +67,35 @@ extension HeaderView {
         }
     }
     
-    private func setUpBellButton() {
-        self.addSubview(bellButton)
+    private func setUpCallButton() {
+        self.addSubview(callButton)
         
-        bellButton.snp.makeConstraints { button in
+        callButton.snp.makeConstraints { button in
             button.centerY.equalTo(titleLabel)
             button.trailing.equalToSuperview().inset(ThemeManager.shared.numbers.padding)
             button.height.width.equalTo(32)
         }
         
-        bellButton.imageView?.snp.makeConstraints { imageView in
+        callButton.imageView?.snp.makeConstraints { imageView in
             imageView.size.centerX.centerY.equalToSuperview()
         }
     }
+}
+
+//MARK: - HeaderView 직원 호출 버튼
+extension HeaderView {
+    
+    private func configureCallButtonAction() {
+        self.callButton.addTarget(nil, action: #selector(callButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func callButtonTapped() {
+        guard let onBellButtonTapped = self.onCallStaff else { return }
+        onBellButtonTapped()
+    }
+}
+
+
+#Preview("ViewController") {
+    ViewController()
 }
