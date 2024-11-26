@@ -7,6 +7,6 @@
 
 import UIKit
 
-class MenuItemButtonCell : UICollectionViewCell {
+class MenuItemButtonCell: UICollectionViewCell {
     
 }
