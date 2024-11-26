@@ -68,9 +68,9 @@ class ViewController: UIViewController {
         }
     }
     
-//    // MARK: - Bindings
-//
-//    private func setupBindings() {
+    // MARK: - Bindings
+
+    private func setupBindings() {
 //        // 헤더에서 카테고리 변경 시 처리
 //        headerView.onCategorySelected = { [weak self] index in
 //            self?.kiosk.selectCategory(at: index)
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
 //        kiosk.onCartUpdated = { [weak self] cartItems in
 //            self?.cartView.updateCartItems(cartItems)
 //        }
-//    }
+    }
     
     // MARK: - Helpers
     
