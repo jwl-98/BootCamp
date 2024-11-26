@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        //setupBindings()
+        setupBindings()
         kiosk.getCurrentMenuItems() // 초기 메뉴 데이터 가져오기
     }
     
