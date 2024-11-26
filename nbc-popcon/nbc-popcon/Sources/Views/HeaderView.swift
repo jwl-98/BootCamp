@@ -13,9 +13,9 @@ class HeaderView: UIView {
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         
-        titleLabel.font = ThemeManager.shared.fonts.h2
+        titleLabel.font = ThemeFonts.h1bold
         titleLabel.text = "POPCON"
-        titleLabel.textColor = .white
+        titleLabel.textColor = ThemeColors.white
 
         return titleLabel
     }()
@@ -27,7 +27,7 @@ class HeaderView: UIView {
         callButton.setImage(callImage, for: .normal)
         callButton.contentMode = .scaleAspectFit
         callButton.backgroundColor = .clear
-        callButton.tintColor = .white
+        callButton.tintColor = ThemeColors.white
         
         return callButton
     }()
@@ -56,7 +56,7 @@ extension HeaderView {
     private func setUpUI() {
         setUpTitleLabel()
         setUpCallButton()
-        self.backgroundColor = .red
+        self.backgroundColor = ThemeColors.red
     }
     
     private func setUpTitleLabel() {
@@ -73,7 +73,7 @@ extension HeaderView {
         callButton.snp.makeConstraints { button in
             button.centerY.equalTo(titleLabel)
             button.trailing.equalToSuperview().inset(ThemeManager.shared.numbers.padding)
-            button.height.width.equalTo(32)
+            button.height.width.equalTo(25)
         }
         
         callButton.imageView?.snp.makeConstraints { imageView in
