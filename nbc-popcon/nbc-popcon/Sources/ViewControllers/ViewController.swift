@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBindings()
+        //setupBindings()
         kiosk.getCurrentMenuItems()
     }
     
@@ -67,6 +67,7 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Bindings
+    /*
     private func setupBindings() {
         // HeaderView 카테고리 변경 이벤트
         headerView.onCategorySelected = { [weak self] index in
@@ -115,6 +116,7 @@ class ViewController: UIViewController {
             self?.cartView.updateSummaryLabel(summary)
         }
     }
+     */
     
     // MARK: - Helpers
     private func showAlert(title: String, message: String) {
