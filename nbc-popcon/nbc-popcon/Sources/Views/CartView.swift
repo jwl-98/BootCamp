@@ -4,7 +4,7 @@
 //
 //  Created by MaxBook on 11/25/24.
 //
-// 
+//
 import UIKit
 import SnapKit
 
@@ -129,4 +129,3 @@ class CartView: UIView {
         backgroundColor = .lightGray
     }
 }
-
