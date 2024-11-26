@@ -13,6 +13,8 @@ project.xcworkspace/
 test-vcs/*
 !test-vcs/.gitkeep
 
+./nbc-popcon/nbc-popcon/Sources/test-vcs/*
+
 .DS_Store
 .Trashes
 
