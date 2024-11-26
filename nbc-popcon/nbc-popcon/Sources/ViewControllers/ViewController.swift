@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     private let buttonView = ButtonsView() // 하단 버튼 뷰
     
     // MARK: - ViewModel
+    
     private let kiosk = Kiosk()
     
     // MARK: - Lifecycle
