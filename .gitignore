@@ -10,7 +10,7 @@
 xcuserdata/
 xcuserdata/**/*
 project.xcworkspace/
-Sources/TestViewControllers/**/*
+TestViewControllers/**/*
 
 .DS_Store
 .Trashes
