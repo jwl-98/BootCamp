@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// **Kiosk**: ViewModel 역할을 수행하며 데이터와 비즈니스 로직을 관리합니다.
+/// ViewModel: 데이터와 로직을 관리하는 클래스
 class Kiosk {
     
     // MARK: - Properties
@@ -41,28 +41,25 @@ class Kiosk {
     private var cartItems: [CartItem] = []
     
     // MARK: - View와의 연결 클로저
-    /// 메뉴가 업데이트될 때 호출
     var onMenuUpdated: (([MenuItem]) -> Void)?
-    /// 장바구니가 업데이트될 때 호출
     var onCartUpdated: (([CartItem]) -> Void)?
-    /// 요약 정보(총 주문 개수와 금액)가 업데이트될 때 호출
     var onSummaryUpdated: ((String) -> Void)?
     
     // MARK: - Public Methods
     
-    /// 현재 선택된 카테고리의 메뉴를 가져옵니다.
+    /// 현재 선택된 카테고리의 메뉴 가져오기
     func getCurrentMenuItems() {
         let currentMenu = menuCategories[currentCategoryIndex]
-        onMenuUpdated?(currentMenu) // 클로저를 통해 메뉴 데이터 전달
+        onMenuUpdated?(currentMenu)
     }
     
-    /// 카테고리를 변경합니다.
+    /// 카테고리 변경
     func selectCategory(at index: Int) {
         currentCategoryIndex = index
         getCurrentMenuItems()
     }
     
-    /// 장바구니에 아이템을 추가합니다.
+    /// 장바구니에 아이템 추가
     func addItemToCart(menuItem: MenuItem) {
         if let index = cartItems.firstIndex(where: { $0.name == menuItem.name }) {
             cartItems[index].quantity += 1
@@ -72,7 +69,7 @@ class Kiosk {
         updateCart()
     }
     
-    /// 장바구니 아이템 수량을 변경합니다.
+    /// 장바구니 아이템 수량 변경
     func updateCartItemQuantity(at index: Int, quantity: Int) {
         if quantity <= 0 {
             cartItems.remove(at: index)
@@ -82,19 +79,19 @@ class Kiosk {
         updateCart()
     }
     
-    /// 장바구니 아이템을 삭제합니다.
+    /// 장바구니 아이템 삭제
     func removeCartItem(at index: Int) {
         cartItems.remove(at: index)
         updateCart()
     }
     
-    /// 장바구니를 초기화합니다.
+    /// 장바구니 초기화
     func clearCart() {
         cartItems.removeAll()
         updateCart()
     }
     
-    /// 주문을 완료합니다.
+    /// 주문 완료
     func completeOrder() -> String {
         let totalItems = cartItems.reduce(0) { $0 + $1.quantity }
         let totalPrice = cartItems.reduce(0) { $0 + ($1.price * $1.quantity) }
@@ -102,18 +99,18 @@ class Kiosk {
         return "총 \(totalItems)개의 상품 | 총 금액: \(totalPrice)원\n주문이 완료되었습니다."
     }
     
-    /// 직원을 호출합니다.
+    /// 직원 호출
     func callStaff() -> String {
         return "직원을 호출하였습니다."
     }
     
     // MARK: - Private Methods
     
-    /// 장바구니와 요약 정보를 업데이트합니다.
+    /// 장바구니와 요약 정보 업데이트
     private func updateCart() {
-        onCartUpdated?(cartItems) // 장바구니 UI 업데이트
+        onCartUpdated?(cartItems)
         let totalItems = cartItems.reduce(0) { $0 + $1.quantity }
         let totalPrice = cartItems.reduce(0) { $0 + ($1.price * $1.quantity) }
-        onSummaryUpdated?("총 \(totalItems)개 | 총 금액: \(totalPrice)원") // 요약 정보 UI 업데이트
+        onSummaryUpdated?("총 \(totalItems)개 | 총 금액: \(totalPrice)원")
     }
 }
