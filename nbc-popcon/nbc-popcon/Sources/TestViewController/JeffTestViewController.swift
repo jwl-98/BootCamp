@@ -25,11 +25,8 @@ class JeffTestViewController: UIViewController {
             $0.leading.equalTo(view.snp.leading).inset(10)
             $0.trailing.equalTo(view.snp.trailing).inset(10)
             $0.bottom.equalTo(view.snp.bottom).inset(50)
-            $0.height.equalTo(300)
+            $0.height.equalTo(671)
         }
     }
 }
 
-#Preview {
-    JeffTestViewController()
-}
