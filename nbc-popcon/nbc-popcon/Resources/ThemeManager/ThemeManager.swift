@@ -51,6 +51,7 @@ struct ThemeManager {
         let padding: CGFloat = 30
         let paddingSmall: CGFloat = 20
         let raidus: CGFloat = 10
+        let itemSpacing: CGFloat = 10
     }
 
     let colors = Colors()
