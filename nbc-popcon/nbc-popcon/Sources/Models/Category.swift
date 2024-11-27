@@ -14,7 +14,8 @@ enum Category: String, CaseIterable {
     case health = "건강"
     case others = "기타"
     
-    init(rawValue: String) {
+    /// rawValue 기반 초기화
+    init?(rawValue: String) {
         switch rawValue {
         case "통신":
             self = .communication
@@ -22,8 +23,15 @@ enum Category: String, CaseIterable {
             self = .tool
         case "건강":
             self = .health
-        default:
+        case "기타":
             self = .others
+        default:
+            return nil
         }
+    }
+    
+    /// fallback 값을 포함하는 초기화 (기본값이 필요할 때 사용)
+    init(fallbackRawValue: String) {
+        self = Category(rawValue: fallbackRawValue) ?? .others
     }
 }
