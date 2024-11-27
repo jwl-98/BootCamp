@@ -11,18 +11,21 @@ import SnapKit
 class ButtonsView: UIView {
     let themeManager = ThemeManager()
     
-    var onCompleteOrder: (() -> (Void))? = nil
-
+    var onCompleteOrder: (() -> (Void))?
+    var onCancelOrder: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .black
         addSubview(buttonStackView)
         setStackViewAutoLayOut()
+        completeButtonAction()
+        cancelButtonAction()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -52,7 +55,7 @@ class ButtonsView: UIView {
         let st = UIStackView(arrangedSubviews: [cancelButton, purchaseButton])
         st.axis = .horizontal
         st.distribution = .fillEqually
-        st.backgroundColor = themeManager.colors.red
+        st.backgroundColor = themeManager.colors.clear
         st.spacing = themeManager.numbers.padding
         return st
     }()
@@ -62,7 +65,6 @@ class ButtonsView: UIView {
             $0.leading.equalTo(self.snp.leading).inset(0)
             $0.trailing.equalTo(self.snp.trailing).inset(0)
             $0.bottom.equalTo(self.snp.bottom).inset(60)
-            $0.top.equalTo(<#T##other: any ConstraintRelatableTarget##any ConstraintRelatableTarget#>)
             $0.height.equalTo(50)
         }
     }
@@ -70,16 +72,34 @@ class ButtonsView: UIView {
 
 extension ButtonsView {
     
-     private func purchaseButtonAction() {
-         self.purchaseButton.addTarget(self.purchaseButton, action: #selector(purchaseButtonTapped), for: .touchUpInside)
+     private func completeButtonAction() {
+         self.purchaseButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
     }
     
-    @objc  func purchaseButtonTapped() {
-        guard let purchaseButtonTapped = self.onCompleteOrder else { return }
+    @objc  func completeButtonTapped(sender: UIButton) {
+        //버튼효과
+        sender.alpha = 0.5
+        
+        guard let purchaseButtonTapped = self.onCompleteOrder else {return}
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.alpha = 1.0
+        }
         purchaseButtonTapped()
     }
     
+    private func cancelButtonAction() {
+        self.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+    }
+    @objc func cancelButtonTapped(sender: UIButton) {
+        cancelButton.alpha = 0.5
+        
+        guard let cancelButtonTapped = self.onCancelOrder else {return}
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.alpha = 1.0
+        }
+        cancelButtonTapped()
+    }
+    
+    
 }
-#Preview {
-  ViewController()
-}
+

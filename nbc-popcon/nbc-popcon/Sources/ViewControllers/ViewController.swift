@@ -103,10 +103,10 @@ class ViewController: UIViewController {
                     guard let message = self?.kiosk.completeOrder() else { return }
                     self?.showAlert(title: "주문 완료", message: message)
                 }
-        //
-        //        buttonView.onCancelOrder = { [weak self] in
-        //            self?.kiosk.clearCart()
-        //        }
+        
+                buttonView.onCancelOrder = { [weak self] in
+                    self?.kiosk.clearCart()
+                }
         //
         
         //
