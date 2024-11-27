@@ -27,7 +27,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         let button = UIButton()
         button.setTitle("닫기 X", for: .normal)
         button.setTitleColor(.white, for: .normal)
-//        button.backgroundColor = .lightGray
         return button
     }()
     
@@ -36,7 +35,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         let label = UILabel()
         label.text = "장바구니 : \(totalCount) 개"
         label.textColor = .white
-//        label.backgroundColor = .lightGray
         label.textAlignment = .left
         return label
     }()
@@ -46,7 +44,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         let label = UILabel()
         label.text = "합계금액 : \(totalPrice) 원"
         label.textColor = .white
-//        label.backgroundColor = .lightGray
         label.textAlignment = .right
         return label
     }()
@@ -54,7 +51,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     // 장바구니 목록을 보여주는 TableView
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .orange
+        tableView.backgroundColor = .orange     // 테스트
         return tableView
     }()
     
@@ -113,9 +110,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
             $0.top.equalTo(summaryView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
-        
-        // 테스트용 배경색
-        backgroundColor = .lightGray
     }
      
     //MARK: - tableView 세팅
@@ -130,6 +124,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
@@ -138,6 +133,4 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
         return cell
     }
-    
-    
 }

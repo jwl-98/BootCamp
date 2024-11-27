@@ -16,17 +16,15 @@ class CartItemButtonCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "wifi")
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
-    // 상품 이름Label
+    // 상품이름 Label
     private let cartItemLabel: UILabel = {
         let label = UILabel()
         label.text = "symbol name"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 16)
-        label.backgroundColor = .lightGray
         return label
     }()
     
@@ -36,7 +34,6 @@ class CartItemButtonCell: UITableViewCell {
         label.text = "10,000 원"
         label.textColor = .blue
         label.textAlignment = .center
-        label.backgroundColor = .lightGray
         return label
     }()
     
@@ -45,7 +42,6 @@ class CartItemButtonCell: UITableViewCell {
         let label = UILabel()
         label.text = "X \(Int(itemQuantity))"
         label.textAlignment = .center
-        label.backgroundColor = .lightGray
         return label
     }()
     
@@ -54,7 +50,6 @@ class CartItemButtonCell: UITableViewCell {
         let label = UILabel()
         label.text = "총 40,000 원"
         label.textAlignment = .right
-        label.backgroundColor = .lightGray
         return label
     }()
     
@@ -65,7 +60,6 @@ class CartItemButtonCell: UITableViewCell {
         stepper.stepValue = 1.0
         stepper.minimumValue = 0.0
         stepper.maximumValue = 50.0
-        stepper.tintColor = .white
         return stepper
     }()
     
@@ -73,7 +67,7 @@ class CartItemButtonCell: UITableViewCell {
     private let totalDeleteButton: UIButton = {
         let button = UIButton()
         button.setTitle(" 이 항목 삭제", for: .normal)
-        button.backgroundColor = .lightGray
+        button.setTitleColor(.black, for: .normal)
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.titleLabel?.textAlignment = .right
         button.contentHorizontalAlignment = .right
@@ -83,35 +77,31 @@ class CartItemButtonCell: UITableViewCell {
     // 상품 이미지, 이름, 단가 verticalStackView
     private let itemVerticalstackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .systemMint
         stackView.axis = .vertical
         stackView.spacing = 5
         stackView.distribution = .fill
-        stackView.alignment = .fill
+        stackView.alignment = .center
         return stackView
     }()
     
     // 갯수와 stepper horizontalView
     private let countHorizontalView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
         return view
     }()
     
     // 카운트, 합계금액, 삭제버튼 verticalStackView
     private let calculateVerticalstackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .gray
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         return stackView
     }()
     
     // 전체 horizontalView
     private let horizontalView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray
         return view
     }()
  
@@ -156,6 +146,7 @@ class CartItemButtonCell: UITableViewCell {
             $0.leading.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().inset(20)
+            $0.width.equalTo(130)
         }
             
         // 오른쪽 수량과 스태퍼 horizontalView
@@ -175,7 +166,7 @@ class CartItemButtonCell: UITableViewCell {
         // 아이템 이미지 크기
         cartItemImageView.snp.makeConstraints {
             $0.height.equalTo(100)
-            $0.width.equalTo(150)
+            $0.width.equalTo(100)
         }
         
         // 아이템 이름 크기
@@ -201,6 +192,15 @@ class CartItemButtonCell: UITableViewCell {
             $0.trailing.equalTo(countHorizontalView.snp.trailing)
             $0.centerY.equalToSuperview()
         }
+        
+        cartItemTotalPriceLabel.snp.makeConstraints {
+            $0.height.equalTo(28)
+        }
+        
+        totalDeleteButton.snp.makeConstraints {
+            $0.height.equalTo(22)
+        }
+        
     }
 }
 
