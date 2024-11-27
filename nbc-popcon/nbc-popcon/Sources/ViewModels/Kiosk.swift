@@ -41,7 +41,6 @@ class Kiosk {
             $0.category == self.currentCategory
         }
         onMenuUpdated?(currentCategoryItems)
-        print(currentCategoryItems)
     }
     
     /// 카테고리 변경

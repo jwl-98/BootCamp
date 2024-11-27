@@ -85,15 +85,18 @@ class ViewController: UIViewController {
             self?.menuView.configureCategory(category)
         }
         
-        // 헤더에서 카테고리 변경 시 처리
+        // MenuView 에서 카테고리 변경 시 처리
         menuView.onCategorySelected = { [weak self] rawValue in
             self?.kiosk.selectCategory(rawValue)
+        }
+        
+        kiosk.onMenuUpdated = { [weak self] items in
+            self?.menuView.menuUpdated(items)
         }
         
         //
         // 메뉴 뷰에서 아이템 선택 시 처리
         menuView.onMenuItemSelected = { [weak self] menuItem in
-            print("잘 들어갔나")
             self?.kiosk.addItemToCart(menuItem: menuItem)
         }
         //
@@ -107,14 +110,14 @@ class ViewController: UIViewController {
         //        }
         //
         //        // 버튼 뷰에서 주문 완료, 취소 및 직원 호출 처리
-                buttonView.onCompleteOrder = { [weak self] in
-                    guard let message = self?.kiosk.completeOrder() else { return }
-                    self?.showAlert(title: "주문 완료", message: message)
-                }
+        buttonView.onCompleteOrder = { [weak self] in
+            guard let message = self?.kiosk.completeOrder() else { return }
+            self?.showAlert(title: "주문 완료", message: message)
+        }
         
-                buttonView.onCancelOrder = { [weak self] in
-                    self?.kiosk.clearCart()
-                }
+        buttonView.onCancelOrder = { [weak self] in
+            self?.kiosk.clearCart()
+        }
         //
         
         //

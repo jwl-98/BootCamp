@@ -13,7 +13,11 @@ class MenuView: UIView {
     
     // MARK: - 바인딩 메서드
     var onCategorySelected: ((String) -> Void)? = nil
+    
+    // 메뉴 아이템 선택 액션 - ViewController.setupBindings()를 통해 할당
+    var onMenuItemSelected:((MenuItem) -> Void)? = nil
 
+    private var items: [MenuItem] = []
     
     // MARK: - 컴포넌트 생성
     
@@ -40,8 +44,6 @@ class MenuView: UIView {
         return collectionView
     }()
 
-    // 메뉴 아이템 선택 액션 - ViewController.setupBindings()를 통해 할당
-    var onMenuItemSelected:((MenuItem) -> Void)? = nil
 
     // MARK: - MenuView 기본 설정
 
@@ -70,6 +72,7 @@ class MenuView: UIView {
         }
         
         segmentedControl.addTarget(self, action: #selector(self.segmentedChanged(_:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
     }
 
     // MARK: - CollectionView 기본 설정
@@ -91,7 +94,7 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     // 아이템 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9 // 테스트용 갯수
+        return items.count
     }
 
     // 셀 생성
@@ -121,6 +124,11 @@ extension MenuView {
         category.enumerated().forEach {
             self.segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false)
         }
+    }
+    
+    func menuUpdated(_ items: [MenuItem]) {
+        self.items = items
+        self.collectionView.reloadData()
     }
     
 }
