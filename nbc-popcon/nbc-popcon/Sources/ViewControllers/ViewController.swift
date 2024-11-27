@@ -44,9 +44,9 @@ class ViewController: UIViewController {
         
         // SnapKit을 사용해 제약조건 설정
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(100)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
         }
         
         menuView.snp.makeConstraints { make in
