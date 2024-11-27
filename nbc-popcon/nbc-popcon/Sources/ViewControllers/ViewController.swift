@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         setupUI()
         setupBindings()
         kiosk.getCurrentMenuItems() // 초기 메뉴 데이터 가져오기
+        kiosk.allCategory()
     }
     
     // MARK: - UI Setup
@@ -79,10 +80,16 @@ class ViewController: UIViewController {
             self?.showAlert(title: "직원 호출", message: message)
         }
         
-        //        // 헤더에서 카테고리 변경 시 처리
-        //        headerView.onCategorySelected = { [weak self] index in
-        //            self?.kiosk.selectCategory(at: index)
-        //        }
+        //MenuView SegmentedControl 카테고리 설정
+        kiosk.onUpdateAllCategory = { [weak self] category in
+            self?.menuView.configureCategory(category)
+        }
+        
+        // 헤더에서 카테고리 변경 시 처리
+        menuView.onCategorySelected = { [weak self] rawValue in
+            self?.kiosk.selectCategory(rawValue)
+        }
+        
         //
         //        // 메뉴 뷰에서 아이템 선택 시 처리
         //        menuView.onMenuItemSelected = { [weak self] menuItem in

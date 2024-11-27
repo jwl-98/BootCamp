@@ -13,14 +13,6 @@ enum Category: String, CaseIterable {
     case tool = "사물 및 도구"
     case health = "건강"
     case others = "기타"
-//    
-//    var kor: String {
-//        switch self {
-//        case .communication: return "통신"
-//        case .tool: return "사물 및 도구"
-//        case .health: return "건강"
-//        }
-//    }
     
     init(rawValue: String) {
         switch rawValue {
