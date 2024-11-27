@@ -72,8 +72,8 @@ extension ButtonsView {
     
      private func purchaseButtonAction() {
          self.purchaseButton.addTarget(self.purchaseButton, action: #selector(purchaseButtonTapped), for: .touchUpInside)
-         print("dddd")
     }
+    
     @objc  func purchaseButtonTapped() {
         guard let purchaseButtonTapped = self.onCompleteOrder else { return }
         purchaseButtonTapped()
