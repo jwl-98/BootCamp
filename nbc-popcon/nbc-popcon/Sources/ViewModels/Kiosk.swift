@@ -13,29 +13,10 @@ class Kiosk {
     // MARK: - Properties
     
     /// 카테고리별 메뉴 데이터 (더미 데이터)
-    private let menuCategories: [[MenuItem]] = [
-        [ // 통신 카테고리
-            MenuItem(name: "📱 스마트폰", price: 1000),
-            MenuItem(name: "💻 컴퓨터", price: 2000),
-            MenuItem(name: "📡 와이파이", price: 1500),
-            MenuItem(name: "🎧 헤드셋", price: 3000)
-        ],
-        [ // 사물 및 도구 카테고리
-            MenuItem(name: "🔨 망치", price: 1200),
-            MenuItem(name: "🪑 의자", price: 2500),
-            MenuItem(name: "💡 전구", price: 800),
-            MenuItem(name: "🎒 가방", price: 3500)
-        ],
-        [ // 건강 카테고리
-            MenuItem(name: "❤️ 심장", price: 4000),
-            MenuItem(name: "💊 약", price: 1000),
-            MenuItem(name: "🌡️ 체온계", price: 2000),
-            MenuItem(name: "😷 마스크", price: 500)
-        ]
-    ]
+    private let menuCategories: [MenuItem] = MenuItem.data
     
     /// 현재 선택된 카테고리 인덱스
-    private var currentCategoryIndex: Int = 0
+    private var currentCategory: Category = .communication
     
     /// 장바구니 데이터
     private var cartItems: [CartItem] = []
@@ -49,14 +30,16 @@ class Kiosk {
     
     /// 현재 선택된 카테고리의 메뉴 가져오기
     func getCurrentMenuItems() {
-        let currentMenu = menuCategories[currentCategoryIndex]
-        onMenuUpdated?(currentMenu)
+        let currentCategoryItems: [MenuItem] = menuCategories.filter {
+            $0.category == self.currentCategory
+        }
+        onMenuUpdated?(currentCategoryItems)
     }
     
     /// 카테고리 변경
     func selectCategory(at index: Int) {
-        currentCategoryIndex = index
-        getCurrentMenuItems()
+        guard let category = Category(rawValue: index) else { return }
+        self.currentCategory = category
     }
     
     /// 장바구니에 아이템 추가
