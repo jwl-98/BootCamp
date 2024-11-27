@@ -85,52 +85,56 @@ class ViewController: UIViewController {
     
     /// ViewModel 및 UI 이벤트와의 바인딩 처리
     private func setupBindings() {
+        
         // HeaderView에서 직원 호출 이벤트 처리
         headerView.onCallStaff = { [weak self] in
             guard let message = self?.kiosk.callStaff() else { return }
             self?.showAlert(title: "직원 호출", message: message)
         }
         
-        // HeaderView에서 카테고리 변경 이벤트 처리
-        headerView.onCategorySelected = { [weak self] index in
-            self?.kiosk.selectCategory(at: index)
+        // ThemedView에서 테마 변경 이벤트 처리
+        themedView.onThemeChanged = { [weak self] theme in
+            self?.applyTheme(to: theme) // 테마 변경
         }
         
-        // MenuView에서 메뉴 아이템 선택 이벤트 처리
-        menuView.onMenuItemSelected = { [weak self] menuItem in
-            self?.kiosk.addItemToCart(menuItem: menuItem)
-        }
+        //        // 헤더에서 카테고리 변경 시 처리
+        //        headerView.onCategorySelected = { [weak self] index in
+        //            self?.kiosk.selectCategory(at: index)
+        //        }
+        //
+        //        // 메뉴 뷰에서 아이템 선택 시 처리
+        //        menuView.onMenuItemSelected = { [weak self] menuItem in
+        //            self?.kiosk.addItemToCart(menuItem: menuItem)
+        //        }
+        //
+        //        // 장바구니 뷰에서 수량 변경 및 삭제 처리
+        //        cartView.onItemQuantityChanged = { [weak self] index, quantity in
+        //            self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
+        //        }
+        //
+        //        cartView.onItemDeleted = { [weak self] index in
+        //            self?.kiosk.removeCartItem(at: index)
+        //        }
+        //
+        //        // 버튼 뷰에서 주문 완료, 취소 및 직원 호출 처리
+                buttonView.onCompleteOrder = { [weak self] in
+                    guard let message = self?.kiosk.completeOrder() else { return }
+                    self?.showAlert(title: "주문 완료", message: message)
+                }
         
-        // CartView에서 장바구니 수량 변경 이벤트 처리
-        cartView.onItemQuantityChanged = { [weak self] index, quantity in
-            self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
-        }
+                buttonView.onCancelOrder = { [weak self] in
+                    self?.kiosk.clearCart()
+                }
+        //
         
-        // CartView에서 장바구니 아이템 삭제 이벤트 처리
-        cartView.onItemDeleted = { [weak self] index in
-            self?.kiosk.removeCartItem(at: index)
-        }
-        
-        // ButtonsView에서 주문 완료 이벤트 처리
-        buttonView.onCompleteOrder = { [weak self] in
-            guard let message = self?.kiosk.completeOrder() else { return }
-            self?.showAlert(title: "주문 완료", message: message)
-        }
-        
-        // ButtonsView에서 주문 취소 이벤트 처리
-        buttonView.onCancelOrder = { [weak self] in
-            self?.kiosk.clearCart()
-        }
-        
-        // Kiosk에서 메뉴 데이터 변경 시 MenuView 업데이트
-        kiosk.onMenuUpdated = { [weak self] menuItems in
-            self?.menuView.updateMenuItems(menuItems)
-        }
-        
-        // Kiosk에서 장바구니 데이터 변경 시 CartView 업데이트
-        kiosk.onCartUpdated = { [weak self] cartItems in
-            self?.cartView.updateCartItems(cartItems)
-        }
+        //        // ViewModel(Kiosk) 데이터 변경 시 UI 업데이트
+        //        kiosk.onMenuUpdated = { [weak self] menuItems in
+        //            self?.menuView.updateMenuItems(menuItems)
+        //        }
+        //
+        //        kiosk.onCartUpdated = { [weak self] cartItems in
+        //            self?.cartView.updateCartItems(cartItems)
+        //        }
     }
     
     // MARK: - Helpers
