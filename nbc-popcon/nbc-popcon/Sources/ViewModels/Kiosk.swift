@@ -15,7 +15,7 @@ class Kiosk {
     /// 카테고리별 메뉴 데이터 (더미 데이터)
     private let menuCategories: [MenuItem] = MenuItem.menuItems
     
-    /// 현재 선택된 카테고리 인덱스
+    /// 현재 선택된 카테고리
     private var currentCategory: Category = .communication
     
     /// 장바구니 데이터
@@ -30,6 +30,7 @@ class Kiosk {
     
     // MARK: - Public Methods
     
+    /// 모든 카테고리 불러오기
     func allCategory() {
         var allCategory: Set<Category> = []
         
@@ -37,12 +38,8 @@ class Kiosk {
             allCategory.insert($0.category)
         }
         
-        let category = Category
-            .allCases
-            .filter{ allCategory.contains($0) }
-            .map { $0.rawValue }
-        
-        onUpdateAllCategory?(category)
+        let categories = allCategory.map { $0.rawValue }
+        onUpdateAllCategory?(categories)
     }
     
     /// 현재 선택된 카테고리의 메뉴 가져오기
@@ -54,8 +51,8 @@ class Kiosk {
     }
     
     /// 카테고리 변경
-    func selectCategory(_ rawValue: String) {
-        self.currentCategory = Category(rawValue: rawValue)
+    func selectCategory(at rawValue: String) {
+        self.currentCategory = Category(fallbackRawValue: rawValue)
         getCurrentMenuItems()
     }
     
@@ -106,9 +103,9 @@ class Kiosk {
     
     // MARK: - Private Methods
     
-    /// 장바구니와 요약 정보 업데이트
     private func updateCart() {
         onCartUpdated?(cartItems)
+        
         let totalItems = cartItems.reduce(0) { $0 + $1.quantity }
         let totalPrice = cartItems.reduce(0) { $0 + ($1.price * $1.quantity) }
         onSummaryUpdated?("총 \(totalItems)개 | 총 금액: \(totalPrice)원")
