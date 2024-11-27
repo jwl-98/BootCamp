@@ -10,12 +10,8 @@
 xcuserdata/
 xcuserdata/**/*
 project.xcworkspace/
-<<<<<<< HEAD
-Sources/TestViewControllers/*
-=======
 test-vcs/*
 
->>>>>>> develop
 
 .DS_Store
 .Trashes

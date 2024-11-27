@@ -73,3 +73,7 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
 }
+
+#Preview {
+    ViewController()
+}
