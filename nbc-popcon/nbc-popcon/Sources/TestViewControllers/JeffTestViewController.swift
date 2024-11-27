@@ -21,10 +21,10 @@ class JeffTestViewController: UIViewController {
 
     func configUI() {
         sample.snp.makeConstraints {
-            $0.leading.equalTo(view.snp.leading)
-            $0.trailing.equalTo(view.snp.trailing)
-            $0.bottom.equalTo(view.snp.bottom).inset(100)
-            $0.height.equalTo(571)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }
