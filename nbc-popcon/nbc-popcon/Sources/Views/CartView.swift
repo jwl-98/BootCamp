@@ -89,7 +89,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupViewLayout()
         configureTableView()
     }
     
@@ -99,7 +99,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     //MARK: - 레이아웃
     
-    private func setupView() {
+    private func setupViewLayout() {
         addSubview(backgroundView)
         summaryView.addSubview(closeButton)
         summaryView.addSubview(countTotalItemLabel)
