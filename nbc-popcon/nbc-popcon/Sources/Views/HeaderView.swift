@@ -54,6 +54,7 @@ class HeaderView: UIView {
 
 
 //MARK: - HeaderView (UI 설정)
+
 extension HeaderView {
     
     // UI 설정 메서드
@@ -68,7 +69,8 @@ extension HeaderView {
         self.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { label in
-            label.centerX.centerY.equalToSuperview()
+            label.centerX.equalToSuperview()
+            label.bottom.equalToSuperview().inset(20)
         }
     }
     
@@ -90,6 +92,7 @@ extension HeaderView {
 
 
 //MARK: - HeaderView (직원 호출 액션 설정)
+
 extension HeaderView {
     
     // 버튼 액션 설정
