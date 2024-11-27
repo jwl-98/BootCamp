@@ -10,6 +10,8 @@
 xcuserdata/
 xcuserdata/**/*
 project.xcworkspace/
+test-vcs/*
+
 
 .DS_Store
 .Trashes
@@ -100,3 +102,4 @@ fastlane/test_output
 iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/swift
+nbc-popcon/nbc-popcon/Sources/TestViewController/JerryTestViewController.swift

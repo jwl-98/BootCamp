@@ -10,6 +10,7 @@ import SnapKit
 
 class HeaderView: UIView {
     
+    // 서비스명 라벨
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         
@@ -20,6 +21,7 @@ class HeaderView: UIView {
         return titleLabel
     }()
     
+    // 호출 버튼
     private let callButton: UIButton = {
         let callButton = UIButton()
         
@@ -32,6 +34,7 @@ class HeaderView: UIView {
         return callButton
     }()
     
+    // 직원 호출 알럿 액션 - ViewController.setupBindings()를 통해 할당
     var onCallStaff: (() -> (Void))? = nil
     
     override init(frame: CGRect) {
@@ -50,23 +53,28 @@ class HeaderView: UIView {
 }
 
 
-//MARK: - HeaderView (setUpUI)
+//MARK: - HeaderView (UI 설정)
+
 extension HeaderView {
     
+    // UI 설정 메서드
     private func setUpUI() {
         setUpTitleLabel()
         setUpCallButton()
         self.backgroundColor = ThemeColors.red
     }
     
+    // 서비스 명 라벨
     private func setUpTitleLabel() {
         self.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { label in
-            label.centerX.centerY.equalToSuperview()
+            label.centerX.equalToSuperview()
+            label.bottom.equalToSuperview().inset(20)
         }
     }
     
+    // 직원 호출 버튼
     private func setUpCallButton() {
         self.addSubview(callButton)
         
@@ -82,13 +90,17 @@ extension HeaderView {
     }
 }
 
-//MARK: - HeaderView 직원 호출 버튼
+
+//MARK: - HeaderView (직원 호출 액션 설정)
+
 extension HeaderView {
     
+    // 버튼 액션 설정
     private func configureCallButtonAction() {
         self.callButton.addTarget(nil, action: #selector(callButtonTapped), for: .touchUpInside)
     }
     
+    // 호출 알럿 버튼 액션
     @objc private func callButtonTapped() {
         guard let onBellButtonTapped = self.onCallStaff else { return }
         onBellButtonTapped()
