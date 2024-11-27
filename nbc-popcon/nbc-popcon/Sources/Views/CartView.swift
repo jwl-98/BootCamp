@@ -175,16 +175,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
             $0.width.equalToSuperview()
             
         }
-        
-        // menuView 장바구니 요약 Layout
-        menuSummaryView.addSubview(countTotalItemLabel)
-        menuSummaryView.addSubview(totalItemPriceLabel)
-        
-        menuSummaryView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(200)
-            $0.width.equalToSuperview()
-            $0.height.equalTo(80)
-        }
     }
      
     //MARK: - tableView 세팅
