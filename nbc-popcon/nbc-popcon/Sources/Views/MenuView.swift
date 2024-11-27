@@ -79,6 +79,7 @@ class MenuView: UIView {
 
     func configureCollectionView() {
         collectionView.dataSource = self
+        collectionView.delegate = self
 
         collectionView.snp.makeConstraints {
             $0.top.equalTo(segmentedControl.snp.bottom)
@@ -101,7 +102,7 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemButtonCell", for: indexPath) as? MenuItemButtonCell else { return UICollectionViewCell() }
-        cell.configure()
+        cell.configure(items[indexPath.item])
 
         return cell
     }
@@ -109,7 +110,7 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     // 셀 누르면 실행
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let onCollectionViewCellSelected = self.onMenuItemSelected else { return }
-        let menuItem = items[indexPath.row]
+        let menuItem = items[indexPath.item]
         onCollectionViewCellSelected(menuItem)
     }
 }
