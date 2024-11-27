@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 import SnapKit
 
 class MenuView: UIView {
@@ -24,7 +23,7 @@ class MenuView: UIView {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .red // 초기 라이트 모드 컬러 유지
 
         return collectionView
     }()
@@ -39,6 +38,7 @@ class MenuView: UIView {
         }
 
         configureCollectionView()
+        applyTheme() // 초기 테마 적용
     }
 
     required init?(coder: NSCoder) {
@@ -71,6 +71,35 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.configure()
 
         return cell
+    }
+}
+
+// MARK: - 테마 변경 메서드 추가
+
+extension MenuView {
+    /// 테마에 따라 UI를 업데이트합니다.
+    func updateTheme(to theme: UIUserInterfaceStyle) {
+        switch theme {
+        case .light:
+            // 라이트 모드: 기존 색상 유지
+            self.backgroundColor = .white
+            collectionView.backgroundColor = .red
+        case .dark:
+            // 다크 모드: 다크 색상 적용
+            self.backgroundColor = .black
+            collectionView.backgroundColor = .darkGray
+        default:
+            // 시스템 설정에 따라 적용
+            let isDarkMode = traitCollection.userInterfaceStyle == .dark
+            self.backgroundColor = isDarkMode ? .black : .white
+            collectionView.backgroundColor = isDarkMode ? .darkGray : .red
+        }
+    }
+
+    /// 현재 테마 상태에 따라 즉시 적용
+    private func applyTheme() {
+        let currentTheme = traitCollection.userInterfaceStyle
+        updateTheme(to: currentTheme)
     }
 }
 
