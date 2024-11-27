@@ -16,7 +16,6 @@ class ButtonsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .black
         addSubview(buttonStackView)
         setStackViewAutoLayOut()
         completeButtonAction()
@@ -64,7 +63,6 @@ class ButtonsView: UIView {
         buttonStackView.snp.makeConstraints {
             $0.leading.equalTo(self.snp.leading).inset(0)
             $0.trailing.equalTo(self.snp.trailing).inset(0)
-            $0.bottom.equalTo(self.snp.bottom).inset(60)
             $0.height.equalTo(50)
         }
     }
@@ -73,33 +71,35 @@ class ButtonsView: UIView {
 extension ButtonsView {
     
      private func completeButtonAction() {
-         self.purchaseButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
+         self.purchaseButton.addTarget(self,
+                                       action: #selector(completeButtonTapped(_:)),
+                                       for: .touchUpInside
+         )
     }
     
-    @objc  func completeButtonTapped(sender: UIButton) {
+    @objc  func completeButtonTapped(_ sender: UIButton) {
         //버튼효과
         sender.alpha = 0.5
-        
-        guard let purchaseButtonTapped = self.onCompleteOrder else {return}
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            sender.alpha = 1.0
-        }
-        purchaseButtonTapped()
+        print(#function)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    sender.alpha = 1.0
+                }
+        onCompleteOrder?()
     }
     
     private func cancelButtonAction() {
-        self.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        self.cancelButton.addTarget(self,
+                                    action: #selector(cancelButtonTapped(_:)),
+                                    for: .touchUpInside
+        )
     }
-    @objc func cancelButtonTapped(sender: UIButton) {
+    
+    @objc func cancelButtonTapped(_ sender: UIButton) {
         cancelButton.alpha = 0.5
         
-        guard let cancelButtonTapped = self.onCancelOrder else {return}
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            sender.alpha = 1.0
-        }
-        cancelButtonTapped()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    sender.alpha = 1.0
+                }
+        onCancelOrder?()
     }
-    
-    
 }
-
