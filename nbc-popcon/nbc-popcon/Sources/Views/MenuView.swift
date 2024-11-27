@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class MenuView: UIView {
-
     // MARK: - 컴포넌트 생성
 
     let items = MenuItem.menuItems // 테스트용 아이템
@@ -30,6 +29,9 @@ class MenuView: UIView {
 
         return collectionView
     }()
+
+    // 메뉴 아이템 선택 액션 - ViewController.setupBindings()를 통해 할당
+    var onMenuItemSelected:((MenuItem) -> Void)? = nil
 
     // MARK: - MenuView 기본 설정
 
@@ -73,6 +75,13 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.configure(items[indexPath.row])
 
         return cell
+    }
+
+    // 셀 누르면 실행
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let onCollectionViewCellSelected = self.onMenuItemSelected else { return }
+        let menuItem = items[indexPath.row]
+        onCollectionViewCellSelected(menuItem)
     }
 }
 

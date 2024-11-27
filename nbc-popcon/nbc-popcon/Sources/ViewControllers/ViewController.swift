@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        //setupBindings()
+        setupBindings()
         kiosk.getCurrentMenuItems() // 초기 메뉴 데이터 가져오기
     }
     
@@ -84,10 +84,11 @@ class ViewController: UIViewController {
         //            self?.kiosk.selectCategory(at: index)
         //        }
         //
-        //        // 메뉴 뷰에서 아이템 선택 시 처리
-        //        menuView.onMenuItemSelected = { [weak self] menuItem in
-        //            self?.kiosk.addItemToCart(menuItem: menuItem)
-        //        }
+        // 메뉴 뷰에서 아이템 선택 시 처리
+        menuView.onMenuItemSelected = { [weak self] menuItem in
+            print("잘 들어갔나")
+            self?.kiosk.addItemToCart(menuItem: menuItem)
+        }
         //
         //        // 장바구니 뷰에서 수량 변경 및 삭제 처리
         //        cartView.onItemQuantityChanged = { [weak self] index, quantity in
