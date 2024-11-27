@@ -44,12 +44,11 @@ class HeaderView: UIView {
         configureCallButtonAction()
     }
     
+    
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        setUpUI()
-        configureCallButtonAction()
+        fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 
@@ -105,9 +104,4 @@ extension HeaderView {
         guard let onBellButtonTapped = self.onCallStaff else { return }
         onBellButtonTapped()
     }
-}
-
-
-#Preview("ViewController") {
-    ViewController()
 }
