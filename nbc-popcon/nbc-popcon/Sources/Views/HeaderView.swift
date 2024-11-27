@@ -94,8 +94,3 @@ extension HeaderView {
         onBellButtonTapped()
     }
 }
-
-
-#Preview("ViewController") {
-    ViewController()
-}

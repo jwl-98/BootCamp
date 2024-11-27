@@ -11,6 +11,8 @@ import SnapKit
 class ButtonsView: UIView {
     let themeManager = ThemeManager()
     
+    var onCompleteOrder: (() -> (Void))? = nil
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(buttonStackView)
@@ -27,7 +29,7 @@ class ButtonsView: UIView {
         
         button.setTitle("취소하기", for: .normal)
         button.titleLabel?.font = themeManager.fonts.bold
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 25
         button.backgroundColor = themeManager.colors.grey1
         button.frame.size.width = 70
 
@@ -39,7 +41,7 @@ class ButtonsView: UIView {
         
         button.setTitle("결제하기", for: .normal)
         button.titleLabel?.font = themeManager.fonts.bold
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 25
         button.backgroundColor = themeManager.colors.blue
         button.frame.size.width = 70
 
@@ -57,14 +59,27 @@ class ButtonsView: UIView {
     
     func setStackViewAutoLayOut() {
         buttonStackView.snp.makeConstraints {
-            $0.leading.equalTo(self.snp.leading).inset(themeManager.numbers.paddingSmall)
-            $0.trailing.equalTo(self.snp.trailing).inset(themeManager.numbers.paddingSmall)
+            $0.leading.equalTo(self.snp.leading).inset(0)
+            $0.trailing.equalTo(self.snp.trailing).inset(0)
             $0.bottom.equalTo(self.snp.bottom).inset(60)
+            $0.top.equalTo(<#T##other: any ConstraintRelatableTarget##any ConstraintRelatableTarget#>)
             $0.height.equalTo(50)
         }
     }
 }
 
+extension ButtonsView {
+    
+     private func purchaseButtonAction() {
+         self.purchaseButton.addTarget(self.purchaseButton, action: #selector(purchaseButtonTapped), for: .touchUpInside)
+         print("dddd")
+    }
+    @objc  func purchaseButtonTapped() {
+        guard let purchaseButtonTapped = self.onCompleteOrder else { return }
+        purchaseButtonTapped()
+    }
+    
+}
 #Preview {
   ViewController()
 }
