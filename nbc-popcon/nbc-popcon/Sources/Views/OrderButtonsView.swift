@@ -62,6 +62,7 @@ class ButtonsView: UIView {
         let st = UIStackView(arrangedSubviews: [cancelButton, purchaseButton])
         st.axis = .horizontal
         st.distribution = .fillEqually
+        st.backgroundColor = themeManager.colors.clear
         st.spacing = themeManager.numbers.padding
         return st
     }()

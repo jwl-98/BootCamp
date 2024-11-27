@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
-    
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
     
@@ -67,6 +66,8 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
     // 장바구니 목록을 보여주는 TableView
     private let tableView: UITableView = {
         let tableView = UITableView()
+//        tableView.layer.borderWidth = 1
+//        tableView.layer.borderColor = UIColor.lightGray.cgColor
         return tableView
     }()
     
@@ -75,16 +76,16 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
         let view = UIView()
         view.backgroundColor = ThemeColors.white
         // view의 상단에만 테두리를 적용
-        let border = UIView()
+        // view의 상단에만 테두리를 적용
         border.backgroundColor = .lightGray
         border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
         border.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5)
-        view.addSubview(border)
+        border.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5)
         return view
     }()
     
     // MARK: - Setting
-    
+    // MARK: - Setting
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViewLayout()
@@ -111,6 +112,14 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
         // background Layout
         backgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        // background Layout
+        backgroundView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
         // 상단바 Layout
@@ -162,11 +171,12 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(130)
             $0.width.equalToSuperview()
+            
         }
     }
      
     // MARK: - TableView 세팅
-    
+
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self

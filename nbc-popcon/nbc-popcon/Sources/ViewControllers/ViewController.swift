@@ -117,14 +117,14 @@ class ViewController: UIViewController {
         //        }
         //
         //        // 버튼 뷰에서 주문 완료, 취소 및 직원 호출 처리
-        //        buttonView.onCompleteOrder = { [weak self] in
-        //            guard let message = self?.kiosk.completeOrder() else { return }
-        //            self?.showAlert(title: "주문 완료", message: message)
-        //        }
-        //
-        //        buttonView.onCancelOrder = { [weak self] in
-        //            self?.kiosk.clearCart()
-        //        }
+                buttonView.onCompleteOrder = { [weak self] in
+                    guard let message = self?.kiosk.completeOrder() else { return }
+                    self?.showAlert(title: "주문 완료", message: message)
+                }
+        
+                buttonView.onCancelOrder = { [weak self] in
+                    self?.kiosk.clearCart()
+                }
         //
         
         //        // ViewModel(Kiosk) 데이터 변경 시 UI 업데이트
