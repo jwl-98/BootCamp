@@ -91,10 +91,11 @@ class ViewController: UIViewController {
         }
         
         //
-        //        // 메뉴 뷰에서 아이템 선택 시 처리
-        //        menuView.onMenuItemSelected = { [weak self] menuItem in
-        //            self?.kiosk.addItemToCart(menuItem: menuItem)
-        //        }
+        // 메뉴 뷰에서 아이템 선택 시 처리
+        menuView.onMenuItemSelected = { [weak self] menuItem in
+            print("잘 들어갔나")
+            self?.kiosk.addItemToCart(menuItem: menuItem)
+        }
         //
         //        // 장바구니 뷰에서 수량 변경 및 삭제 처리
         //        cartView.onItemQuantityChanged = { [weak self] index, quantity in
@@ -106,14 +107,14 @@ class ViewController: UIViewController {
         //        }
         //
         //        // 버튼 뷰에서 주문 완료, 취소 및 직원 호출 처리
-        //        buttonView.onCompleteOrder = { [weak self] in
-        //            guard let message = self?.kiosk.completeOrder() else { return }
-        //            self?.showAlert(title: "주문 완료", message: message)
-        //        }
-        //
-        //        buttonView.onCancelOrder = { [weak self] in
-        //            self?.kiosk.clearCart()
-        //        }
+                buttonView.onCompleteOrder = { [weak self] in
+                    guard let message = self?.kiosk.completeOrder() else { return }
+                    self?.showAlert(title: "주문 완료", message: message)
+                }
+        
+                buttonView.onCancelOrder = { [weak self] in
+                    self?.kiosk.clearCart()
+                }
         //
         
         //
