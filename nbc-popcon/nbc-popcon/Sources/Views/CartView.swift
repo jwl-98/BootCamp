@@ -67,8 +67,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     // 장바구니 목록을 보여주는 TableView
     private let tableView: UITableView = {
         let tableView = UITableView()
-//        tableView.layer.borderWidth = 1
-//        tableView.layer.borderColor = UIColor.lightGray.cgColor
         return tableView
     }()
     
@@ -82,6 +80,15 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
         border.frame = CGRect(x: 0, y: 0 , width: view.frame.width, height: 0.5)
         view.addSubview(border)
+        return view
+    }()
+    
+    // menuView의 장바구니 요약 View
+    private let menuSummaryView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.red
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.cornerRadius = 20
         return view
     }()
     
@@ -152,7 +159,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
             $0.bottom.equalTo(buttonsView.snp.top)
         }
         
-        // orderButtonsView.buttonStackView Layout
+        // orderButtonsView의 스택뷰 Layout
         orderButtonsView.buttonStackView.snp.makeConstraints {
             $0.top.equalTo(buttonsView.snp.top).inset(40)
             $0.bottom.equalTo(buttonsView.snp.bottom).inset(40)
@@ -167,6 +174,16 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
             $0.height.equalTo(130)
             $0.width.equalToSuperview()
             
+        }
+        
+        // menuView 장바구니 요약 Layout
+        menuSummaryView.addSubview(countTotalItemLabel)
+        menuSummaryView.addSubview(totalItemPriceLabel)
+        
+        menuSummaryView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(200)
+            $0.width.equalToSuperview()
+            $0.height.equalTo(80)
         }
     }
      
