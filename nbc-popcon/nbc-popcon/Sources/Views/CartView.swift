@@ -4,12 +4,11 @@
 //
 //  Created by MaxBook on 11/25/24.
 //
-//
+
 import UIKit
 import SnapKit
 
-class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
-    
+class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
     
@@ -17,7 +16,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     var totalPrice: Int = 40000
     var totalCount: Int = 7
     
-    //MARK: - 컴포넌트 생성
+    // MARK: - 컴포넌트 생성
     
     // Background View
     private let backgroundView: UIView = {
@@ -76,28 +75,29 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     private let buttonsView: UIView = {
         let view = UIView()
         view.backgroundColor = ThemeColors.white
-        // view의 상단에만 테투리를 적용
-        let border = UIView()
+        // view의 상단에만 테두리를 적용
+        // view의 상단에만 테두리를 적용
         border.backgroundColor = .lightGray
         border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
-        border.frame = CGRect(x: 0, y: 0 , width: view.frame.width, height: 0.5)
-        view.addSubview(border)
+        border.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5)
+        border.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5)
         return view
     }()
     
-    //MARK: - setting
-    
+    // MARK: - Setting
+    // MARK: - Setting
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViewLayout()
         configureTableView()
+        applyTheme() // 초기 테마 적용
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    //MARK: - 레이아웃
+    // MARK: - 레이아웃
     
     private func setupViewLayout() {
         addSubview(backgroundView)
@@ -108,6 +108,11 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         backgroundView.addSubview(tableView)
         buttonsView.addSubview(orderButtonsView.buttonStackView)
         backgroundView.addSubview(buttonsView)
+        
+        // background Layout
+        backgroundView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         // background Layout
         backgroundView.snp.makeConstraints {
@@ -170,9 +175,8 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         }
     }
      
-    //MARK: - tableView 세팅
-    
-    // tableView 세팅
+    // MARK: - TableView 세팅
+
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -192,5 +196,37 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         
         cell.selectionStyle = .none // 셀 선택 색상 제거
         return cell
+    }
+}
+
+// MARK: - 테마 변경 메서드 추가
+
+extension CartView {
+    /// 테마에 따라 UI를 업데이트합니다.
+    func updateTheme(to theme: UIUserInterfaceStyle) {
+        switch theme {
+        case .light:
+            backgroundView.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
+            summaryView.backgroundColor = ThemeColors.red
+            countTotalItemLabel.textColor = ThemeColors.white
+            totalItemPriceLabel.textColor = ThemeColors.white
+            buttonsView.backgroundColor = ThemeColors.white
+        case .dark:
+            backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            summaryView.backgroundColor = .darkGray
+            countTotalItemLabel.textColor = .white
+            totalItemPriceLabel.textColor = .white
+            buttonsView.backgroundColor = .black
+        default:
+            // 시스템 테마에 따라 결정
+            let isDarkMode = traitCollection.userInterfaceStyle == .dark
+            updateTheme(to: isDarkMode ? .dark : .light)
+        }
+    }
+    
+    /// 현재 테마를 초기 적용
+    private func applyTheme() {
+        let currentTheme = traitCollection.userInterfaceStyle
+        updateTheme(to: currentTheme)
     }
 }
