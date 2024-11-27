@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         
         menuView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(ThemeNumbers.paddingSmall)
             make.height.equalTo(view.frame.height * 0.4)
         }
         

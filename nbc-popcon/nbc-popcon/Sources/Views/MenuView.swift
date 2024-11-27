@@ -36,6 +36,7 @@ class MenuView: UIView {
         layout.itemSize.width = itemSize
         layout.itemSize.height = itemSize
         layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing
+        layout.minimumLineSpacing = ThemeNumbers.itemSpacing
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
@@ -66,13 +67,12 @@ class MenuView: UIView {
     private func configureSegmentedControl() {
 
         segmentedControl.snp.makeConstraints { view in
-            view.top.equalToSuperview()
+            view.top.equalToSuperview().inset(ThemeNumbers.itemSpacing)
             view.leading.trailing.equalToSuperview()
             view.height.equalTo(50)
         }
         
         segmentedControl.addTarget(self, action: #selector(self.segmentedChanged(_:)), for: .valueChanged)
-        segmentedControl.selectedSegmentIndex = 0
     }
 
     // MARK: - CollectionView 기본 설정
@@ -82,7 +82,7 @@ class MenuView: UIView {
         collectionView.delegate = self
 
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(segmentedControl.snp.bottom)
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(ThemeNumbers.itemSpacing)
             $0.width.bottom.equalToSuperview()
         }
     }
@@ -125,6 +125,8 @@ extension MenuView {
         category.enumerated().forEach {
             self.segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false)
         }
+        
+        segmentedControl.selectedSegmentIndex = 0
     }
     
     func menuUpdated(_ items: [MenuItem]) {
