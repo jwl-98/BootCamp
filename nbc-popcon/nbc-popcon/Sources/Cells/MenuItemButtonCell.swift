@@ -26,6 +26,7 @@ class MenuItemButtonCell : UICollectionViewCell {
     // 아이템 이름 Label
     let nameLabel: UILabel = {
         let label = UILabel()
+        label.text = "item name"
         label.font = ThemeFonts.p
         label.textColor = ThemeColors.black
 
@@ -35,6 +36,7 @@ class MenuItemButtonCell : UICollectionViewCell {
     // 아이템 가격 Label
     let priceLabel: UILabel = {
         let label = UILabel()
+        label.text = "1,000원"
         label.font = ThemeFonts.small
         label.textColor = ThemeColors.blue
 
@@ -44,16 +46,14 @@ class MenuItemButtonCell : UICollectionViewCell {
     // 아이템 이미지 ImageView
     let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "multiply.circle.fill")
         imageView.contentMode = .scaleAspectFit
-        
         return imageView
     }()
 
     // MARK: - 기본 설정
 
-
-
-    func configure(_ menuItem: MenuItem) {
+    func configure() {
         self.contentView.addSubview(stackView)
 
         [imageView, nameLabel, priceLabel].forEach {
@@ -65,10 +65,6 @@ class MenuItemButtonCell : UICollectionViewCell {
         self.layer.borderColor = UIColor.systemYellow.cgColor
         self.layer.cornerRadius = ThemeNumbers.radius
         self.clipsToBounds = true
-
-        nameLabel.text = menuItem.name
-        priceLabel.text = "\(menuItem.price)"
-        imageView.image = UIImage(systemName: menuItem.symbolId)
 
         stackView.snp.makeConstraints() {
             $0.width.height.leading.trailing.equalToSuperview()

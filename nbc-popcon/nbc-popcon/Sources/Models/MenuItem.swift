@@ -245,4 +245,5 @@ struct MenuItem {
             categoryName: "건강"
         )
     ]
+    
 }
