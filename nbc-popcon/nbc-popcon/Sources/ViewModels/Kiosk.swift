@@ -31,8 +31,18 @@ class Kiosk {
     // MARK: - Public Methods
     
     func allCategory() {
-        let allCategory = Category.allCases.map { $0.rawValue }
-        onUpdateAllCategory?(allCategory)
+        var allCategory: Set<Category> = []
+        
+        self.menuCategories.forEach {
+            allCategory.insert($0.category)
+        }
+        
+        let category = Category
+            .allCases
+            .filter{ allCategory.contains($0) }
+            .map { $0.rawValue }
+        
+        onUpdateAllCategory?(category)
     }
     
     /// 현재 선택된 카테고리의 메뉴 가져오기

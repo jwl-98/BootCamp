@@ -243,7 +243,9 @@ struct MenuItem {
             symbolId: "heart.text.square.fill",
             description: "심박수를 나타내는 아이콘으로, 심장의 건강 상태를 의미합니다.",
             categoryName: "건강"
-        )
+        ),
+        MenuItem(
+            name: "공유", price: 3000, symbolId: "square.and.arrow.up.circle", description: "외부로의 공유를 의미합니다", categoryName: "기타")
     ]
     
 }
