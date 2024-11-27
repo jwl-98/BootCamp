@@ -13,7 +13,7 @@ class Kiosk {
     // MARK: - Properties
     
     /// 카테고리별 메뉴 데이터 (더미 데이터)
-    private let menuCategories: [MenuItem] = MenuItem.data
+    private let menuCategories: [MenuItem] = MenuItem.menuItems
     
     /// 현재 선택된 카테고리 인덱스
     private var currentCategory: Category = .communication
@@ -22,11 +22,18 @@ class Kiosk {
     private var cartItems: [CartItem] = []
     
     // MARK: - View와의 연결 클로저
+    
+    var onUpdateAllCategory: (([String]) -> Void)?
     var onMenuUpdated: (([MenuItem]) -> Void)?
     var onCartUpdated: (([CartItem]) -> Void)?
     var onSummaryUpdated: ((String) -> Void)?
     
     // MARK: - Public Methods
+    
+    func allCategory() {
+        let allCategory = Category.allCases.map { $0.rawValue }
+        onUpdateAllCategory?(allCategory)
+    }
     
     /// 현재 선택된 카테고리의 메뉴 가져오기
     func getCurrentMenuItems() {
@@ -37,9 +44,8 @@ class Kiosk {
     }
     
     /// 카테고리 변경
-    func selectCategory(at index: Int) {
-        guard let category = Category(rawValue: index) else { return }
-        self.currentCategory = category
+    func selectCategory(by rawValue: String) {
+        self.currentCategory = Category(rawValue: rawValue)
     }
     
     /// 장바구니에 아이템 추가
