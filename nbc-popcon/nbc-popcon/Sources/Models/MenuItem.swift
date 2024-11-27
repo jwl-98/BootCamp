@@ -168,10 +168,10 @@ struct MenuItem {
         
         // 건강 카테고리
         MenuItem(
-            name: "심장",
+            name: "하트",
             price: 3500,
             symbolId: "heart.fill",
-            description: "사랑이나 건강을 상징하는 심장 모양의 아이콘입니다.",
+            description: "사랑을 상징하는 하트 모양의 아이콘입니다.",
             categoryName: "건강"
         ),
         MenuItem(
