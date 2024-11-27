@@ -14,7 +14,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
     var totalCount: Int = 7
     
     //MARK: - 컴포넌트 생성
-    
+   
     // 상단 장바구니 요약 View
     private let summaryView: UIView = {
         let view = UIView()
@@ -83,7 +83,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         summaryView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(80)
         }
         
         // 상단바 닫기버튼 Layout
@@ -117,7 +117,10 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         // 테스트용 배경색
         backgroundColor = .lightGray
     }
+     
+    //MARK: - tableView 세팅
     
+    // tableView 세팅
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self

@@ -11,11 +11,11 @@ import SnapKit
 class CartItemButtonCell: UITableViewCell {
     var itemQuantity = 0.0
     
-    
     // 상품 imageView
     private let cartItemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "wifi")
+        imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .lightGray
         return imageView
     }()
@@ -65,7 +65,6 @@ class CartItemButtonCell: UITableViewCell {
         stepper.stepValue = 1.0
         stepper.minimumValue = 0.0
         stepper.maximumValue = 50.0
-//        stepper.backgroundColor = .yellow
         stepper.tintColor = .white
         return stepper
     }()
@@ -76,7 +75,8 @@ class CartItemButtonCell: UITableViewCell {
         button.setTitle(" 이 항목 삭제", for: .normal)
         button.backgroundColor = .lightGray
         button.setImage(UIImage(systemName: "trash"), for: .normal)
-        
+        button.titleLabel?.textAlignment = .right
+        button.contentHorizontalAlignment = .right
         return button
     }()
     
@@ -87,17 +87,15 @@ class CartItemButtonCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.spacing = 5
         stackView.distribution = .fill
+        stackView.alignment = .fill
         return stackView
     }()
     
-    // 갯수와 stepper horizontalStackView
-    private let countHorizontalstackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.backgroundColor = .red
-        stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.distribution = .fill
-        return stackView
+    // 갯수와 stepper horizontalView
+    private let countHorizontalView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
     }()
     
     // 카운트, 합계금액, 삭제버튼 verticalStackView
@@ -110,74 +108,98 @@ class CartItemButtonCell: UITableViewCell {
         return stackView
     }()
     
-    // 전체 horizontalStackView
-    private let totalHorizontalstackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.backgroundColor = .green
-        stackView.axis = .horizontal
-        stackView.spacing = 50
-        stackView.distribution = .fill
-        return stackView
+    // 전체 horizontalView
+    private let horizontalView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray
+        return view
     }()
-    
+ 
+    //MARK: - setting
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupTableViewCell()
+        setupTableViewCellLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    private func setupTableViewCell() {
-       
+    //MARK: - layout
+    
+    // TableViewCell layout 설정
+    private func setupTableViewCellLayout() {
+        
         itemVerticalstackView.addArrangedSubview(cartItemImageView)
         itemVerticalstackView.addArrangedSubview(cartItemLabel)
         itemVerticalstackView.addArrangedSubview(cartItemPriceLabel)
-        countHorizontalstackView.addArrangedSubview(cartItemQuantityLabel)
-        countHorizontalstackView.addArrangedSubview(stepper)
-        calculateVerticalstackView.addArrangedSubview(countHorizontalstackView)
+        countHorizontalView.addSubview(cartItemQuantityLabel)
+        countHorizontalView.addSubview(stepper)
+        calculateVerticalstackView.addArrangedSubview(countHorizontalView)
         calculateVerticalstackView.addArrangedSubview(cartItemTotalPriceLabel)
         calculateVerticalstackView.addArrangedSubview(totalDeleteButton)
-        totalHorizontalstackView.addArrangedSubview(itemVerticalstackView)
-        totalHorizontalstackView.addArrangedSubview(calculateVerticalstackView)
-       
-        contentView.addSubview(totalHorizontalstackView)
-        
-        totalHorizontalstackView.snp.makeConstraints {
+        horizontalView.addSubview(itemVerticalstackView)
+        horizontalView.addSubview(calculateVerticalstackView)
+
+        contentView.addSubview(horizontalView)
+      
+        // 전체를 감싼 StackView
+        horizontalView.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.top)
             $0.bottom.equalTo(contentView.snp.bottom)
             $0.leading.equalTo(contentView.snp.leading)
             $0.trailing.equalTo(contentView.snp.trailing)
         }
         
-        itemVerticalstackView.snp.makeConstraints {
+        // 왼쪽의 이미지, 이름, 단가 verticalStackView
+        itemVerticalstackView.snp.remakeConstraints {
+            $0.leading.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(10)
-            $0.bottom.equalTo(totalHorizontalstackView.snp.bottom).inset(10)
-        
+            $0.bottom.equalToSuperview().inset(20)
         }
-        
-        calculateVerticalstackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
-            $0.trailing.equalToSuperview().inset(10)
-            $0.width.equalTo(160)
             
-        }
-        
-        countHorizontalstackView.snp.makeConstraints {
+        // 오른쪽 수량과 스태퍼 horizontalView
+        countHorizontalView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(10)
             $0.top.equalToSuperview()
-            $0.height.equalTo(30)
-            $0.width.equalTo(50)
         }
         
-        cartItemImageView.snp.makeConstraints {
-            $0.height.equalTo(50)
-            $0.width.equalTo(50)
+        // 수량, 가격, 삭제버튼 verticalStackView
+        calculateVerticalstackView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(50)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(20)
+            $0.width.equalTo(150)
         }
+         
+        // 아이템 이미지 크기
+        cartItemImageView.snp.makeConstraints {
+            $0.height.equalTo(100)
+            $0.width.equalTo(150)
+        }
+        
+        // 아이템 이름 크기
+        cartItemLabel.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
+        
+        // 아이템 단가 크기
+        cartItemPriceLabel.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
+        
+        // 아이템 선택 갯수 크기
+        cartItemQuantityLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.height.equalToSuperview()
+            $0.width.equalTo(40)
+        }
+        
+        // stepper 크기
         stepper.snp.makeConstraints {
-            $0.width.equalTo(80)
+            $0.trailing.equalTo(countHorizontalView.snp.trailing)
+            $0.centerY.equalToSuperview()
         }
     }
 }
