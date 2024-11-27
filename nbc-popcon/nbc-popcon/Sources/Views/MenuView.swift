@@ -13,6 +13,8 @@ class MenuView: UIView {
 
     // MARK: - 컴포넌트 생성
 
+    let items = MenuItem.menuItems // 테스트용 아이템
+
     // 카테고리에 맞는 아이템을 보여주는 CollectionView
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -49,6 +51,7 @@ class MenuView: UIView {
 
     func configureCollectionView() {
         collectionView.dataSource = self
+        collectionView.delegate = self
 
         collectionView.snp.makeConstraints {
             $0.width.height.top.bottom.equalToSuperview()
@@ -66,9 +69,8 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     // 셀 생성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("collectionview")
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemButtonCell", for: indexPath) as? MenuItemButtonCell else { return UICollectionViewCell() }
-        cell.configure()
+        cell.configure(items[indexPath.row])
 
         return cell
     }
