@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBindings()
+        //setupBindings()
         kiosk.getCurrentMenuItems() // 초기 메뉴 데이터 가져오기
     }
     
@@ -99,14 +99,14 @@ class ViewController: UIViewController {
         //        }
         //
         //        // 버튼 뷰에서 주문 완료, 취소 및 직원 호출 처리
-        //        buttonView.onCompleteOrder = { [weak self] in
-        //            guard let message = self?.kiosk.completeOrder() else { return }
-        //            self?.showAlert(title: "주문 완료", message: message)
-        //        }
-        //
-        //        buttonView.onCancelOrder = { [weak self] in
-        //            self?.kiosk.clearCart()
-        //        }
+                buttonView.onCompleteOrder = { [weak self] in
+                    guard let message = self?.kiosk.completeOrder() else { return }
+                    self?.showAlert(title: "주문 완료", message: message)
+                }
+        
+                buttonView.onCancelOrder = { [weak self] in
+                    self?.kiosk.clearCart()
+                }
         //
         
         //
