@@ -44,12 +44,11 @@ class HeaderView: UIView {
         configureCallButtonAction()
     }
     
+    
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        setUpUI()
-        configureCallButtonAction()
+        fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 

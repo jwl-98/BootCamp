@@ -7,17 +7,18 @@
 
 import Foundation
 
-enum Category: Int {
+enum Category: Int, CaseIterable {
     
-  case communication = 0
-  case tool = 1
-  case health = 2
+    case communication = 0
+    case tool = 1
+    case health = 2
     
-  var kor: String {
-    switch self {
-    case .communication: return "통신"
-    case .tool: return "사물 및 도구"
-    case .health: return "건강"
+    var kor: String {
+        switch self {
+        case .communication: return "통신"
+        case .tool: return "사물 및 도구"
+        case .health: return "건강"
+        }
     }
-  }
+    
 }
