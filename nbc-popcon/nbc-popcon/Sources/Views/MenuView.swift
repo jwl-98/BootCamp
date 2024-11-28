@@ -45,11 +45,13 @@ class MenuView: UIView {
         layout.itemSize.height = itemSize
         layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing
         layout.minimumLineSpacing = ThemeNumbers.itemSpacing
+        layout.footerReferenceSize = CGSize(width: 0, height: 80)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
         collectionView.backgroundColor = .red
         collectionView.showsVerticalScrollIndicator = false
+        
         return collectionView
     }()
     
@@ -121,6 +123,7 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         let menuItem = items[indexPath.item]
         onCollectionViewCellSelected(menuItem)
     }
+    
 }
 
 
