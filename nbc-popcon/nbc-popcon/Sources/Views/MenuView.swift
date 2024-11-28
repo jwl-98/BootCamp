@@ -49,7 +49,7 @@ class MenuView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
         collectionView.backgroundColor = .red
-        
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
