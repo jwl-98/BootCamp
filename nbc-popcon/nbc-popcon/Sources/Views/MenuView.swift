@@ -40,7 +40,7 @@ class MenuView: UIView {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let rowCount: CGFloat = 2
-        let itemSize = (UIScreen.main.bounds.width - (2 * ThemeNumbers.paddingSmall + (rowCount - 1) * ThemeNumbers.itemSpacing)) / rowCount
+        let itemSize = (UIScreen.main.bounds.width - (2 * ThemeNumbers.padding + (rowCount - 1) * ThemeNumbers.itemSpacing)) / rowCount
         layout.itemSize.width = itemSize
         layout.itemSize.height = itemSize
         layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing

@@ -105,7 +105,7 @@ extension HeaderView {
         themeSwitch.snp.makeConstraints { themeSwitch in
             themeSwitch.centerY.equalTo(titleLabel)
             themeSwitch.width.height.equalTo(30)
-            themeSwitch.leading.equalToSuperview().inset(ThemeNumbers.paddingSmall)
+            themeSwitch.leading.equalToSuperview().inset(ThemeNumbers.padding)
         }
     }
 }

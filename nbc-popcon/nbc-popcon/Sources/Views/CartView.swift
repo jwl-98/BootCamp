@@ -127,20 +127,20 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource{
         // 상단바 닫기버튼 Layout
         closeButton.snp.makeConstraints {
             $0.top.equalTo(summaryView.snp.top)
-            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.paddingSmall)
+            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.padding)
             $0.width.height.equalTo(50)
         }
         
         // 상단바 장바구니 갯수 Layout
         countTotalItemLabel.snp.makeConstraints {
-            $0.leading.equalTo(summaryView.snp.leading).inset(ThemeNumbers.paddingSmall)
+            $0.leading.equalTo(summaryView.snp.leading).inset(ThemeNumbers.padding)
             $0.bottom.equalTo(summaryView.snp.bottom)
             $0.height.equalTo(50)
         }
         
         // 상단바 합계금액 Layout
         totalItemPriceLabel.snp.makeConstraints {
-            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.paddingSmall)
+            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.padding)
             $0.bottom.equalTo(summaryView.snp.bottom)
             $0.height.equalTo(50)
         }
