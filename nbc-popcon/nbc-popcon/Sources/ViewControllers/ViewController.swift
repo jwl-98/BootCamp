@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     // MARK: - ViewModel
     
-    private let kiosk = Kiosk() // Kiosk ViewModel
+    let kiosk = Kiosk() // Kiosk ViewModel
     
     // MARK: - Lifecycle
     
