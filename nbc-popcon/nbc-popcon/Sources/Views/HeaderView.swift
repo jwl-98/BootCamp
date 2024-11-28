@@ -16,9 +16,15 @@ class HeaderView: UIView {
         
         titleLabel.font = ThemeFonts.h1bold
         titleLabel.text = "POPCON"
-        titleLabel.textColor = ThemeColors.white
+        titleLabel.textColor = ThemeColors.bg
 
         return titleLabel
+    }()
+    
+    private let greenBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.green
+        return view
     }()
     
     // 호출 버튼
@@ -29,16 +35,16 @@ class HeaderView: UIView {
         callButton.setImage(callImage, for: .normal)
         callButton.contentMode = .scaleAspectFit
         callButton.backgroundColor = .clear
-        callButton.tintColor = ThemeColors.label
+        callButton.tintColor = ThemeColors.bg
         
         return callButton
     }()
     
-    private let themeButton: UIButton = {
+    @objc private let themeButton: UIButton = {
         let themeButton = UIButton()
         let gearImage = UIImage(systemName: "gear")
         themeButton.setImage(gearImage, for: .normal)
-        themeButton.tintColor = ThemeColors.label
+        themeButton.tintColor = ThemeColors.bg
         
         return themeButton
     }()
@@ -53,7 +59,7 @@ class HeaderView: UIView {
         super.init(frame: frame)
         
         setUpUI()
-        configureCallButtonAction()
+        configureButtonAction()
     }
     
     required init?(coder: NSCoder) {
@@ -69,6 +75,7 @@ extension HeaderView {
     
     // UI 설정 메서드
     private func setUpUI() {
+        setUpGreenBarView()
         setUpTitleLabel()
         setUpCallButton()
         setUpThemeButton()
@@ -82,7 +89,16 @@ extension HeaderView {
         
         titleLabel.snp.makeConstraints { label in
             label.centerX.equalToSuperview()
-            label.bottom.equalToSuperview().inset(20)
+            label.bottom.equalTo(greenBarView).inset(ThemeNumbers.padding)
+        }
+    }
+    
+    private func setUpGreenBarView() {
+        self.addSubview(greenBarView)
+        
+        greenBarView.snp.makeConstraints { view in
+            view.leading.trailing.bottom.equalToSuperview()
+            view.height.equalTo(14)
         }
     }
     
@@ -123,14 +139,21 @@ extension HeaderView {
 extension HeaderView {
     
     // 버튼 액션 설정
-    private func configureCallButtonAction() {
+    private func configureButtonAction() {
         self.callButton.addTarget(nil, action: #selector(callButtonTapped), for: .touchUpInside)
+        self.themeButton.addTarget(nil, action: #selector(themeButtonTapped), for: .touchUpInside)
     }
     
     // 호출 알럿 버튼 액션
     @objc private func callButtonTapped() {
         guard let onBellButtonTapped = self.onCallStaff else { return }
         onBellButtonTapped()
+    }
+    
+    // 테마 선택 버튼 설정
+    @objc private func themeButtonTapped() {
+        let themeSelectView = ThemeSelectView()
+        ModalManager.createGlobalModal(themeSelectView)
     }
 }
 

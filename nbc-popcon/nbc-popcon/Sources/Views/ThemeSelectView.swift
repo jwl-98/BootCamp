@@ -26,15 +26,14 @@ class ThemeSelectView: UIView {
             .allCases
             .map { ALRadioItem(title: $0.rawValue) }
         
-        
         let radioGroup = ALRadioGroup(items: items,
                                       style: .grouped)
         
         radioGroup.titleFont = ThemeFonts.p
         radioGroup.axis = .vertical
         radioGroup.selectedIndex = 0
-        radioGroup.addTarget(ThemeSelectView.self, action: #selector(buttonTapped), for: .valueChanged)
-        
+        radioGroup.addTarget(nil, action: #selector(buttonTapped), for: .valueChanged)
+        radioGroup.buttonBackgroundColor = .clear
         
         return radioGroup
     }()
@@ -61,6 +60,8 @@ class ThemeSelectView: UIView {
             addSubview($0)
         }
         
+        self.backgroundColor = ThemeColors.white
+        
         titleLabel.snp.makeConstraints { label in
             label.top.leading.equalToSuperview().inset(ThemeNumbers.padding)
         }
@@ -83,8 +84,4 @@ class TestViewController: UIViewController {
             $0.bottom.trailing.leading.top.equalToSuperview().inset(ThemeNumbers.padding)
         }
     }
-}
-
-#Preview("TestViewController") {
-    TestViewController()
 }

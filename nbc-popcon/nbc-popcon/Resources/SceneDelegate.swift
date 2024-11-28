@@ -18,9 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = TestViewController()
+        window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
+        window.overrideUserInterfaceStyle = .light
+        
         ThemeMode.onThemeChoice = { [weak self] themeMode in
             self?.themeChoice(themeMode)
         }
@@ -67,7 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         default:
             window.overrideUserInterfaceStyle = .unspecified
-
+            
         }
     }
 }

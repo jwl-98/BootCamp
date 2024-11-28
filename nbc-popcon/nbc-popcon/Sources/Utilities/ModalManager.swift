@@ -15,7 +15,7 @@ struct ModalManager {
         guard let topVC = AppHelpers.getTopViewController() else {
             return nil
         }
-        
+//        topVC.view.backgroundColor = ThemeColors.label
         let modalVC = GlobalModalViewController(target: content)
         modalVC.modalPresentationStyle = .overFullScreen
         modalVC.modalTransitionStyle = .crossDissolve
