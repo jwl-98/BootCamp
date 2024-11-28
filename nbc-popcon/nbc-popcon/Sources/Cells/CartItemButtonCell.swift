@@ -18,105 +18,114 @@ class CartItemButtonCell: UITableViewCell {
     // 상품 imageView
     private let cartItemImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "trash")
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = ThemeColors.black
-        //imageView.backgroundColor = .gray
+        
+        imageView.image = UIImage(systemName: "trash")?.withRenderingMode(.alwaysOriginal)
+        imageView.contentMode = .scaleAspectFill
+
         return imageView
     }()
     
     // 상품이름 Label
     private let cartItemLabel: UILabel = {
         let label = UILabel()
-        label.text = "symbol name"
-        label.text = "wifi"
-        label.font = ThemeFonts.h2
-        label.textColor = ThemeColors.black
+        
+        label.text = "상품 이름"
+        label.font = ThemeFonts.h3
+        label.textColor = ThemeColors.label
         label.textAlignment = .right
-        label.textAlignment = .center
+        
         return label
     }()
-    
     
     //  상품 단가 가격 Label
     private let cartItemPriceLabel: UILabel = {
         let label = UILabel()
+        
         label.text = "10,000 원"
-        label.font = ThemeFonts.h2
+        label.font = ThemeFonts.h3
         label.textColor = ThemeColors.blue
         label.textAlignment = .right
+        
         return label
     }()
     
     // 전체 삭제 Button
     private let totalDeleteButton: UIButton = {
         let button = UIButton()
+        
         button.setTitle(" 이 항목 삭제", for: .normal)
         button.setTitleColor(ThemeColors.grey1, for: .normal)
-        button.titleLabel?.font = ThemeFonts.p
+        button.titleLabel?.font = ThemeFonts.small
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.tintColor = ThemeColors.grey1
         button.titleLabel?.textAlignment = .right
         button.contentHorizontalAlignment = .right
+        
         return button
     }()
     
     //  상품 갯수 Label
     lazy var cartItemQuantityLabel: UILabel = {
         let label = UILabel()
-        label.text = "주문수량 : \(Int(itemQuantity)) 개"
+        
+        label.text = "주문 : \(Int(itemQuantity)) 개"
         label.font = ThemeFonts.h3
-        label.textColor = ThemeColors.black
+        label.textColor = ThemeColors.label
         label.textAlignment = .center
+        
         return label
     }()
     
     // stapper
     lazy var stepper: UIStepper = {
         let stepper = UIStepper()
+        
         stepper.value = itemQuantity
         stepper.stepValue = 1.0
         stepper.minimumValue = 0.0
         stepper.maximumValue = 50.0
-        stepper.backgroundColor = .orange
+
         return stepper
     }()
     
     //  상품 합계 가격 Label
     lazy var cartItemTotalPriceLabel: UILabel = {
         let label = UILabel()
+        
         label.text = "= 20,000 원"
-        label.font = ThemeFonts.h3bold
-        label.textColor = ThemeColors.black
+        label.font = ThemeFonts.h3
+        label.textColor = ThemeColors.label
         label.textAlignment = .center
+        
         return label
     }()
     
     // 이름, 단가 삭제버튼 verticalStackView
     private let itemVerticalstackView: UIStackView = {
         let stackView = UIStackView()
+        
         stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.spacing = 8
         stackView.distribution = .fill
         stackView.alignment = .trailing
-        //stackView.backgroundColor = .red
+
         return stackView
     }()
     
     // image와 오른쪽 View
     private let itemHorizonView: UIView = {
-        let view = UIView()
-        //view.backgroundColor = .green
-        return view
+        
+        return UIView()
     }()
     
     // 갯수와 stepper 합계금액 horizontalView
     private let calculateHorizontalView: UIStackView = {
         let stackView = UIStackView()
+        
         stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.distribution = .fill
+        stackView.spacing = 20
         stackView.backgroundColor = ThemeColors.grey6
+        
         return stackView
     }()
     
@@ -144,7 +153,6 @@ class CartItemButtonCell: UITableViewCell {
     // TableViewCell layout 설정
     private func setupTableViewCellLayout() {
         
-        
         itemHorizonView.addSubview(cartItemImageView)
         itemVerticalstackView.addArrangedSubview(cartItemLabel)
         itemVerticalstackView.addArrangedSubview(cartItemPriceLabel)
@@ -159,37 +167,29 @@ class CartItemButtonCell: UITableViewCell {
         
         // 전체를 감싼 cellView
         cellView.snp.makeConstraints {
-            $0.top.equalTo(contentView.snp.top)
-            $0.bottom.equalTo(contentView.snp.bottom)
-            $0.leading.equalTo(contentView.snp.leading)
-            $0.trailing.equalTo(contentView.snp.trailing)
+            $0.top.bottom.leading.trailing.equalToSuperview()
+            
         }
         
         itemHorizonView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview().inset(10)
-            $0.bottom.equalTo(calculateHorizontalView.snp.top)
+            $0.top.trailing.equalToSuperview().inset(ThemeNumbers.padding)
+            $0.leading.equalToSuperview().inset(50)
+            $0.height.equalTo(130)
         }
         
         // 아이템 이미지 Layout
         cartItemImageView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(5)
-            $0.leading.equalToSuperview().inset(20)
-            $0.width.equalTo(100)
+            $0.top.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview().inset(40)
+            $0.height.equalTo(60)
         }
         
         // 오른쪽 이름, 단가 삭제버튼 verticalStackView
         itemVerticalstackView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(10)
+            $0.leading.equalToSuperview().inset(100)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(10)
-            $0.bottom.equalTo(calculateHorizontalView.snp.top)
-            $0.width.equalTo(150)
-        }
-        
-        // 아래 수량과 스태퍼 합계 horizontalView
-        calculateHorizontalView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().inset(10)
         }
         
         // 아이템 이름 Layout
@@ -201,7 +201,7 @@ class CartItemButtonCell: UITableViewCell {
         
         // 아이템 단가 Layout
         cartItemPriceLabel.snp.makeConstraints {
-            $0.height.equalTo(ThemeNumbers.padding)
+            $0.height.equalTo(20)
             $0.trailing.equalTo(itemVerticalstackView.snp.trailing)
         }
         
@@ -210,19 +210,23 @@ class CartItemButtonCell: UITableViewCell {
             $0.height.equalTo(22)
         }
         
+        // 아래 수량과 스태퍼 합계 horizontalView
+        calculateHorizontalView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(itemHorizonView.snp.bottom)
+            $0.height.equalTo(50)
+        }
+        
         // 아이템 선택된 갯수 Layout
         cartItemQuantityLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(10)
+            $0.leading.equalToSuperview().inset(20)
             $0.centerY.equalToSuperview()
             $0.height.equalToSuperview()
-            $0.width.equalTo(140)
         }
+        
         // stepper Layout
         stepper.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(cartItemQuantityLabel.snp.trailing).offset(10)
-            $0.width.equalTo(94)
-            $0.height.equalTo(30)
+            $0.top.equalToSuperview().inset(9)
         }
         
         // 선택된 아이템 가격 Layout
@@ -262,5 +266,5 @@ extension CartItemButtonCell {
 
 
 //#Preview {
-//    JeffTestViewController()
+//    ViewController()
 //}
