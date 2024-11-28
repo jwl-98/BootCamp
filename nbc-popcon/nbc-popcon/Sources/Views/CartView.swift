@@ -14,8 +14,11 @@ class CartView: UIView {
     
     var onItemQuantityChanged: ((Int, Int) -> Void)?
     var onRemoveCartItem: ((Int) -> Void)?
-    var onUpdateCartItem: (([CartItem]) -> Void)?
-    
+    var onCompleteOrder: (() -> Void)?
+    var onClearCartItem: (() -> Void)?
+
+    lazy var modalVC = CartModalViewController()
+
     //  장바구니 요약 View (장바구니 갯수 + 합계금액)
     private let footerView: UIView = {
         let view = UIView()
@@ -95,9 +98,7 @@ class CartView: UIView {
         guard let topVC = AppHelpers.getTopViewController() else {
             return
         }
-        
-        let modalVC = CartModalViewController()
-        
+                
         if let onItemQuantityChanged = self.onItemQuantityChanged {
             modalVC.onItemQuantityChanged = { (index, quantity) in onItemQuantityChanged(index, quantity) }
         }
@@ -120,7 +121,11 @@ class CartView: UIView {
 
 //MARK: - UpdateCartView ( binding )
 extension CartView {
-    func updateCartView() {
-        
+    func updateCartItems(_ items: [CartItem]) {
+        modalVC.updateCart(items)
+    }
+    
+    func updateSummary(totalCount: Int, totalPrice: Int) {
+        modalVC.updateSummary(totalCount: totalCount, totalPrice: totalPrice)
     }
 }

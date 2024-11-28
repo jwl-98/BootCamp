@@ -91,39 +91,47 @@ class ViewController: UIViewController {
             self?.kiosk.addItemToCart(menuItem: menuItem)
         }
         
-        
-        
-        //        // **CartView 수량 변경 및 삭제 처리**
+        // **CartView 수량 변경 및 삭제 처리**
         cartView.onItemQuantityChanged = { [weak self] (index, quantity) in
             self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
         }
-        //
-        //        cartView.onItemDeleted = { [weak self] index in
-        //            self?.kiosk.removeCartItem(at: index)
-        //        }
-        //
-        //        // **CartView 데이터 업데이트**
-        //        kiosk.onCartUpdated = { [weak self] cartItems in
-        //            self?.cartView.updateCartItems(cartItems)
-        //        }
+        
+        // **CartView 인덱스를 통해 카트 아이템 삭제 처리**
+        cartView.onRemoveCartItem = { [weak self] index in
+            self?.kiosk.removeCartItem(at: index)
+        }
+        
+        // **CartView 데이터 업데이트**
+        kiosk.onCartUpdated = { [weak self] cartItems in
+            self?.cartView.updateCartItems(cartItems)
+        }
         
         // **CartView 요약 정보 업데이트**
-        //                kiosk.onSummaryUpdated = { [weak self] summary in
-        //                    let totalInfo = summary.split(separator: "|")
-        //                    self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
-        //                    self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
-        //                }
+        kiosk.onSummaryUpdated = { [weak self] totalCount, totalPrice in
+            self?.cartView.updateSummary(totalCount: totalCount, totalPrice: totalPrice)
+        }
         
-        // **CartView의 버튼 액션 연결**
-        //        cartView.orderButtonsView.onCompleteOrder = { [weak self] in
-        //            guard let message = self?.kiosk.completeOrder() else { return }
-        //            self?.showAlert(title: "주문 완료", message: message)
-        //        }
+        // **CartView의 버튼 액션 연결** (주문하기)
+        cartView.onCompleteOrder = { [weak self] in
+            guard let message = self?.kiosk.completeOrder() else { return }
+            self?.showAlert(title: "주문 완료", message: message)
+        }
+        
+        // **CartView의 버튼 액션 연결** (취소하기)
+        cartView.onClearCartItem = { [weak self] in
+            self?.kiosk.clearCart()
+        }
         //
         //        cartView.orderButtonsView.onCancelOrder = { [weak self] in
         //            self?.kiosk.clearCart()
         //        }
     }
+    
+    
+    func setUpdateCartBinding(_ closer: (([CartItem])->Void)?) {
+        kiosk.onCartUpdated = closer
+    }
+    
     // MARK: - Helpers
     
     /// 사용자에게 알림을 표시하는 메서드

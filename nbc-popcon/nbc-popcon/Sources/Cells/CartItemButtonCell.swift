@@ -255,11 +255,19 @@ extension CartItemButtonCell {
         self.stepper.addTarget(self, action: #selector(pressedStepper), for: .valueChanged)
     }
     
-    @objc func pressedStepper(_ sender: UIStepper) {
-        let newValue = sender.value
-        
-        itemQuantity = newValue
-        self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
+    @objc private func pressedStepper(_ sender: UIStepper) {
+        let newValue = Int(sender.value)
+        //키오스크에 수정된 값을 전달
+        onItemQuantityChanged?(newValue)
+//        self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
+    }
+    
+    private func totalDeleteButtonAction() {
+        self.totalDeleteButton.addTarget(self, action: #selector(pressdTotalDeleteButton), for: .touchUpInside)
+    }
+    
+    @objc private func pressdTotalDeleteButton(_ sender: UIButton) {
+        onRemoveCartItem?()
     }
 }
 

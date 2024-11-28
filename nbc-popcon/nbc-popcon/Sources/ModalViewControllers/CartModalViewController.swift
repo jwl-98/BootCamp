@@ -9,13 +9,17 @@ import UIKit
 import SnapKit
 
 //기존 cartView
+/*
+ 1. cell이 입력을 키오스크에 전달하기 위한 클로저를 dequeue시에 할당한다.
+ 2. 
+ */
 class CartModalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
     let kiosk = Kiosk()
     let orderButtonsView = ButtonsView()
-    var totalPrice: Int = 40000
-    var totalCount: Int = 7
+    var totalPrice: Int = 0
+    var totalCount: Int = 0
     
     private var cartItems: [CartItem] = []
     
@@ -211,7 +215,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //let cartItems = kiosk.getCartItems()
-        return 1
+        return cartItems.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -252,5 +256,12 @@ extension CartModalViewController {
     
     func updateCart(_ items: [CartItem]) {
         self.cartItems = items
+        self.tableView.reloadData()
+    }
+    
+    func updateSummary(totalCount: Int, totalPrice: Int) {
+        self.totalCount = totalCount
+        self.totalPrice = totalPrice
+        //UI업데이트 메서드 필요
     }
 }

@@ -81,6 +81,7 @@ class Kiosk {
             cartItems[index].update(quantity)
         }
         updateCart()
+        print("updateCartItemQuantity")
     }
     
     
@@ -88,12 +89,14 @@ class Kiosk {
     func removeCartItem(at index: Int) {
         cartItems.remove(at: index)
         updateCart()
+        print("removeCartItem")
     }
     
     /// 장바구니 초기화 - 취소하기 버튼
     func clearCart() {
         cartItems.removeAll()
         updateCart()
+        print("clearCart")
     }
     
     /// 주문 완료 - 결제하기 버튼
@@ -101,6 +104,7 @@ class Kiosk {
         let totalItems = cartItems.reduce(0) { $0 + $1.quantity }
         let totalPrice = cartItems.reduce(0) { $0 + $1.totalPrice }
         clearCart()
+        print("completeOrder")
         return "총 \(totalItems)개의 상품 | 총 금액: \(totalPrice)원\n주문이 완료되었습니다."
     }
     
@@ -109,6 +113,7 @@ class Kiosk {
     // MARK: - Private Methods
     
     private func updateCart() {
+        print("updateCart")
         onCartUpdated?(cartItems)
         
         let totalItems = cartItems.reduce(0) { $0 + $1.quantity }

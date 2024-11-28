@@ -55,7 +55,7 @@ class MenuItemButtonCell : UICollectionViewCell {
         let buttonImage = UIImage(systemName: "magnifyingglass.circle.fill",
                                   withConfiguration:  config)
         button.setImage(buttonImage, for: .normal)
-        button.addTarget(self,
+        button.addTarget(nil,
                          action: #selector(showDetailModal),
                          for: .touchUpInside)
 
@@ -173,9 +173,7 @@ class MenuItemButtonCell : UICollectionViewCell {
     @objc
     func showDetailModal() {
         let menuItemDetailView = MenuItemDetailView()
-        ModalManager.createGlobalModal(menuItemDetailView)
+        let _ = ModalManager.createGlobalModal(menuItemDetailView)
         menuItemDetailView.configure(item: menuItem!)
     }
-
-
 }
