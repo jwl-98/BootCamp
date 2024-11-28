@@ -108,7 +108,7 @@ class ViewController: UIViewController {
 //                    self?.kiosk.clearCart()
 //                }
 //        
-//        
+//
 //                // ViewModel(Kiosk) 데이터 변경 시 UI 업데이트
 //                kiosk.onMenuUpdated = { [weak self] menuItems in
 //                    self?.menuView.updateMenuItems(menuItems)
