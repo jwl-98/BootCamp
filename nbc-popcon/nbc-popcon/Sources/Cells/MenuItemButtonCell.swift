@@ -109,6 +109,9 @@ class MenuItemButtonCell : UICollectionViewCell {
         self.layer.cornerRadius = 30
         self.clipsToBounds = true
 
+        // 버튼 클릭시 메서드 연결
+        detailsButton.addTarget(self, action: #selector(test), for: .touchUpInside)
+
         stackView.snp.makeConstraints {
             $0.width.height.leading.trailing.equalToSuperview()
         }
@@ -152,7 +155,12 @@ class MenuItemButtonCell : UICollectionViewCell {
         nameLabel.text = menuItem.name
         priceLabel.text = "\(menuItem.price)원"
         imageView.image = UIImage(systemName: menuItem.symbolId)
+    }
 
+    // MARK: - 버튼 클릭 시 실행
+
+    @objc
+    func test() {
 
     }
 }
