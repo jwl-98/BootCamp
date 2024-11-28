@@ -9,6 +9,11 @@ import UIKit
 
 import SnapKit
 
+/*
+ 카테고리 열거형 추가
+ 
+ */
+
 class MenuView: UIView {
     
     // MARK: - 바인딩 메서드
@@ -16,7 +21,7 @@ class MenuView: UIView {
     
     // 메뉴 아이템 선택 액션 - ViewController.setupBindings()를 통해 할당
     var onMenuItemSelected:((MenuItem) -> Void)? = nil
-
+    
     private var items: [MenuItem] = []
     
     // MARK: - 컴포넌트 생성
@@ -25,9 +30,12 @@ class MenuView: UIView {
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         segmentedControl.backgroundColor = ThemeColors.green
+        segmentedControl.setTitleTextAttributes([.font: ThemeFonts.p], for: .normal)
+        segmentedControl.setTitleTextAttributes([.foregroundColor: ThemeColors.white], for: .normal)
+        segmentedControl.setTitleTextAttributes([.foregroundColor: ThemeColors.black], for: .selected)
         return segmentedControl
     }()
-
+    
     // 카테고리에 맞는 아이템을 보여주는 CollectionView
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,20 +45,20 @@ class MenuView: UIView {
         layout.itemSize.height = itemSize
         layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing
         layout.minimumLineSpacing = ThemeNumbers.itemSpacing
-
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
         collectionView.backgroundColor = .red
-
+        
         return collectionView
     }()
-
-
+    
+    
     // MARK: - MenuView 기본 설정
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         [segmentedControl, collectionView].forEach {
             self.addSubview($0)
         }
@@ -58,14 +66,14 @@ class MenuView: UIView {
         configureSegmentedControl()
         configureCollectionView()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - SegmentedControl 레이아웃 설정
     private func configureSegmentedControl() {
-
+        
         segmentedControl.snp.makeConstraints { view in
             view.top.equalToSuperview().inset(ThemeNumbers.itemSpacing)
             view.leading.trailing.equalToSuperview()
@@ -74,13 +82,13 @@ class MenuView: UIView {
         
         segmentedControl.addTarget(self, action: #selector(self.segmentedChanged(_:)), for: .valueChanged)
     }
-
+    
     // MARK: - CollectionView 기본 설정
-
+    
     func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
-
+        
         collectionView.snp.makeConstraints {
             $0.top.equalTo(segmentedControl.snp.bottom).offset(ThemeNumbers.itemSpacing)
             $0.width.bottom.equalToSuperview()
@@ -97,16 +105,16 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
-
+    
     // 셀 생성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemButtonCell", for: indexPath) as? MenuItemButtonCell else { return UICollectionViewCell() }
         cell.configure(items[indexPath.item])
-
+        
         return cell
     }
-
+    
     // 셀 누르면 실행
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let onCollectionViewCellSelected = self.onMenuItemSelected else { return }
@@ -149,7 +157,6 @@ extension MenuView {
     }
 }
 
-
-#Preview {
+#Preview("ViewController") {
     ViewController()
 }

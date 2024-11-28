@@ -15,7 +15,7 @@ enum Category: String, CaseIterable {
     case others = "기타"
     
     /// rawValue 기반 초기화
-    init?(rawValue: String) {
+    init(rawValue: String) {
         switch rawValue {
         case "통신":
             self = .communication
@@ -23,10 +23,8 @@ enum Category: String, CaseIterable {
             self = .tool
         case "건강":
             self = .health
-        case "기타":
-            self = .others
         default:
-            return nil
+            self = .others
         }
     }
     
