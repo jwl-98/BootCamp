@@ -10,5 +10,8 @@ import Foundation
 enum ThemeMode: String, CaseIterable {
     case auto = "자동"
     case light = "라이트 모드"
-    case dark = "다크모드"
+    case dark = "다크 모드"
+    
+    static var onThemeChoice: ((ThemeMode) -> Void)?
+    
 }
