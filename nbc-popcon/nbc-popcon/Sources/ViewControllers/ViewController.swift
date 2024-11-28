@@ -143,6 +143,15 @@ class ViewController: UIViewController {
             self?.headerView.onThemeToggle = closer
         }
     }
+
+    /// 메뉴 아이템 상세보기를 누르면 모달로 이동하는 메서드
+    private func showModal(menuItem: MenuItem) {
+        let detailModalVC = DetailModalViewController()
+        detailModalVC.modalPresentationStyle = .overFullScreen
+        detailModalVC.modalTransitionStyle = .crossDissolve
+        present(detailModalVC, animated: true)
+
+    }
 }
 
 
