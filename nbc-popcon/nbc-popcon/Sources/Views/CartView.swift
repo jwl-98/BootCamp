@@ -108,6 +108,14 @@ class CartView: UIView {
                 onRemoveCartItem(index) }
         }
         
+        if let onClearCartItem = self.onClearCartItem {
+            modalVC.onCartClear = onClearCartItem
+        }
+        
+        if let onCompleteOrder = self.onCompleteOrder {
+            modalVC.onOrderCompleted = onCompleteOrder
+        }
+        
         modalVC.configureButtonAction()
  
         modalVC.modalPresentationStyle = .overFullScreen

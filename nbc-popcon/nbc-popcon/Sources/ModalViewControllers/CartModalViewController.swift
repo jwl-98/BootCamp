@@ -281,12 +281,19 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
 extension CartModalViewController {
     func configureButtonAction() {
         if let onCartClear = self.onCartClear {
-            orderButtonsView.onCancelOrder = onCartClear
+            orderButtonsView.onCancelOrder = {
+                self.closeModal()
+                onCartClear()
+            }
+        }
+        if let onOrderCompleted = self.onOrderCompleted {
+            orderButtonsView.onCompleteOrder = {
+                self.closeModal()
+                onOrderCompleted()
+            }
         }
         
-        if let onOrderCompleted = self.onOrderCompleted {
-            orderButtonsView.onCompleteOrder = onOrderCompleted
-        }
+        orderButtonsView.setAction()
     }
 }
 

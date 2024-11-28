@@ -18,8 +18,7 @@ class ButtonsView: UIView {
         super.init(frame: frame)
         addSubview(buttonStackView)
         setStackViewAutoLayOut()
-        completeButtonAction()
-        cancelButtonAction()
+
     }
     
     required init?(coder: NSCoder) {
@@ -73,6 +72,11 @@ class ButtonsView: UIView {
 }
 
 extension ButtonsView {
+    
+    func setAction() {
+        completeButtonAction()
+        cancelButtonAction()
+    }
     
      private func completeButtonAction() {
          self.purchaseButton.addTarget(self,

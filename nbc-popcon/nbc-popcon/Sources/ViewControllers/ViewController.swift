@@ -113,7 +113,9 @@ class ViewController: UIViewController {
         
         // **CartView의 버튼 액션 연결** (주문하기)
         cartView.onCompleteOrder = { [weak self] in
-            guard let message = self?.kiosk.completeOrder() else { return }
+            guard let message = self?.kiosk.completeOrder() else {
+                return }
+            print(message)
             self?.showAlert(title: "주문 완료", message: message)
         }
         
