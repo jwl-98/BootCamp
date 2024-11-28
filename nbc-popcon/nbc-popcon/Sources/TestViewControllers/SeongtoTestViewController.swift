@@ -8,25 +8,32 @@
 import UIKit
 import SnapKit
 
-class SeongtoTestViewController: UIViewController {
-    
+
+class SeongtoTestViewController: PopconViewController {
     let label: UILabel = UILabel()
     let button: UIButton = UIButton()
     let button2: UIButton = UIButton()
-    var text:String = "AAA\nAAA"
         
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        
     }
+    
+    init() {
+        super.init("AAAA BBBB")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     
     func configUI() {
         
         view.backgroundColor = ThemeColors.orange
         
-        label.text = text
+        label.text = myText
         label.backgroundColor = ThemeColors.blue
         label.textColor = ThemeColors.white
         label.font = ThemeFonts.p
@@ -66,20 +73,17 @@ class SeongtoTestViewController: UIViewController {
     }
     
     @objc func tapAction() {
-        text += "\n"
-        label.text = text
-    }
-    
-    @objc func tapAction2() {
-        guard let topVC = AppHelpers.getTopViewController() else {
-            print("❌ ERROR: Top ViewController not found.")
+        print(self)
+        guard let topVC = AppHelpers.getTopViewController() as? SeongtoTestViewController else {
             return
         }
         
-        let newVC = UIViewController()
-        newVC.view.backgroundColor = .systemBlue
-        newVC.modalPresentationStyle = .custom
-        topVC.present(newVC, animated: true, completion: nil)
+        print(topVC)
+        print(topVC.myText)
+    }
+    
+    @objc func tapAction2() {
+        AppHelpers.showAlert(title: "hello", message: "world")
     }
 }
 
