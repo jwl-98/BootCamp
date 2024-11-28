@@ -92,10 +92,11 @@ class JeffTestViewController: UIViewController {
         // bottomSheetView Layout
         bottomSheetView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(bottomSheetHeight)
-            $0.height.equalTo(bottomSheetHeight)
+            $0.bottom.equalToSuperview().inset(200)
+            $0.height.equalTo(80)
             
         }
+        
         // 상단바 Layout
         summaryView.snp.makeConstraints {
             $0.top.equalToSuperview()

@@ -56,7 +56,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private func setupViewLayout() {
         addSubview(View)
-        buttonsView.addSubview(orderButtonsView.buttonStackView)
+        buttonsView.addSubview(orderButtonsView)
         [tableView,buttonsView].forEach { View.addSubview($0) }
         
         // background Layout (inserView)
@@ -75,7 +75,7 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         
         // orderButtonsView의 스택뷰 Layout
-        orderButtonsView.buttonStackView.snp.makeConstraints {
+        orderButtonsView.snp.makeConstraints {
             $0.top.equalTo(buttonsView.snp.top).inset(40)
             $0.bottom.equalTo(buttonsView.snp.bottom).inset(40)
             $0.leading.equalTo(buttonsView.snp.leading).inset(20)
