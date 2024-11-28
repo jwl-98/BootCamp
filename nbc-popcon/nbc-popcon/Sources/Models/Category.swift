@@ -27,9 +27,4 @@ enum Category: String, CaseIterable {
             self = .others
         }
     }
-    
-    /// fallback 값을 포함하는 초기화 (기본값이 필요할 때 사용)
-    init(fallbackRawValue: String) {
-        self = Category(rawValue: fallbackRawValue) ?? .others
-    }
 }

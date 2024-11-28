@@ -47,11 +47,15 @@ class HeaderView: UIView {
     // 직원 호출 알럿 액션 - ViewController.setupBindings()를 통해 할당
     var onCallStaff: (() -> (Void))? = nil
     
+    var onThemeToggle: (() -> Void)? = nil
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUpUI()
         configureCallButtonAction()
+//        self.overrideUserInterfaceStyle = .light
+//        self.reloadInputViews()
     }
     
     required init?(coder: NSCoder) {
@@ -70,6 +74,9 @@ extension HeaderView {
         setUpTitleLabel()
         setUpCallButton()
         setUpThemeSwitch()
+        
+        
+        
         self.backgroundColor = ThemeColors.red
     }
     
@@ -122,7 +129,7 @@ extension HeaderView {
     
     // 호출 알럿 버튼 액션
     @objc private func callButtonTapped() {
-        guard let onBellButtonTapped = self.onCallStaff else { return }
+        guard let onBellButtonTapped = self.onThemeToggle else { return }
         onBellButtonTapped()
     }
 }
