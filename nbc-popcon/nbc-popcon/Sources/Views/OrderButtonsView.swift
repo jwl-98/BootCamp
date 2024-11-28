@@ -31,9 +31,9 @@ class ButtonsView: UIView {
         let button = UIButton()
         
         button.setTitle("취소하기", for: .normal)
-        button.titleLabel?.font = themeManager.fonts.bold
-        button.layer.cornerRadius = 25
-        button.backgroundColor = themeManager.colors.grey1
+        button.titleLabel?.textColor = #colorLiteral(red: 0.505881846, green: 0.5058827996, blue: 0.527366817, alpha: 1)
+        button.layer.cornerRadius = 20
+        button.backgroundColor = themeManager.colors.clear
         button.frame.size.width = 70
 
         return button
@@ -44,8 +44,8 @@ class ButtonsView: UIView {
         
         button.setTitle("결제하기", for: .normal)
         button.titleLabel?.font = themeManager.fonts.bold
-        button.layer.cornerRadius = 25
-        button.backgroundColor = themeManager.colors.blue
+        button.layer.cornerRadius = 20
+        button.backgroundColor = #colorLiteral(red: 0.2066813409, green: 0.7795598507, blue: 0.3491449356, alpha: 1)
         button.frame.size.width = 70
 
         return button
@@ -56,7 +56,7 @@ class ButtonsView: UIView {
         st.axis = .horizontal
         st.distribution = .fillEqually
         st.backgroundColor = themeManager.colors.clear
-        st.spacing = themeManager.numbers.padding
+        st.spacing = themeManager.numbers.itemSpacing
         return st
     }()
     
@@ -79,6 +79,7 @@ extension ButtonsView {
     }
     
     @objc  func completeButtonTapped(_ sender: UIButton) {
+        
         //버튼효과
         sender.alpha = 0.5
         print(#function)
@@ -93,11 +94,6 @@ extension ButtonsView {
     }
     
     @objc func cancelButtonTapped(_ sender: UIButton) {
-        cancelButton.alpha = 0.5
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    sender.alpha = 1.0
-                }
         onCancelOrder?()
     }
 }
