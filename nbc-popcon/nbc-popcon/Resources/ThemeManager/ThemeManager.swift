@@ -15,11 +15,17 @@ struct ThemeManager {
     static let shared = ThemeManager()
 
     struct Colors {
-        // 기본적용 색상값
-        let black: UIColor = UIColor.systemBackground
-        let white: UIColor = UIColor.label
+        // 라이트에서 화이트, 다크에서 블랙
+        let label: UIColor = UIColor.label
+        // 라이트에서 블랙, 다크에서 화이트
+        let bg: UIColor = UIColor.systemBackground
+        // 라이트에서 밝은 회색, 다크에서 어두운 회색
         let fill: UIColor = UIColor.systemFill
-
+        
+        // 아래 화이트와 블랙은 고정값.
+        let white: UIColor = UIColor.white
+        let black: UIColor = UIColor.black
+        
         let grey1: UIColor = UIColor.systemGray
         let grey2: UIColor = UIColor.systemGray2
         let grey3: UIColor = UIColor.systemGray3
