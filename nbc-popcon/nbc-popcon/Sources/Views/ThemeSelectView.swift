@@ -11,7 +11,6 @@ import ALRadioButtons
 
 class ThemeSelectView: UIView {
     
-    
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "테마 선택"
@@ -61,6 +60,9 @@ extension ThemeSelectView {
         let themeMode = ThemeMode.allCases[index]
         
         ThemeMode.onThemeChoice?(themeMode)
+        ThemeMode.observer.forEach {
+            $0.reloadInputViews()
+        }
     }
 }
 
@@ -83,4 +85,8 @@ extension ThemeSelectView {
             buttons.top.equalTo(titleLabel).inset(ThemeNumbers.padding * 3)
         }
     }
+}
+
+#Preview {
+    ViewController()
 }

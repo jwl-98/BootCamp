@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
 import SnapKit
+
 class MenuItemDetailView: UIView {
     var symbolImage: UIImageView = {
         let image = UIImageView()

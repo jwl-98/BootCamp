@@ -14,7 +14,7 @@ class HeaderView: UIView {
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         
-        titleLabel.font = ThemeFonts.h1bold
+        titleLabel.font = ThemeFonts.title1Bold
         titleLabel.text = "POPCON"
         titleLabel.textColor = ThemeColors.bg
 
@@ -108,7 +108,7 @@ extension HeaderView {
         callButton.snp.makeConstraints { button in
             button.centerY.equalTo(titleLabel)
             button.leading.equalToSuperview().inset(ThemeNumbers.padding)
-            button.height.width.equalTo(25)
+            button.height.width.equalTo(32)
         }
         
         callButton.imageView?.snp.makeConstraints { imageView in
@@ -123,7 +123,7 @@ extension HeaderView {
         themeButton.snp.makeConstraints { button in
             button.centerY.equalTo(titleLabel)
             button.trailing.equalToSuperview().inset(ThemeNumbers.padding)
-            button.height.width.equalTo(25)
+            button.height.width.equalTo(32)
         }
         
         themeButton.imageView?.snp.makeConstraints { imageView in

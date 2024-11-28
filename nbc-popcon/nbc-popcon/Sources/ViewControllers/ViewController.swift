@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
         }
         
         menuView.snp.makeConstraints { make in

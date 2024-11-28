@@ -76,7 +76,13 @@ class MenuItemButtonCell : UICollectionViewCell {
 
         return label
     }()
-
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.layer.borderColor = UIColor.black.cgColor
+    }
+    
 
     // MARK: - UI 설정
 
@@ -86,6 +92,8 @@ class MenuItemButtonCell : UICollectionViewCell {
 
         setupUI()
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

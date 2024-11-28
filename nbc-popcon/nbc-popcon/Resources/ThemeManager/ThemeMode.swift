@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ThemeMode: String, CaseIterable {
     case auto = "자동"
@@ -14,4 +15,9 @@ enum ThemeMode: String, CaseIterable {
     
     static var onThemeChoice: ((ThemeMode) -> Void)?
     
+    static var observer: [UIView] = []
+    
+    static func addObserver(_ view: UIView) {
+        Self.observer.append(view)
+    }
 }
