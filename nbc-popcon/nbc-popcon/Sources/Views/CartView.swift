@@ -76,6 +76,7 @@ class CartView: UIView {
             $0.height.equalTo(50)
         }
     }
+}
     
 //    private func setupTapGesture() {
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(footerViewTapped))
