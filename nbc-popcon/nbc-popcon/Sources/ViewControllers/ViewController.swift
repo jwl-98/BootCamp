@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private let headerView = HeaderView() // 헤더 뷰 (카테고리 선택 포함)
     private let menuView = MenuView() // 메뉴 리스트 뷰
     private let cartView = CartView() // 장바구니 뷰 (ButtonsView 포함)
+    private let jeffTestViewController = JeffTestViewController()  // 하단의 뷰 추가
     
     // MARK: - ViewModel
     
@@ -28,7 +29,7 @@ class ViewController: UIViewController {
         setupUI() // UI 초기화
         setupBindings() // ViewModel 및 UI 이벤트 바인딩
         kiosk.getCurrentMenuItems() // 초기 메뉴 데이터 가져오기
-        kiosk.allCategory() // 초기 카테고리 데이터 가져오기
+//        kiosk.allCategory() // 초기 카테고리 데이터 가져오기
     }
     
     // MARK: - UI Setup
@@ -39,7 +40,10 @@ class ViewController: UIViewController {
         // 뷰 계층구조 설정
         view.addSubview(headerView)
         view.addSubview(menuView)
-        view.addSubview(cartView)
+        addChild(jeffTestViewController)
+        view.addSubview(jeffTestViewController.view) // 뷰 컨트롤러 추가
+        
+        jeffTestViewController.didMove(toParent: self)  // 자식 뷰 컨트롤러 추가
         
         // SnapKit을 사용해 제약조건 설정
         headerView.snp.makeConstraints { make in
@@ -51,10 +55,11 @@ class ViewController: UIViewController {
         menuView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(ThemeNumbers.paddingSmall)
-            make.height.equalTo(view.frame.height * 0.4)
+            make.bottom.equalTo(jeffTestViewController.view.snp.top)
+//            make.height.equalTo(view.frame.height * 0.4) // 높이 설정으로 인한 menuView크기 이외에 회색배경이 생겨서 주석
         }
         
-        cartView.snp.makeConstraints { make in
+        jeffTestViewController.view.snp.makeConstraints { make in
             make.top.equalTo(menuView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -70,15 +75,15 @@ class ViewController: UIViewController {
             self?.showAlert(title: "직원 호출", message: message)
         }
         
-        // **MenuView SegmentedControl 카테고리 설정**
-        kiosk.onUpdateAllCategory = { [weak self] categories in
-            self?.menuView.configureCategory(categories)
-        }
+//        // **MenuView SegmentedControl 카테고리 설정**
+//        kiosk.onUpdateAllCategory = { [weak self] categories in
+//            self?.menuView.configureCategory(categories)
+//        }
         
-        // **MenuView에서 카테고리 변경 시 처리**
-        menuView.onCategorySelected = { [weak self] rawValue in
-            self?.kiosk.selectCategory(at: rawValue)
-        }
+//        // **MenuView에서 카테고리 변경 시 처리**
+//        menuView.onCategorySelected = { [weak self] rawValue in
+//            self?.kiosk.selectCategory(at: rawValue)
+//        }
         
         // **MenuView 메뉴 데이터 업데이트**
         kiosk.onMenuUpdated = { [weak self] items in
@@ -105,11 +110,11 @@ class ViewController: UIViewController {
 //        }
         
         // **CartView 요약 정보 업데이트**
-        kiosk.onSummaryUpdated = { [weak self] summary in
-            let totalInfo = summary.split(separator: "|")
-            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
-            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
-        }
+//        kiosk.onSummaryUpdated = { [weak self] summary in
+//            let totalInfo = summary.split(separator: "|")
+//            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
+//            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
+//        }
         
         // **CartView의 버튼 액션 연결**
         cartView.orderButtonsView.onCompleteOrder = { [weak self] in

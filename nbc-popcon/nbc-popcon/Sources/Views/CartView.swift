@@ -9,15 +9,53 @@ import UIKit
 import SnapKit
 
 class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
+    // totalCount -> 각 아이템의 갯수의 합
+    // totalPrice -> (각 아이템의 갯수 * 단가) + 합
     
     let orderButtonsView = ButtonsView()
+    var totalPrice: Int = 40000
+    var totalCount: Int = 7
     
     //MARK: - 컴포넌트 생성
     
-    // Background View
-    private let View: UIView = {
+    // 상단 닫기버튼 View
+    private let closeButtonView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
+        view.backgroundColor = ThemeColors.red
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // 부분만 cornerRadius
+        view.layer.cornerRadius = 20
+        
+//        let border = UIView()
+//        border.backgroundColor = ThemeColors.yellow
+//        view.addSubview(border)
+//        
+//        border.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalTo(view.snp.bottom).inset(-50)
+//            make.height.equalTo(10)
+//        }
+        return view
+    }()
+
+    // 닫기 Button
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("닫기 X", for: .normal)
+        button.titleLabel?.font = ThemeFonts.p
+        button.setTitleColor(ThemeColors.white, for: .normal)
+        return button
+    }()
+    
+    // colorView (노란색 선)
+    private let colorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.yellow
+        return view
+    }()
+ 
+    // tableview + summary + button View
+    private let insertView: UIView = {
+        let view = UIView()
         return view
     }()
   
@@ -27,18 +65,46 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
         return tableView
     }()
     
-    // buttons View
+    //  장바구니 요약 View (장바구니 갯수 + 합계금액)
+    private let summaryView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.red
+        return view
+    }()
+    
+    // 장바구니 갯수 Label
+    lazy var countTotalItemLabel: UILabel = {
+        let label = UILabel()
+        label.text = "장바구니 : \(totalCount) 개"
+        label.textColor = ThemeColors.white
+        label.font = ThemeFonts.bold
+        label.textAlignment = .left
+        return label
+    }()
+    
+    // 합계금액 Label
+    lazy var totalItemPriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "합계금액 : \(totalPrice) 원"
+        label.textColor = ThemeColors.white
+        label.font = ThemeFonts.bold
+        label.textAlignment = .right
+        return label
+    }()
+    
+    // 하단 buttons View
     private let buttonsView: UIView = {
         let view = UIView()
-        view.backgroundColor = ThemeColors.white
+        view.backgroundColor = ThemeColors.red
         // view의 상단에만 테투리를 적용
         let border = UIView()
-        border.backgroundColor = .lightGray
+        border.backgroundColor = ThemeColors.white
         border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
-        border.frame = CGRect(x: 0, y: 0 , width: view.frame.width, height: 0.5)
+        border.frame = CGRect(x: 0, y: 0 , width: view.frame.width, height: 1)
         view.addSubview(border)
         return view
     }()
+    
     
     //MARK: - setting
     
@@ -55,38 +121,85 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
     //MARK: - 레이아웃
     
     private func setupViewLayout() {
-        addSubview(View)
+      
+        closeButtonView.addSubview(closeButton)
+        summaryView.addSubview(countTotalItemLabel)
+        summaryView.addSubview(totalItemPriceLabel)
         buttonsView.addSubview(orderButtonsView)
-        [tableView,buttonsView].forEach { View.addSubview($0) }
+        [tableView, summaryView,buttonsView].forEach { insertView.addSubview($0) }
+        [closeButtonView, colorView, insertView].forEach { addSubview($0) }
         
-        // background Layout (inserView)
-        View.snp.makeConstraints {
+        // 닫기 button view Layout
+        closeButtonView.snp.makeConstraints {
             $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(50)
+        }
+        
+        //  닫기 button Layout
+        closeButton.snp.makeConstraints {
+            $0.top.equalTo(closeButtonView.snp.top)
+            $0.trailing.equalTo(closeButtonView.snp.trailing).inset(ThemeNumbers.paddingSmall)
+            $0.width.height.equalTo(50)
+        }
+        
+        // colorview Layout
+        colorView.snp.makeConstraints {
+            $0.top.equalTo(closeButtonView.snp.bottom)
+            $0.bottom.equalTo(insertView.snp.top)
+            $0.width.equalToSuperview()
+            $0.height.equalTo(10)
+        }
+        
+        // insertview Layout
+        insertView.snp.makeConstraints {
+            $0.top.equalTo(colorView.snp.bottom)
             $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
         
-        // 테이블뷰 Layout
+        // tableView Layout
         tableView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
-            $0.bottom.equalTo(buttonsView.snp.top)
+            $0.bottom.equalTo(summaryView.snp.top)
+            $0.height.equalTo(200)
         }
         
-        // orderButtonsView의 스택뷰 Layout
+        // summaryView Layout
+        summaryView.snp.makeConstraints {
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        //  장바구니 갯수 Label Layout
+        countTotalItemLabel.snp.makeConstraints {
+            $0.leading.equalTo(summaryView.snp.leading).inset(ThemeNumbers.paddingSmall)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(50)
+        }
+        
+        //  합계 금액 Label Layout
+        totalItemPriceLabel.snp.makeConstraints {
+            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.paddingSmall)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(50)
+        }
+        
+        // orderButtonsView Layout
         orderButtonsView.snp.makeConstraints {
-            $0.top.equalTo(buttonsView.snp.top).inset(40)
-            $0.bottom.equalTo(buttonsView.snp.bottom).inset(40)
+            $0.top.equalTo(buttonsView.snp.top).inset(20)
             $0.leading.equalTo(buttonsView.snp.leading).inset(20)
             $0.trailing.equalTo(buttonsView.snp.trailing).inset(20)
         }
         
-        // 하단 버튼 View Layout
+        // 하단 button View Layout
         buttonsView.snp.makeConstraints {
-            $0.top.equalTo(tableView.snp.bottom)
+            $0.top.equalTo(summaryView.snp.bottom)
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(130)
+            $0.height.equalTo(100)
             $0.width.equalToSuperview()
         }
     }
@@ -114,5 +227,11 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none // 셀 선택 색상 제거
         return cell
     }
+    
+//    func setupDismissAction() {
+//        closeButton.addTarget(self, action: #selector(hideBottomSheetAction), for: .touchUpInside)
+//        
+//    }
+    
 }
 
