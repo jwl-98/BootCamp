@@ -10,20 +10,10 @@ import SnapKit
 
 class CartItemButtonCell: UITableViewCell {
     
-    /* cartItemImageView     -> 배열에 담긴 아이템의 이미지 String
-     cartItemLabel           -> 배열에 담긴 아이템의 이름 String
-     cartItemPriceLabel      -> 배열에 담긴 아이템의 단가 Int
-     cartItemQuantityLabel   -> stepper로 변경되는 itemQuantity
-     cartItemTotalPriceLabel -> itemQuantity * cartItemPriceLabel
-     totalDeleteButton       -> 해당 아이템 배열에서 삭제
-     stepper                 -> itemQuantity 값 증감
-     */
-    
     private let kiosk = Kiosk()
     private var itemQuantity = 1.0
+    var onItemQuantityChanged: ((_ newQuantity: Int) -> Void)?
     
-    
-    //MARK: -
     // 상품 imageView
     private let cartItemImageView: UIImageView = {
         let imageView = UIImageView()
@@ -33,14 +23,14 @@ class CartItemButtonCell: UITableViewCell {
         //imageView.backgroundColor = .gray
         return imageView
     }()
-    //MARK: -
+    
     // 상품이름 Label
     private let cartItemLabel: UILabel = {
         let label = UILabel()
-        label.text = "symbol name"
+        label.text = "wifi"
         label.font = ThemeFonts.h2
         label.textColor = ThemeColors.black
-        label.textAlignment = .right
+        label.textAlignment = .center
         return label
     }()
     
@@ -53,6 +43,7 @@ class CartItemButtonCell: UITableViewCell {
         label.textAlignment = .right
         return label
     }()
+    
     // 전체 삭제 Button
     private let totalDeleteButton: UIButton = {
         let button = UIButton()
@@ -65,7 +56,7 @@ class CartItemButtonCell: UITableViewCell {
         button.contentHorizontalAlignment = .right
         return button
     }()
-    //MARK: -
+    
     //  상품 갯수 Label
     lazy var cartItemQuantityLabel: UILabel = {
         let label = UILabel()
@@ -96,7 +87,7 @@ class CartItemButtonCell: UITableViewCell {
         label.textAlignment = .center
         return label
     }()
-    //MARK: -
+    
     // 이름, 단가 삭제버튼 verticalStackView
     private let itemVerticalstackView: UIStackView = {
         let stackView = UIStackView()
@@ -225,9 +216,9 @@ class CartItemButtonCell: UITableViewCell {
         // stepper Layout
         stepper.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-              $0.leading.equalTo(cartItemQuantityLabel.snp.trailing).offset(10)
-              $0.width.equalTo(94)
-              $0.height.equalTo(30)
+            $0.leading.equalTo(cartItemQuantityLabel.snp.trailing).offset(10)
+            $0.width.equalTo(94)
+            $0.height.equalTo(30)
         }
         
         // 선택된 아이템 가격 Layout
@@ -237,12 +228,20 @@ class CartItemButtonCell: UITableViewCell {
             $0.trailing.equalToSuperview()
             $0.width.equalTo(140)
         }
-        
-        
     }
 }
 
 extension CartItemButtonCell {
+    
+    func configure(with item: CartItem) {
+        
+        cartItemImageView.image = UIImage(systemName: item.name)
+        cartItemLabel.text = item.name
+        cartItemPriceLabel.text = "\(item.price) 원"
+        cartItemQuantityLabel.text = "주문수량 : \(item.quantity) 개"
+        cartItemTotalPriceLabel.text = "= \(item.price * item.quantity) 원"
+        
+    }
     
     private func actionMethod() {
         stepperAction()
@@ -252,14 +251,14 @@ extension CartItemButtonCell {
     private func stepperAction() {
         self.stepper.addTarget(self, action: #selector(pressedStepper), for: .valueChanged)
     }
+    
     @objc func pressedStepper(_ sender: UIStepper) {
         let newValue = sender.value
-        if newValue > itemQuantity {
-            itemQuantity = newValue
-            self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
-        } else if newValue < itemQuantity {
-            itemQuantity = newValue
-            self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
+        if newValue != itemQuantity {
+            itemQuantity = Double(newValue)
+            cartItemQuantityLabel.text = "주문수량 : \(Int(newValue)) 개"
+            
+            onItemQuantityChanged?(Int(newValue))
         }
     }
 }

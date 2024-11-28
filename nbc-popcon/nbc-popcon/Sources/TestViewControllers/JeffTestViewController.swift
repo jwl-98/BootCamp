@@ -12,14 +12,6 @@ class JeffTestViewController: UIViewController {
     private let modalTestView: UIView = ModalTestView()
     private var bottomSheetHeight: CGFloat = 80
     
-    //    // backgroundView
-    //    private let backgroundView: UIView = {
-    //        let view = UIView()
-    //        view.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
-    //        return view
-    //    }()
-    
-    // bottomSheet View
     private let bottomSheetView: UIView = {
         let view = UIView()
         return view

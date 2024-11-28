@@ -12,7 +12,7 @@ import SnapKit
 class ModalTestView: UIView, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
-    
+    let kiosk = Kiosk()
     let orderButtonsView = ButtonsView()
     var totalPrice: Int = 40000
     var totalCount: Int = 7
@@ -198,7 +198,8 @@ class ModalTestView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        let cartItems = kiosk.getCartItems()
+        return cartItems.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -207,6 +208,10 @@ class ModalTestView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
+        
+        let cartItems = kiosk.getCartItems() // Kiosk에서 cartItems 가져오기
+        let item = cartItems[indexPath.row]  // 현재 행의 아이템 가져오기
+        cell.configure(with: item)          // 데이터 전달
         
         cell.selectionStyle = .none // 셀 선택 색상 제거
         return cell
