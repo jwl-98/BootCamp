@@ -8,7 +8,12 @@
 import UIKit
 
 import SnapKit
+
 class MenuItemDetailView: UIView {
+
+    // MARK: - 컴포넌트 생성
+
+    // 아이콘 이미지 ImageView
     var symbolImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -16,6 +21,7 @@ class MenuItemDetailView: UIView {
         return image
     }()
 
+    // 아이콘 이름 Label
     var symbolNameLabel: UILabel = {
         let label = UILabel()
         label.text = "testName"
@@ -24,6 +30,8 @@ class MenuItemDetailView: UIView {
 
         return label
     }()
+
+    // 아이콘 카테고리 Label
     var symbolCategoryLabel: UILabel = {
         let label = UILabel()
         label.text = "testcategory"
@@ -32,6 +40,8 @@ class MenuItemDetailView: UIView {
 
         return label
     }()
+
+    // 아이콘 Id Label
     var symbolIdLabel: UILabel = {
         let label = UILabel()
         label.text = "symbol id"
@@ -40,6 +50,8 @@ class MenuItemDetailView: UIView {
 
         return label
     }()
+
+    // 아이콘 설명 Label
     var symbolDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "symbol description"
@@ -50,6 +62,8 @@ class MenuItemDetailView: UIView {
 
         return label
     }()
+
+    // 아이콘 가격 Label
     var symbolPriceLabel: UILabel = {
         let label = UILabel()
         label.font = ThemeFonts.h1
@@ -58,16 +72,14 @@ class MenuItemDetailView: UIView {
         return label
     }()
 
+    // MARK: - UI 설정
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        self.backgroundColor = .white
-
 
         [symbolImage, symbolNameLabel, symbolPriceLabel, symbolCategoryLabel, symbolIdLabel, symbolDescriptionLabel].forEach {
             self.addSubview($0)
         }
-
 
         setupUI()
     }
@@ -76,20 +88,19 @@ class MenuItemDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(item: MenuItem) {
+    // MARK: - 값 설정
 
+    func configure(item: MenuItem) {
         symbolImage.image = UIImage(systemName: item.symbolId)?.withRenderingMode(.alwaysOriginal)
         symbolImage.addSymbolEffect(.variableColor.iterative)
         symbolIdLabel.text = item.symbolId
         symbolNameLabel.text = item.name
         symbolCategoryLabel.text = "\(item.category)"
         symbolPriceLabel.text = PriceFormat.wonFormat(item.price)
-
-        if item.description.count > 18 {
-            
-        }
         symbolDescriptionLabel.text = item.description
     }
+
+    // MARK: - UI 설정
 
     private func setupUI() {
 
