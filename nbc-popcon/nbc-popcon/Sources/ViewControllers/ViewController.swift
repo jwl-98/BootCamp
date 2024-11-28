@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         view.addSubview(headerView)
         view.addSubview(menuView)
         view.addSubview(cartView)
-       
+        
         // SnapKit을 사용해 제약조건 설정
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -90,36 +90,38 @@ class ViewController: UIViewController {
             self?.kiosk.addItemToCart(menuItem: menuItem)
         }
         
-//        // **CartView 수량 변경 및 삭제 처리**
-//        cartView.onItemQuantityChanged = { [weak self] index, quantity in
-//            self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
-//        }
-//        
-//        cartView.onItemDeleted = { [weak self] index in
-//            self?.kiosk.removeCartItem(at: index)
-//        }
-//        
-//        // **CartView 데이터 업데이트**
-//        kiosk.onCartUpdated = { [weak self] cartItems in
-//            self?.cartView.updateCartItems(cartItems)
-//        }
+        
+        
+        //        // **CartView 수량 변경 및 삭제 처리**
+        //        cartView.onItemQuantityChanged = { [weak self] index, quantity in
+        //            self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
+        //        }
+        //
+        //        cartView.onItemDeleted = { [weak self] index in
+        //            self?.kiosk.removeCartItem(at: index)
+        //        }
+        //
+        //        // **CartView 데이터 업데이트**
+        //        kiosk.onCartUpdated = { [weak self] cartItems in
+        //            self?.cartView.updateCartItems(cartItems)
+        //        }
         
         // **CartView 요약 정보 업데이트**
-//        kiosk.onSummaryUpdated = { [weak self] summary in
-//            let totalInfo = summary.split(separator: "|")
-//            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
-//            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
-//        }
+        //        kiosk.onSummaryUpdated = { [weak self] summary in
+        //            let totalInfo = summary.split(separator: "|")
+        //            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
+        //            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
+        //        }
         
         // **CartView의 버튼 액션 연결**
-//        cartView.orderButtonsView.onCompleteOrder = { [weak self] in
-//            guard let message = self?.kiosk.completeOrder() else { return }
-//            self?.showAlert(title: "주문 완료", message: message)
-//        }
-//        
-//        cartView.orderButtonsView.onCancelOrder = { [weak self] in
-//            self?.kiosk.clearCart()
-//        }
+        //        cartView.orderButtonsView.onCompleteOrder = { [weak self] in
+        //            guard let message = self?.kiosk.completeOrder() else { return }
+        //            self?.showAlert(title: "주문 완료", message: message)
+        //        }
+        //
+        //        cartView.orderButtonsView.onCancelOrder = { [weak self] in
+        //            self?.kiosk.clearCart()
+        //        }
     }
     // MARK: - Helpers
     
@@ -128,6 +130,12 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setThemeToggle(_ closer: (() -> Void)?) {
+        headerView.onThemeToggle = { [weak self] in
+            self?.headerView.onThemeToggle = closer
+        }
     }
 }
 
