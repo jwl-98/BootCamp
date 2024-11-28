@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     // MARK: - UI Setup
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = ThemeColors.bg
         
         // 뷰 계층구조 설정
         view.addSubview(headerView)
@@ -131,12 +131,6 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
-    }
-    
-    func setThemeToggle(_ closer: (() -> Void)?) {
-        headerView.onThemeToggle = { [weak self] in
-            self?.headerView.onThemeToggle = closer
-        }
     }
 }
 

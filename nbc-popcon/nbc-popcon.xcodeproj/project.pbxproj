@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231674F62CF86EC400655AD9 /* ALRadioButtons in Frameworks */ = {isa = PBXBuildFile; productRef = 231674F52CF86EC400655AD9 /* ALRadioButtons */; };
 		E9B9871C2CF46A0A006FFF70 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9B9871B2CF46A0A006FFF70 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9B9871C2CF46A0A006FFF70 /* SnapKit in Frameworks */,
+				231674F62CF86EC400655AD9 /* ALRadioButtons in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = "nbc-popcon";
 			packageProductDependencies = (
 				E9B9871B2CF46A0A006FFF70 /* SnapKit */,
+				231674F52CF86EC400655AD9 /* ALRadioButtons */,
 			);
 			productName = "nbc-popcon";
 			productReference = E2A5FA172CF45B1700916DD1 /* nbc-popcon.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				E9B9871A2CF46A0A006FFF70 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				231674F42CF86EC400655AD9 /* XCRemoteSwiftPackageReference "ALRadioButtons" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E2A5FA182CF45B1700916DD1 /* Products */;
@@ -352,6 +356,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		231674F42CF86EC400655AD9 /* XCRemoteSwiftPackageReference "ALRadioButtons" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alxrguz/ALRadioButtons";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
 		E9B9871A2CF46A0A006FFF70 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -363,6 +375,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		231674F52CF86EC400655AD9 /* ALRadioButtons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 231674F42CF86EC400655AD9 /* XCRemoteSwiftPackageReference "ALRadioButtons" */;
+			productName = ALRadioButtons;
+		};
 		E9B9871B2CF46A0A006FFF70 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E9B9871A2CF46A0A006FFF70 /* XCRemoteSwiftPackageReference "SnapKit" */;

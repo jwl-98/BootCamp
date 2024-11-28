@@ -28,10 +28,9 @@ class MenuView: UIView {
     // 카테고리를 보여주는 segmentedControl
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        segmentedControl.backgroundColor = ThemeColors.green
+
         segmentedControl.setTitleTextAttributes([.font: ThemeFonts.p], for: .normal)
-        segmentedControl.setTitleTextAttributes([.foregroundColor: ThemeColors.white], for: .normal)
-        segmentedControl.setTitleTextAttributes([.foregroundColor: ThemeColors.black], for: .selected)
+
         return segmentedControl
     }()
     
@@ -78,7 +77,7 @@ class MenuView: UIView {
         segmentedControl.snp.makeConstraints { view in
             view.top.equalToSuperview().inset(ThemeNumbers.itemSpacing)
             view.leading.trailing.equalToSuperview()
-            view.height.equalTo(50)
+            view.height.equalTo(32)
         }
         
         segmentedControl.addTarget(self, action: #selector(self.segmentedChanged(_:)), for: .valueChanged)

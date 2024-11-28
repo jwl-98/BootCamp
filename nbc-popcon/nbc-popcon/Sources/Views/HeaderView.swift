@@ -16,9 +16,15 @@ class HeaderView: UIView {
         
         titleLabel.font = ThemeFonts.h1bold
         titleLabel.text = "POPCON"
-        titleLabel.textColor = ThemeColors.white
+        titleLabel.textColor = ThemeColors.bg
 
         return titleLabel
+    }()
+    
+    private let greenBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.green
+        return view
     }()
     
     // 호출 버튼
@@ -29,22 +35,29 @@ class HeaderView: UIView {
         callButton.setImage(callImage, for: .normal)
         callButton.contentMode = .scaleAspectFit
         callButton.backgroundColor = .clear
-        callButton.tintColor = ThemeColors.white
+        callButton.tintColor = ThemeColors.bg
         
         return callButton
     }()
     
+    // 테마 버튼
+    private let themeButton: UIButton = {
+        let themeButton = UIButton()
+        let gearImage = UIImage(systemName: "gear")
+        themeButton.setImage(gearImage, for: .normal)
+        themeButton.tintColor = ThemeColors.bg
+        
+        return themeButton
+    }()
     
     // 직원 호출 알럿 액션 - ViewController.setupBindings()를 통해 할당
     var onCallStaff: (() -> (Void))? = nil
-    
-    var onThemeToggle: (() -> Void)? = nil
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUpUI()
-        configureCallButtonAction()
+        configureButtonAction()
     }
     
     required init?(coder: NSCoder) {
@@ -60,10 +73,22 @@ extension HeaderView {
     
     // UI 설정 메서드
     private func setUpUI() {
+        setUpGreenBarView()
         setUpTitleLabel()
         setUpCallButton()
+        setUpThemeButton()
         
         self.backgroundColor = ThemeColors.red
+    }
+    
+    // 초록바 뷰
+    private func setUpGreenBarView() {
+        self.addSubview(greenBarView)
+        
+        greenBarView.snp.makeConstraints { view in
+            view.leading.trailing.bottom.equalToSuperview()
+            view.height.equalTo(14)
+        }
     }
     
     // 서비스 명 라벨
@@ -72,7 +97,7 @@ extension HeaderView {
         
         titleLabel.snp.makeConstraints { label in
             label.centerX.equalToSuperview()
-            label.bottom.equalToSuperview().inset(20)
+            label.bottom.equalTo(greenBarView).inset(ThemeNumbers.padding)
         }
     }
     
@@ -82,13 +107,29 @@ extension HeaderView {
         
         callButton.snp.makeConstraints { button in
             button.centerY.equalTo(titleLabel)
-            button.trailing.equalToSuperview().inset(ThemeManager.shared.numbers.padding)
+            button.leading.equalToSuperview().inset(ThemeNumbers.padding)
             button.height.width.equalTo(25)
         }
         
         callButton.imageView?.snp.makeConstraints { imageView in
             imageView.size.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    // 테마 버튼
+    private func setUpThemeButton() {
+        self.addSubview(themeButton)
+        
+        themeButton.snp.makeConstraints { button in
+            button.centerY.equalTo(titleLabel)
+            button.trailing.equalToSuperview().inset(ThemeNumbers.padding)
+            button.height.width.equalTo(25)
+        }
+        
+        themeButton.imageView?.snp.makeConstraints { imageView in
+            imageView.size.centerX.centerY.equalToSuperview()
+        }
+
     }
 }
 
@@ -98,14 +139,21 @@ extension HeaderView {
 extension HeaderView {
     
     // 버튼 액션 설정
-    private func configureCallButtonAction() {
+    private func configureButtonAction() {
         self.callButton.addTarget(nil, action: #selector(callButtonTapped), for: .touchUpInside)
+        self.themeButton.addTarget(nil, action: #selector(themeButtonTapped), for: .touchUpInside)
     }
     
     // 호출 알럿 버튼 액션
     @objc private func callButtonTapped() {
         guard let onBellButtonTapped = self.onCallStaff else { return }
         onBellButtonTapped()
+    }
+    
+    // 테마 선택 버튼 설정
+    @objc private func themeButtonTapped() {
+        let themeSelectView = ThemeSelectView()
+        ModalManager.createGlobalModal(themeSelectView)
     }
 }
 
