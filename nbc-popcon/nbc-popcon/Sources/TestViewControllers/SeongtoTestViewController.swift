@@ -83,7 +83,15 @@ class SeongtoTestViewController: PopconViewController {
     }
     
     @objc func tapAction2() {
-        AppHelpers.showAlert(title: "hello", message: "world")
+        guard let topVC = AppHelpers.getTopViewController() else {
+                return
+            }
+            
+        let newVC = UIViewController()
+        newVC.view.backgroundColor = .systemBlue
+        newVC.modalPresentationStyle = .fullScreen
+        
+        topVC.present(newVC, animated: true, completion: nil)
     }
 }
 

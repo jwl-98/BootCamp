@@ -56,7 +56,7 @@ class Kiosk {
     
     /// 카테고리 변경
     func selectCategory(at rawValue: String) {
-        self.currentCategory = Category(fallbackRawValue: rawValue)
+        self.currentCategory = Category(rawValue: rawValue)
         getCurrentMenuItems()
     }
     
@@ -79,6 +79,7 @@ class Kiosk {
         }
         updateCart()
     }
+    
     
     /// 장바구니 아이템 삭제
     func removeCartItem(at index: Int) {
