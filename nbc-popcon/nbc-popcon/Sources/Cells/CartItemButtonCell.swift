@@ -12,6 +12,7 @@ class CartItemButtonCell: UITableViewCell {
     
     private let kiosk = Kiosk()
     private var itemQuantity = 1.0
+    
     private var cartItem: CartItem?
     
     var onItemQuantityChanged: ((_ newQuantity: Int) -> Void)?
@@ -141,6 +142,7 @@ class CartItemButtonCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTableViewCellLayout()
         actionMethod()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -269,6 +271,18 @@ extension CartItemButtonCell {
     @objc private func pressdTotalDeleteButton(_ sender: UIButton) {
         onRemoveCartItem?()
     }
+    
+    // 테이블뷰 셀의 데이터를 추가
+    func configureData(_ cartItem: CartItem) {
+        self.cartItem = cartItem
+        
+        cartItemLabel.text = cartItem.menuitem.name
+        cartItemImageView.image = UIImage(systemName: cartItem.menuitem.symbolId)
+        cartItemPriceLabel.text = "\(cartItem.menuitem.price) 원"
+        cartItemQuantityLabel.text = "주문수량 : \(cartItem.quantity) 개"
+        cartItemTotalPriceLabel.text = "= \(cartItem.totalPrice) 원"
+        stepper.value = Double(cartItem.quantity)
+    }
 }
 
 
@@ -276,3 +290,15 @@ extension CartItemButtonCell {
 //#Preview {
 //    JeffTestViewController()
 //}
+
+/*
+ itemQuantity = Double(newValue)
+ self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
+ func configureCell(item: CartItem) {
+     cartItemImageView.image = UIImage(systemName: "\(item.name)")
+     cartItemLabel.text = "\(item.name)"
+     cartItemPriceLabel.text = "\(item.price)"
+     cartItemQuantityLabel.text = "주문수량 : \(Int(item.quantity)) 개"
+     //cartItemTotalPriceLabel.text = "= \() 원"
+ }
+ */

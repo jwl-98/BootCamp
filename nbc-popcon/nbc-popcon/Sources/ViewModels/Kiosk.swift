@@ -19,7 +19,7 @@ class Kiosk {
     private var currentCategory: Category = .communication
     
     /// 장바구니 데이터(더미 데이터 추가)
-    private var cartItems: [CartItem] = []
+    private(set) var cartItems: [CartItem] = []
     
     // MARK: - View와의 연결 클로저
     
