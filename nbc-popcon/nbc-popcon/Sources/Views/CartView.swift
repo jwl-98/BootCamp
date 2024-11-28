@@ -76,7 +76,13 @@ class CartView: UIView {
             $0.height.equalTo(50)
         }
     }
-}
+    
+//    private func setupTapGesture() {
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(footerViewTapped))
+//        
+//    }
+//    
+//}
 /*
  class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
