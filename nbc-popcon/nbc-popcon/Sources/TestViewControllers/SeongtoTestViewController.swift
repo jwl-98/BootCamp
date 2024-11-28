@@ -14,12 +14,13 @@ class SeongtoTestViewController: UIViewController {
     let button: UIButton = UIButton()
     let button2: UIButton = UIButton()
     var text:String = "AAA\nAAA"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
         
     }
+    
     
     func configUI() {
         
@@ -70,8 +71,15 @@ class SeongtoTestViewController: UIViewController {
     }
     
     @objc func tapAction2() {
-        text += "A"
-        label.text = text
+        guard let topVC = AppHelpers.getTopViewController() else {
+            print("❌ ERROR: Top ViewController not found.")
+            return
+        }
+        
+        let newVC = UIViewController()
+        newVC.view.backgroundColor = .systemBlue
+        newVC.modalPresentationStyle = .custom
+        topVC.present(newVC, animated: true, completion: nil)
     }
 }
 
