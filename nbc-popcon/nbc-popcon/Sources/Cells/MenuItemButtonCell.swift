@@ -113,7 +113,7 @@ class MenuItemButtonCell : UICollectionViewCell {
 
         self.backgroundColor = ThemeColors.bg
         self.layer.borderWidth = 1.5
-        self.layer.borderColor = ThemeColors.label.cgColor
+        self.layer.borderColor = ThemeColors.grey4.cgColor
         self.layer.cornerRadius = 30
         self.clipsToBounds = true
 

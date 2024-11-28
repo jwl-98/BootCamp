@@ -26,7 +26,7 @@ class MenuItemDetailView: UIView {
         let label = UILabel()
         label.text = "testName"
         label.font = ThemeFonts.h1bold
-        label.textColor = ThemeColors.black
+        label.textColor = ThemeColors.label
 
         return label
     }()
@@ -56,8 +56,9 @@ class MenuItemDetailView: UIView {
         let label = UILabel()
         label.text = "symbol description"
         label.font = ThemeFonts.p
-        label.textColor = ThemeColors.black
+        label.textColor = ThemeColors.label
         label.numberOfLines = 2
+        label.setLineSpacing(lineSpacing: CGFloat(5))
         label.textAlignment = .center
 
         return label
@@ -115,18 +116,17 @@ class MenuItemDetailView: UIView {
             $0.centerX.equalToSuperview()
         }
 
-        symbolCategoryLabel.snp.makeConstraints {
+        symbolIdLabel.snp.makeConstraints {
             $0.top.equalTo(symbolNameLabel.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
 
-        symbolIdLabel.snp.makeConstraints {
-            $0.top.equalTo(symbolCategoryLabel.snp.bottom).offset(5)
+        symbolCategoryLabel.snp.makeConstraints {
+            $0.top.equalTo(symbolIdLabel.snp.bottom).offset(5)
             $0.centerX.equalToSuperview()
         }
-
         symbolDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(symbolIdLabel.snp.bottom).offset(20)
+            $0.top.equalTo(symbolCategoryLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(30)
         }
 
