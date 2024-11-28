@@ -132,4 +132,7 @@ class ViewController: UIViewController {
     }
 }
 
-//휴,,,
+
+#Preview {
+    ViewController()
+}
