@@ -11,9 +11,9 @@ import UIKit
 
 struct ModalManager {
     
-    static func createGlobalModal(_ content: UIView ) {
+    static func createGlobalModal(_ content: UIView ) -> GlobalModalViewController? {
         guard let topVC = AppHelpers.getTopViewController() else {
-            return
+            return nil
         }
         
         let modalVC = GlobalModalViewController(target: content)
@@ -25,7 +25,8 @@ struct ModalManager {
             modalVC.isModalInPresentation = true
         }
         
-        topVC.present(modalVC, animated: true, completion: nil)
+        topVC.present(modalVC, animated: false, completion: nil)
         
+        return modalVC
     }
 }

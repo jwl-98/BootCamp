@@ -83,15 +83,18 @@ class SeongtoTestViewController: PopconViewController {
     }
     
     @objc func tapAction2() {
-        guard let topVC = AppHelpers.getTopViewController() else {
-                return
-            }
-            
-        let newVC = UIViewController()
-        newVC.view.backgroundColor = .systemBlue
-        newVC.modalPresentationStyle = .fullScreen
+//        guard let topVC = AppHelpers.getTopViewController() else {
+//            return
+//        }
+//        
+//        let newVC = UIViewController()
+//        newVC.view.backgroundColor = .systemBlue
+//        newVC.modalPresentationStyle = .fullScreen
+//        
+//        topVC.present(newVC, animated: true, completion: nil)
         
-        topVC.present(newVC, animated: true, completion: nil)
+        
+        let modalView = ModalManager.createGlobalModal( MenuView() )
     }
 }
 
