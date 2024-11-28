@@ -9,13 +9,24 @@ import UIKit
 
 class DetailModalViewController: UIViewController {
 
+    private let menuItemDetailView = MenuItemDetailView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.addSubview(menuItemDetailView)
+
+        setupUI()
 
         // Do any additional setup after loading the view.
     }
-    
+
+    private func setupUI() {
+        menuItemDetailView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(200)
+            $0.leading.trailing.equalToSuperview().inset(50)
+        }
+    }
+
 
     /*
     // MARK: - Navigation

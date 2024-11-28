@@ -10,12 +10,13 @@ import UIKit
 import SnapKit
 
 protocol CollectionViewCellDelegate: AnyObject {
-    func didSelectButton(_ cell: MenuItemButtonCell)
+    func didSelectButton(_ cell: MenuItemButtonCell, _ item: MenuItem)
 }
 
 class MenuItemButtonCell : UICollectionViewCell {
 
     weak var delegate: CollectionViewCellDelegate?
+    var menuItem: MenuItem?
 
     // MARK: - 컴포넌트 생성
 
@@ -157,6 +158,7 @@ class MenuItemButtonCell : UICollectionViewCell {
     // MARK: - 셀 별로 세부 설정
 
     func configure(_ menuItem: MenuItem) {
+        self.menuItem = menuItem
 
         nameLabel.text = menuItem.name
         priceLabel.text = "\(menuItem.price)원"
@@ -167,7 +169,9 @@ class MenuItemButtonCell : UICollectionViewCell {
 
     @objc
     func showDetailModal() {
-        delegate?.didSelectButton(self)
+        let menuItemDeatilView = MenuItemDetailView()
+        delegate?.didSelectButton(self, menuItem!)
+        menuItemDeatilView.configure(item: menuItem!)
     }
 
 
