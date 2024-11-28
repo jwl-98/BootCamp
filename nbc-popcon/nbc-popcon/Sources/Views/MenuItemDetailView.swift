@@ -8,10 +8,11 @@
 import UIKit
 
 import SnapKit
-
+// 기능 소개 1분 - 1분 30초
 class MenuItemDetailView: UIView {
     var symbolImage: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
 
         return image
     }()
@@ -45,6 +46,8 @@ class MenuItemDetailView: UIView {
         label.text = "symbol description"
         label.font = ThemeFonts.p
         label.textColor = ThemeColors.black
+        label.numberOfLines = 2
+        label.textAlignment = .center
 
         return label
     }()
@@ -56,48 +59,16 @@ class MenuItemDetailView: UIView {
         return label
     }()
 
-    var buttonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 20
-
-        return stackView
-    }()
-
-    var closeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("창 닫기", for: .normal)
-        button.backgroundColor = ThemeColors.grey4
-        button.layer.cornerRadius = 20
-        button.setTitleColor(ThemeColors.white, for: .normal)
-
-        return button
-    }()
-    var addButon: UIButton = {
-        let button = UIButton()
-        button.setTitle("추가하기", for: .normal)
-        button.backgroundColor = ThemeColors.blue
-        button.layer.cornerRadius = 20
-        button.setTitleColor(ThemeColors.white, for: .normal)
-
-        return button
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("nit")
 
         self.backgroundColor = .white
 
 
-        [symbolImage, symbolNameLabel, symbolPriceLabel, symbolCategoryLabel, symbolIdLabel, symbolDescriptionLabel, buttonStackView].forEach {
+        [symbolImage, symbolNameLabel, symbolPriceLabel, symbolCategoryLabel, symbolIdLabel, symbolDescriptionLabel].forEach {
             self.addSubview($0)
         }
 
-        [closeButton, addButon].forEach {
-            buttonStackView.addArrangedSubview($0)
-        }
 
         setupUI()
     }
@@ -108,11 +79,16 @@ class MenuItemDetailView: UIView {
 
     func configure(item: MenuItem) {
 
-        symbolImage.image = UIImage(systemName: item.symbolId)
+        symbolImage.image = UIImage(systemName: item.symbolId)?.withRenderingMode(.alwaysOriginal)
+        symbolImage.addSymbolEffect(.variableColor.iterative)
         symbolIdLabel.text = item.symbolId
         symbolNameLabel.text = item.name
         symbolCategoryLabel.text = "\(item.category)"
-        symbolPriceLabel.text = "\(item.price)"
+        symbolPriceLabel.text = PriceFormat.wonFormat(item.price)
+
+        if item.description.count > 18 {
+            
+        }
         symbolDescriptionLabel.text = item.description
     }
 
@@ -121,7 +97,6 @@ class MenuItemDetailView: UIView {
         symbolImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(40)
-            $0.width.equalTo(100)
             $0.height.equalTo(100)
         }
 
@@ -142,22 +117,13 @@ class MenuItemDetailView: UIView {
 
         symbolDescriptionLabel.snp.makeConstraints {
             $0.top.equalTo(symbolIdLabel.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(30)
         }
 
         symbolPriceLabel.snp.makeConstraints {
-            $0.top.equalTo(symbolDescriptionLabel.snp.bottom).offset(50)
+            $0.top.equalTo(symbolDescriptionLabel.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
-        }
-
-        buttonStackView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(20)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(40)
         }
     }
 }
-#Preview("DetailModalViewController") {
-    DetailModalViewController()
-}
+

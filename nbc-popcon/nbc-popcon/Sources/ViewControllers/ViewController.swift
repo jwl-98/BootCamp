@@ -76,11 +76,6 @@ class ViewController: UIViewController {
             self?.menuView.configureCategory(categories)
         }
 
-        // **menuView 아이템 상세보기 클릭 시 처리**
-        menuView.onDetailButtonClick = { [weak self] menuItem in
-            self?.showModal(menuItem: menuItem)
-        }
-
         // **MenuView에서 카테고리 변경 시 처리**
         menuView.onCategorySelected = { [weak self] rawValue in
             self?.kiosk.selectCategory(at: rawValue)
@@ -142,16 +137,6 @@ class ViewController: UIViewController {
         headerView.onThemeToggle = { [weak self] in
             self?.headerView.onThemeToggle = closer
         }
-    }
-
-    /// 메뉴 아이템 상세보기를 누르면 모달로 이동하는 메서드
-    private func showModal(menuItem: MenuItem) {
-        let detailModalVC = DetailModalViewController()
-        detailModalVC.modalPresentationStyle = .overFullScreen
-        detailModalVC.modalTransitionStyle = .crossDissolve
-        present(detailModalVC, animated: true)
-
-        detailModalVC.configure(menuItem: menuItem)
     }
 }
 

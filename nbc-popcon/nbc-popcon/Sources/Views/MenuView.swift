@@ -20,9 +20,6 @@ class MenuView: UIView {
     var onCategorySelected: ((String) -> Void)? = nil
     // 메뉴 아이템 선택 액션 - ViewController.setupBindings()를 통해 할당
     var onMenuItemSelected:((MenuItem) -> Void)? = nil
-    // 메뉴 아이템 셀 버튼 선택 액션
-    var onDetailButtonClick: ((MenuItem) -> Void)? = nil
-
 
     private var items: [MenuItem] = []
     
@@ -51,7 +48,7 @@ class MenuView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
         
         return collectionView
@@ -115,29 +112,18 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemButtonCell", for: indexPath) as? MenuItemButtonCell else { return UICollectionViewCell() }
         cell.configure(items[indexPath.item])
-        cell.delegate = self
 
         return cell
     }
     
     // 셀 누르면 실행
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("aaa")
         guard let onCollectionViewCellSelected = self.onMenuItemSelected else { return }
         let menuItem = items[indexPath.item]
         onCollectionViewCellSelected(menuItem)
     }
     
 }
-
-extension MenuView: CollectionViewCellDelegate {
-    // 셀 버튼 클릭시 실행
-    func didSelectButton(_ cell: MenuItemButtonCell, _ menuItem: MenuItem) {
-        guard let onButtonClick = self.onDetailButtonClick else { return }
-        onButtonClick(menuItem)
-    }
-}
-
 
 // MARK: - 바인딩 메서드
 

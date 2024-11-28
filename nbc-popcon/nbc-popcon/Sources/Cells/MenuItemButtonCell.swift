@@ -9,13 +9,8 @@ import UIKit
 
 import SnapKit
 
-protocol CollectionViewCellDelegate: AnyObject {
-    func didSelectButton(_ cell: MenuItemButtonCell, _ item: MenuItem)
-}
-
 class MenuItemButtonCell : UICollectionViewCell {
 
-    weak var delegate: CollectionViewCellDelegate?
     var menuItem: MenuItem?
 
     // MARK: - 컴포넌트 생성
@@ -34,7 +29,6 @@ class MenuItemButtonCell : UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.tintColor = .black
 
         return imageView
     }()
@@ -161,15 +155,17 @@ class MenuItemButtonCell : UICollectionViewCell {
         self.menuItem = menuItem
 
         nameLabel.text = menuItem.name
-        priceLabel.text = "\(menuItem.price)원"
-        imageView.image = UIImage(systemName: menuItem.symbolId)
+        priceLabel.text = PriceFormat.wonFormat(menuItem.price)
+        imageView.image = UIImage(systemName: menuItem.symbolId)?.withRenderingMode(.alwaysOriginal)
     }
 
     // MARK: - 메뉴 아이템 버튼 클릭 시 실행
 
     @objc
     func showDetailModal() {
-        delegate?.didSelectButton(self, menuItem!)
+        let menuItemDetailView = MenuItemDetailView()
+        ModalManager.createGlobalModal(menuItemDetailView)
+        menuItemDetailView.configure(item: menuItem!)
     }
 
 
