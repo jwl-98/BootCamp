@@ -55,8 +55,8 @@ struct ThemeManager {
     }
     
     struct Numbers {
-        let padding: CGFloat = 30
-        let paddingSmall: CGFloat = 20
+        let padding: CGFloat = 20
+        let paddingSmall: CGFloat = 15
         let radius: CGFloat = 10
         let itemSpacing: CGFloat = 10
     }
