@@ -102,10 +102,10 @@ class ViewController: UIViewController {
         //            self?.kiosk.removeCartItem(at: index)
         //        }
         //
-        //        // **CartView 데이터 업데이트**
-        //        kiosk.onCartUpdated = { [weak self] cartItems in
-        //            self?.cartView.updateCartItems(cartItems)
-        //        }
+                // **CartView 데이터 업데이트**
+//                kiosk.onCartUpdated = { [weak self] cartItems in
+//                    self?.cartView.updateCartItems(cartItems)
+//                }
         
         // **CartView 요약 정보 업데이트**
         //                kiosk.onSummaryUpdated = { [weak self] summary in
