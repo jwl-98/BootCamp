@@ -12,8 +12,10 @@ class CartItemButtonCell: UITableViewCell {
     
     private let kiosk = Kiosk()
     private var itemQuantity = 1.0
-    var onItemQuantityChanged: ((_ newQuantity: Int) -> Void)?
+    private var cartItem: CartItem?
     
+    var onItemQuantityChanged: ((_ newQuantity: Int) -> Void)?
+    var onRemoveCartItem: (() -> Void)?
     
     // 상품 imageView
     private let cartItemImageView: UIImageView = {
@@ -22,6 +24,7 @@ class CartItemButtonCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = ThemeColors.black
         //imageView.backgroundColor = .gray
+        
         return imageView
     }()
     
@@ -126,6 +129,11 @@ class CartItemButtonCell: UITableViewCell {
         //view.backgroundColor = .cyan
         return view
     }()
+    
+    //dequeue시 데이터 입력
+    func configure(_ cartItem: CartItem) {
+        self.cartItem = cartItem
+    }
     
     //MARK: - setting
     
@@ -246,16 +254,12 @@ extension CartItemButtonCell {
     private func stepperAction() {
         self.stepper.addTarget(self, action: #selector(pressedStepper), for: .valueChanged)
     }
+    
     @objc func pressedStepper(_ sender: UIStepper) {
         let newValue = sender.value
         
-        if newValue > itemQuantity {
-            itemQuantity = newValue
-            self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
-        } else if newValue < itemQuantity {
-            itemQuantity = newValue
-            self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
-        }
+        itemQuantity = newValue
+        self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
     }
 }
 

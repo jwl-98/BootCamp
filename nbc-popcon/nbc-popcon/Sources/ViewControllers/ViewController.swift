@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     private let headerView = HeaderView() // 헤더 뷰 (카테고리 선택 포함)
     private let menuView = MenuView() // 메뉴 리스트 뷰
     private let cartView = CartView() // 장바구니 뷰 (ButtonsView 포함)
-
+    
     // MARK: - ViewModel
     
     let kiosk = Kiosk() // Kiosk ViewModel
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             make.top.equalTo(menuView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-
+        
     }
     
     // MARK: - Bindings
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         kiosk.onUpdateAllCategory = { [weak self] categories in
             self?.menuView.configureCategory(categories)
         }
-
+        
         // **MenuView에서 카테고리 변경 시 처리**
         menuView.onCategorySelected = { [weak self] rawValue in
             self?.kiosk.selectCategory(at: rawValue)
@@ -94,9 +94,9 @@ class ViewController: UIViewController {
         
         
         //        // **CartView 수량 변경 및 삭제 처리**
-        //        cartView.onItemQuantityChanged = { [weak self] index, quantity in
-        //            self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
-        //        }
+        cartView.onItemQuantityChanged = { [weak self] (index, quantity) in
+            self?.kiosk.updateCartItemQuantity(at: index, quantity: quantity)
+        }
         //
         //        cartView.onItemDeleted = { [weak self] index in
         //            self?.kiosk.removeCartItem(at: index)
@@ -108,11 +108,11 @@ class ViewController: UIViewController {
         //        }
         
         // **CartView 요약 정보 업데이트**
-        //        kiosk.onSummaryUpdated = { [weak self] summary in
-        //            let totalInfo = summary.split(separator: "|")
-        //            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
-        //            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
-        //        }
+        //                kiosk.onSummaryUpdated = { [weak self] summary in
+        //                    let totalInfo = summary.split(separator: "|")
+        //                    self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
+        //                    self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
+        //                }
         
         // **CartView의 버튼 액션 연결**
         //        cartView.orderButtonsView.onCompleteOrder = { [weak self] in

@@ -85,7 +85,7 @@ extension ButtonsView {
         
         //버튼효과
         sender.alpha = 0.5
-        print(#function)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     sender.alpha = 1.0
                 }

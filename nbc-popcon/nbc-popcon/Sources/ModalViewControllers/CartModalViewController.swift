@@ -17,6 +17,11 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     var totalPrice: Int = 40000
     var totalCount: Int = 7
     
+    private var cartItems: [CartItem] = []
+    
+    var onItemQuantityChanged: ((Int, Int) -> Void)?
+    var onRemoveCartItem: ((Int) -> Void)?
+    
     //MARK: - 컴포넌트 생성
     
     // 상단 닫기버튼 View
@@ -27,7 +32,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         view.layer.cornerRadius = 20
         return view
     }()
-
+    
     // 닫기 Button
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -42,7 +47,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         let view = UIView()
         return view
     }()
-  
+    
     // 장바구니 목록을 보여주는 TableView
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -98,7 +103,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         configureTableView()
         addMethod()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupViewLayout()
@@ -109,7 +114,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     //MARK: - 레이아웃
     
     private func setupViewLayout() {
-      
+        
         closeButtonView.addSubview(closeButton)
         summaryView.addSubview(countTotalItemLabel)
         summaryView.addSubview(totalItemPriceLabel)
@@ -214,14 +219,38 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
+        guard let cartItemButtonCell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
         
         //let cartItems = kiosk.getCartItems() // Kiosk에서 cartItems 가져오기
         //let item = cartItems[indexPath.row]  // 현재 행의 아이템 가져오기
-        //cell.configure(with: item)          // 데이터 전달
         
-        cell.selectionStyle = .none // 셀 선택 색상 제거
-        return cell
+        //cell.configure(with: item)          // 데이터 전달
+        let index = indexPath.row
+        
+        cartItemButtonCell.configure(cartItems[index])
+        cartItemButtonCell.selectionStyle = .none // 셀 선택 색상 제거
+        
+        if let onItemQuantityChanged = self.onItemQuantityChanged {
+            cartItemButtonCell.onItemQuantityChanged = { quantity in
+                onItemQuantityChanged(index, quantity) }
+        }
+        
+        if let onRemoveCartItem = self.onRemoveCartItem {
+            cartItemButtonCell.onRemoveCartItem = {
+                onRemoveCartItem(index) }
+        }
+        
+        
+        return cartItemButtonCell
     }
     
+    
+}
+
+//MARK: - 바인딩 메서드
+extension CartModalViewController {
+    
+    func updateCart(_ items: [CartItem]) {
+        self.cartItems = items
+    }
 }

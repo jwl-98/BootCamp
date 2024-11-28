@@ -12,6 +12,10 @@ class CartView: UIView {
     var totalPrice: Int = 40000
     var totalCount: Int = 7
     
+    var onItemQuantityChanged: ((Int, Int) -> Void)?
+    var onRemoveCartItem: ((Int) -> Void)?
+    var onUpdateCartItem: (([CartItem]) -> Void)?
+    
     //  장바구니 요약 View (장바구니 갯수 + 합계금액)
     private let footerView: UIView = {
         let view = UIView()
@@ -93,6 +97,16 @@ class CartView: UIView {
         }
         
         let modalVC = CartModalViewController()
+        
+        if let onItemQuantityChanged = self.onItemQuantityChanged {
+            modalVC.onItemQuantityChanged = { (index, quantity) in onItemQuantityChanged(index, quantity) }
+        }
+        
+        if let onRemoveCartItem = self.onRemoveCartItem {
+            modalVC.onRemoveCartItem = { index in
+                onRemoveCartItem(index) }
+        }
+ 
         modalVC.modalPresentationStyle = .overFullScreen
         
         if #available(iOS 13.0, *) {
@@ -101,6 +115,12 @@ class CartView: UIView {
         
         topVC.present(modalVC, animated: true, completion: nil)
     }
-    
-    
+}
+
+
+//MARK: - UpdateCartView ( binding )
+extension CartView {
+    func updateCartView() {
+        
+    }
 }
