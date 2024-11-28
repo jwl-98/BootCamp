@@ -18,7 +18,7 @@ struct MenuItem {
         self.price = price
         self.symbolId = symbolId
         self.description = description
-        self.category = Category(rawValue: categoryName) ?? .others // 기본값으로 .others 설정
+        self.category = Category(rawValue: categoryName)
     }
         
         static let menuItems: [MenuItem] = [
