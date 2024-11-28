@@ -239,22 +239,29 @@ class CartView: UIView {
         
         // summaryView Layout
         summaryView.snp.makeConstraints {
-            $0.top.equalTo(tableView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
+            $0.top.equalToSuperview().inset(200)
+            $0.width.equalToSuperview()
+            $0.height.equalTo(80)
         }
         
-        //  장바구니 갯수 Label Layout
+        // 상단바 닫기버튼 Layout
+        closeButton.snp.makeConstraints {
+            $0.top.equalTo(summaryView.snp.top)
+            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.padding)
+            $0.width.height.equalTo(50)
+        }
+        
+        // 상단바 장바구니 갯수 Layout
         countTotalItemLabel.snp.makeConstraints {
-            $0.leading.equalTo(summaryView.snp.leading).inset(ThemeNumbers.paddingSmall)
-            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(summaryView.snp.leading).inset(ThemeNumbers.padding)
+            $0.bottom.equalTo(summaryView.snp.bottom)
             $0.height.equalTo(50)
         }
         
         //  합계 금액 Label Layout
         totalItemPriceLabel.snp.makeConstraints {
-            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.paddingSmall)
-            $0.centerY.equalToSuperview()
+            $0.trailing.equalTo(summaryView.snp.trailing).inset(ThemeNumbers.padding)
+            $0.bottom.equalTo(summaryView.snp.bottom)
             $0.height.equalTo(50)
         }
         

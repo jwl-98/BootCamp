@@ -50,9 +50,8 @@ class ViewController: UIViewController {
         
         menuView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
-            make.leading.trailing.equalToSuperview().inset(ThemeNumbers.paddingSmall)
-            make.bottom.equalTo(cartView.snp.top)
-//            make.height.equalTo(view.frame.height * 0.4) // 높이 설정으로 인한 menuView크기 이외에 회색배경이 생겨서 주석
+            make.leading.trailing.equalToSuperview().inset(ThemeNumbers.padding)
+            make.height.equalTo(view.frame.height * 0.4)
         }
         
         cartView.snp.makeConstraints { make in

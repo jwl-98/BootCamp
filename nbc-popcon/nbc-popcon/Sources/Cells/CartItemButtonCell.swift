@@ -165,9 +165,9 @@ class CartItemButtonCell: UITableViewCell {
         
         // 왼쪽의 이미지, 이름, 단가 verticalStackView
         itemVerticalstackView.snp.remakeConstraints {
-            $0.leading.equalToSuperview().inset(ThemeNumbers.paddingSmall)
-            $0.top.equalToSuperview().inset(ThemeNumbers.paddingSmall)
-            $0.bottom.equalToSuperview().inset(ThemeNumbers.paddingSmall)
+            $0.leading.equalToSuperview().inset(ThemeNumbers.padding)
+            $0.top.equalToSuperview().inset(ThemeNumbers.padding)
+            $0.bottom.equalToSuperview().inset(ThemeNumbers.padding)
             $0.width.equalTo(130)
         }
             
@@ -180,8 +180,8 @@ class CartItemButtonCell: UITableViewCell {
         // 수량, 가격, 삭제버튼 verticalStackView
         calculateVerticalstackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(40)
-            $0.trailing.equalToSuperview().inset(ThemeNumbers.paddingSmall)
-            $0.bottom.equalToSuperview().inset(ThemeNumbers.paddingSmall)
+            $0.trailing.equalToSuperview().inset(ThemeNumbers.padding)
+            $0.bottom.equalToSuperview().inset(ThemeNumbers.padding)
             $0.width.equalTo(150)
         }
          
@@ -193,14 +193,14 @@ class CartItemButtonCell: UITableViewCell {
         
         // 아이템 이름 Layout
         cartItemLabel.snp.makeConstraints {
-            $0.height.equalTo(ThemeNumbers.paddingSmall)
+            $0.height.equalTo(ThemeNumbers.padding)
             $0.width.equalTo(itemVerticalstackView.snp.width)
             $0.leading.equalTo(itemVerticalstackView.snp.leading).inset(10)
         }
         
         // 아이템 단가 Layout
         cartItemPriceLabel.snp.makeConstraints {
-            $0.height.equalTo(ThemeNumbers.paddingSmall + 5)
+            $0.height.equalTo(ThemeNumbers.padding + 5)
             $0.leading.equalTo(itemVerticalstackView.snp.leading).inset(10)
         }
         
