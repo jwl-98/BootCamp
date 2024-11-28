@@ -76,7 +76,6 @@ class MenuView: UIView {
         
         configureSegmentedControl()
         configureCollectionView()
-        ThemeMode.addObserver(self.collectionView)
     }
     
     required init?(coder: NSCoder) {

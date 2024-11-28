@@ -14,10 +14,4 @@ enum ThemeMode: String, CaseIterable {
     case dark = "다크 모드"
     
     static var onThemeChoice: ((ThemeMode) -> Void)?
-    
-    static var observer: [UIView] = []
-    
-    static func addObserver(_ view: UIView) {
-        Self.observer.append(view)
-    }
 }

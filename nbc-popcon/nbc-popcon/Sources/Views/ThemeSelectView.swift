@@ -60,9 +60,6 @@ extension ThemeSelectView {
         let themeMode = ThemeMode.allCases[index]
         
         ThemeMode.onThemeChoice?(themeMode)
-        ThemeMode.observer.forEach {
-            $0.reloadInputViews()
-        }
     }
 }
 

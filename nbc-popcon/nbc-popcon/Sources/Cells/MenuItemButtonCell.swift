@@ -52,9 +52,12 @@ class MenuItemButtonCell : UICollectionViewCell {
     let detailsButton: UIButton = {
         let button = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 30)
-        let buttonImage = UIImage(systemName: "magnifyingglass.circle.fill", withConfiguration:  config)
+        let buttonImage = UIImage(systemName: "magnifyingglass.circle.fill",
+                                  withConfiguration:  config)
         button.setImage(buttonImage, for: .normal)
-        button.addTarget(self, action: #selector(showDetailModal), for: .touchUpInside)
+        button.addTarget(self,
+                         action: #selector(showDetailModal),
+                         for: .touchUpInside)
 
         return button
     }()
@@ -77,23 +80,14 @@ class MenuItemButtonCell : UICollectionViewCell {
         return label
     }()
     
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.layer.borderColor = UIColor.black.cgColor
-    }
-    
 
     // MARK: - UI 설정
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-
         setupUI()
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -101,8 +95,10 @@ class MenuItemButtonCell : UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.layer.borderColor = ThemeColors.label.cgColor
+        self.layer.borderColor = ThemeColors.grey4.cgColor
     }
+    
+//    will
 
     private func setupUI() {
         self.contentView.addSubview(stackView)
