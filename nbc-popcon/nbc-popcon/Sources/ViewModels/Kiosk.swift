@@ -18,8 +18,12 @@ class Kiosk {
     /// 현재 선택된 카테고리
     private var currentCategory: Category = .communication
     
-    /// 장바구니 데이터
-    private var cartItems: [CartItem] = []
+    /// 장바구니 데이터(더미 데이터 추가)
+    private var cartItems: [CartItem] = [
+        CartItem(name: "wifi", price: 10000, quantity: 1),
+        CartItem(name: "camera", price: 30000, quantity: 1),
+        CartItem(name: "person", price: 50000, quantity: 1)
+    ]
     
     // MARK: - View와의 연결 클로저
     
