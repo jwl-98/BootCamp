@@ -34,6 +34,16 @@ class HeaderView: UIView {
         return callButton
     }()
     
+    private let themeSwitch: UISwitch = {
+        let themeSwitch = UISwitch()
+        themeSwitch.isOn = false
+        themeSwitch.backgroundColor = .clear
+        
+//        themeSwitch.
+        
+        return themeSwitch
+    }()
+    
     // 직원 호출 알럿 액션 - ViewController.setupBindings()를 통해 할당
     var onCallStaff: (() -> (Void))? = nil
     
@@ -43,7 +53,6 @@ class HeaderView: UIView {
         setUpUI()
         configureCallButtonAction()
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -60,6 +69,7 @@ extension HeaderView {
     private func setUpUI() {
         setUpTitleLabel()
         setUpCallButton()
+        setUpThemeSwitch()
         self.backgroundColor = ThemeColors.red
     }
     
@@ -85,6 +95,17 @@ extension HeaderView {
         
         callButton.imageView?.snp.makeConstraints { imageView in
             imageView.size.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    // 테마 스위치
+    private func setUpThemeSwitch() {
+        self.addSubview(themeSwitch)
+        
+        themeSwitch.snp.makeConstraints { themeSwitch in
+            themeSwitch.centerY.equalTo(titleLabel)
+            themeSwitch.width.height.equalTo(30)
+            themeSwitch.leading.equalToSuperview().inset(ThemeNumbers.padding)
         }
     }
 }
