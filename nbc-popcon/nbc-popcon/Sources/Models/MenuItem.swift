@@ -18,7 +18,7 @@ struct MenuItem {
         self.price = price
         self.symbolId = symbolId
         self.description = description
-        self.category = Category(rawValue: categoryName) ?? .others // 기본값으로 .others 설정
+        self.category = Category(rawValue: categoryName)
     }
         
         static let menuItems: [MenuItem] = [
@@ -243,9 +243,7 @@ struct MenuItem {
                 symbolId: "heart.text.square.fill",
                 description: "심박수를 나타내는 아이콘으로, 심장의 건강 상태를 의미합니다.",
                 categoryName: "건강"
-            ),
-            MenuItem(
-                name: "공유", price: 3000, symbolId: "square.and.arrow.up.circle", description: "외부로의 공유를 의미합니다", categoryName: "기타")
+            )
         ]
         
     }
