@@ -150,7 +150,7 @@ class MenuItemButtonCell : UICollectionViewCell {
 
     func configure(_ menuItem: MenuItem) {
         nameLabel.text = menuItem.name
-        priceLabel.text = "\(menuItem.price)"
+        priceLabel.text = "\(menuItem.price)원"
         imageView.image = UIImage(systemName: menuItem.symbolId)
 
 
