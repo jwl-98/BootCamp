@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     private let headerView = HeaderView() // 헤더 뷰 (카테고리 선택 포함)
     private let menuView = MenuView() // 메뉴 리스트 뷰
     private let cartView = CartView() // 장바구니 뷰 (ButtonsView 포함)
-    
+
     // MARK: - ViewModel
     
     private let kiosk = Kiosk() // Kiosk ViewModel
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         view.addSubview(headerView)
         view.addSubview(menuView)
         view.addSubview(cartView)
-        
+
         // SnapKit을 사용해 제약조건 설정
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -58,6 +58,7 @@ class ViewController: UIViewController {
             make.top.equalTo(menuView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+
     }
     
     // MARK: - Bindings
@@ -74,9 +75,16 @@ class ViewController: UIViewController {
         kiosk.onUpdateAllCategory = { [weak self] categories in
             self?.menuView.configureCategory(categories)
         }
-        
+
+        // **menuView 아이템 상세보기 클릭 시 처리**
+        menuView.onDetailButtonClick = { [weak self] in
+            print("vc 연결")
+            self?.showModal()
+        }
+
         // **MenuView에서 카테고리 변경 시 처리**
         menuView.onCategorySelected = { [weak self] rawValue in
+            print("카테고리 변경")
             self?.kiosk.selectCategory(at: rawValue)
         }
         
@@ -130,6 +138,15 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+
+    /// 메뉴 아이템 상세보기를 누르면 모달로 이동하는 메서드
+    private func showModal() {
+        let detailModalVC = DetailModalViewController()
+        detailModalVC.modalPresentationStyle = .overFullScreen
+        detailModalVC.modalTransitionStyle = .crossDissolve
+        present(detailModalVC, animated: true)
+    }
+
 }
 
 

@@ -9,7 +9,13 @@ import UIKit
 
 import SnapKit
 
+protocol CollectionViewCellDelegate: AnyObject {
+    func didSelectButton(_ cell: MenuItemButtonCell)
+}
+
 class MenuItemButtonCell : UICollectionViewCell {
+
+    weak var delegate: CollectionViewCellDelegate?
 
     // MARK: - 컴포넌트 생성
 
@@ -53,6 +59,7 @@ class MenuItemButtonCell : UICollectionViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: 30)
         let buttonImage = UIImage(systemName: "magnifyingglass.circle.fill", withConfiguration:  config)
         button.setImage(buttonImage, for: .normal)
+        button.addTarget(self, action: #selector(showDetailModal), for: .touchUpInside)
 
         return button
     }()
@@ -80,6 +87,7 @@ class MenuItemButtonCell : UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
 
         setupUI()
     }
@@ -108,9 +116,6 @@ class MenuItemButtonCell : UICollectionViewCell {
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.cornerRadius = 30
         self.clipsToBounds = true
-
-        // 버튼 클릭시 메서드 연결
-        detailsButton.addTarget(self, action: #selector(test), for: .touchUpInside)
 
         stackView.snp.makeConstraints {
             $0.width.height.leading.trailing.equalToSuperview()
@@ -152,15 +157,18 @@ class MenuItemButtonCell : UICollectionViewCell {
     // MARK: - 셀 별로 세부 설정
 
     func configure(_ menuItem: MenuItem) {
+
         nameLabel.text = menuItem.name
         priceLabel.text = "\(menuItem.price)원"
         imageView.image = UIImage(systemName: menuItem.symbolId)
     }
 
-    // MARK: - 버튼 클릭 시 실행
+    // MARK: - 메뉴 아이템 버튼 클릭 시 실행
 
     @objc
-    func test() {
-
+    func showDetailModal() {
+        delegate?.didSelectButton(self)
     }
+
+
 }
