@@ -33,9 +33,8 @@ class ThemeSelectView: UIView {
         radioGroup.titleFont = ThemeFonts.p
         radioGroup.axis = .vertical
         radioGroup.selectedIndex = 0
-        radioGroup.addTarget(self, action: #selector(buttonTapped), for: .valueChanged)
+        radioGroup.addTarget(ThemeSelectView.self, action: #selector(buttonTapped), for: .valueChanged)
         
-//        radioGroup.
         
         return radioGroup
     }()
