@@ -63,7 +63,7 @@ class MenuItemButtonCell : UICollectionViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = ThemeFonts.p
-        label.textColor = ThemeColors.black
+        label.textColor = ThemeColors.label
 
         return label
     }()
@@ -91,6 +91,11 @@ class MenuItemButtonCell : UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.layer.borderColor = ThemeColors.label.cgColor
+    }
+
     private func setupUI() {
         self.contentView.addSubview(stackView)
 
@@ -106,9 +111,9 @@ class MenuItemButtonCell : UICollectionViewCell {
             itemInformationView.addSubview($0)
         }
 
-        self.backgroundColor = ThemeColors.white
+        self.backgroundColor = ThemeColors.bg
         self.layer.borderWidth = 1.5
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = ThemeColors.grey4.cgColor
         self.layer.cornerRadius = 30
         self.clipsToBounds = true
 
