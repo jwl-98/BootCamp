@@ -107,6 +107,8 @@ class CartView: UIView {
             modalVC.onRemoveCartItem = { index in
                 onRemoveCartItem(index) }
         }
+        
+        modalVC.configureButtonAction()
  
         modalVC.modalPresentationStyle = .overFullScreen
         

@@ -25,6 +25,8 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var onItemQuantityChanged: ((Int, Int) -> Void)?
     var onRemoveCartItem: ((Int) -> Void)?
+    var onOrderCompleted: (() -> Void)?
+    var onCartClear: (() -> Void)?
     
     //MARK: - 컴포넌트 생성
     
@@ -247,9 +249,22 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return cartItemButtonCell
     }
-    
-    
 }
+
+//MARK: - 버튼 액션
+extension CartModalViewController {
+    func configureButtonAction() {
+        orderButtonsView.onCancelOrder = { [weak self] in
+            self?.onCartClear
+        }
+        
+        orderButtonsView.onCompleteOrder = { [weak self] in
+            self?.onOrderCompleted
+        }
+    }
+}
+
+
 
 //MARK: - 바인딩 메서드
 extension CartModalViewController {
