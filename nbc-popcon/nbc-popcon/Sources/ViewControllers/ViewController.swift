@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         view.addSubview(headerView)
         view.addSubview(menuView)
         view.addSubview(cartView)
-        
+       
         // SnapKit을 사용해 제약조건 설정
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         menuView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(ThemeNumbers.padding)
-            make.height.equalTo(view.frame.height * 0.4)
+            make.bottom.equalTo(cartView.snp.top)
         }
         
         cartView.snp.makeConstraints { make in
@@ -105,23 +105,22 @@ class ViewController: UIViewController {
 //        }
         
         // **CartView 요약 정보 업데이트**
-        kiosk.onSummaryUpdated = { [weak self] summary in
-            let totalInfo = summary.split(separator: "|")
-            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
-            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
-        }
+//        kiosk.onSummaryUpdated = { [weak self] summary in
+//            let totalInfo = summary.split(separator: "|")
+//            self?.cartView.countTotalItemLabel.text = String(totalInfo[0]).trimmingCharacters(in: .whitespaces)
+//            self?.cartView.totalItemPriceLabel.text = String(totalInfo[1]).trimmingCharacters(in: .whitespaces)
+//        }
         
         // **CartView의 버튼 액션 연결**
-        cartView.orderButtonsView.onCompleteOrder = { [weak self] in
-            guard let message = self?.kiosk.completeOrder() else { return }
-            self?.showAlert(title: "주문 완료", message: message)
-        }
-        
-        cartView.orderButtonsView.onCancelOrder = { [weak self] in
-            self?.kiosk.clearCart()
-        }
+//        cartView.orderButtonsView.onCompleteOrder = { [weak self] in
+//            guard let message = self?.kiosk.completeOrder() else { return }
+//            self?.showAlert(title: "주문 완료", message: message)
+//        }
+//        
+//        cartView.orderButtonsView.onCancelOrder = { [weak self] in
+//            self?.kiosk.clearCart()
+//        }
     }
-    
     // MARK: - Helpers
     
     /// 사용자에게 알림을 표시하는 메서드

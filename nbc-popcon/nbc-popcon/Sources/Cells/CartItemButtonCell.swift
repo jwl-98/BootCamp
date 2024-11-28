@@ -9,7 +9,18 @@ import UIKit
 import SnapKit
 
 class CartItemButtonCell: UITableViewCell {
-    var itemQuantity = 0.0
+    
+    /* cartItemImageView     -> 배열에 담긴 아이템의 이미지 String
+     cartItemLabel           -> 배열에 담긴 아이템의 이름 String
+     cartItemPriceLabel      -> 배열에 담긴 아이템의 단가 Int
+     cartItemQuantityLabel   -> stepper로 변경되는 itemQuantity
+     cartItemTotalPriceLabel -> itemQuantity * cartItemPriceLabel
+     totalDeleteButton       -> 해당 아이템 배열에서 삭제
+     stepper                 -> itemQuantity 값 증감
+     */
+    
+    private let kiosk = Kiosk()
+    private var itemQuantity = 1.0
     
     // 상품 imageView
     private let cartItemImageView: UIImageView = {
@@ -26,7 +37,7 @@ class CartItemButtonCell: UITableViewCell {
         label.text = "symbol name"
         label.font = ThemeFonts.h3
         label.textColor = ThemeColors.black
-        label.textAlignment = .left
+        label.textAlignment = .center
         return label
     }()
     
@@ -36,7 +47,7 @@ class CartItemButtonCell: UITableViewCell {
         label.text = "10,000 원"
         label.font = ThemeFonts.h3
         label.textColor = ThemeColors.blue
-        label.textAlignment = .left
+        label.textAlignment = .center
         return label
     }()
     
@@ -53,7 +64,7 @@ class CartItemButtonCell: UITableViewCell {
     // stapper
     lazy var stepper: UIStepper = {
         let stepper = UIStepper()
-        stepper.value = Double(itemQuantity)
+        stepper.value = itemQuantity
         stepper.stepValue = 1.0
         stepper.minimumValue = 0.0
         stepper.maximumValue = 50.0
@@ -119,6 +130,7 @@ class CartItemButtonCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTableViewCellLayout()
+        actionMethod()
     }
     
     required init?(coder: NSCoder) {
@@ -218,6 +230,30 @@ class CartItemButtonCell: UITableViewCell {
     }
 }
 
-#Preview {
-    JeffTestViewController()
+extension CartItemButtonCell {
+    
+    private func actionMethod() {
+        stepperAction()
+    }
+    
+    // stepper 버튼 액션
+    private func stepperAction() {
+        self.stepper.addTarget(self, action: #selector(pressedStepper), for: .valueChanged)
+    }
+    @objc func pressedStepper(_ sender: UIStepper) {
+        let newValue = sender.value
+        if newValue > itemQuantity {
+            itemQuantity = newValue
+            self.cartItemQuantityLabel.text = "x \(Int(self.itemQuantity))"
+        } else if newValue < itemQuantity {
+            itemQuantity = newValue
+            self.cartItemQuantityLabel.text = "x \(Int(self.itemQuantity))"
+        }
+    }
 }
+
+
+
+//#Preview {
+//    JeffTestViewController()
+//}
