@@ -40,7 +40,8 @@ class HeaderView: UIView {
         return callButton
     }()
     
-    @objc private let themeButton: UIButton = {
+    // 테마 버튼
+    private let themeButton: UIButton = {
         let themeButton = UIButton()
         let gearImage = UIImage(systemName: "gear")
         themeButton.setImage(gearImage, for: .normal)
@@ -49,12 +50,9 @@ class HeaderView: UIView {
         return themeButton
     }()
     
-    
     // 직원 호출 알럿 액션 - ViewController.setupBindings()를 통해 할당
     var onCallStaff: (() -> (Void))? = nil
-    
-    var onThemeToggle: (() -> Void)? = nil
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -83,6 +81,16 @@ extension HeaderView {
         self.backgroundColor = ThemeColors.red
     }
     
+    // 초록바 뷰
+    private func setUpGreenBarView() {
+        self.addSubview(greenBarView)
+        
+        greenBarView.snp.makeConstraints { view in
+            view.leading.trailing.bottom.equalToSuperview()
+            view.height.equalTo(14)
+        }
+    }
+    
     // 서비스 명 라벨
     private func setUpTitleLabel() {
         self.addSubview(titleLabel)
@@ -90,15 +98,6 @@ extension HeaderView {
         titleLabel.snp.makeConstraints { label in
             label.centerX.equalToSuperview()
             label.bottom.equalTo(greenBarView).inset(ThemeNumbers.padding)
-        }
-    }
-    
-    private func setUpGreenBarView() {
-        self.addSubview(greenBarView)
-        
-        greenBarView.snp.makeConstraints { view in
-            view.leading.trailing.bottom.equalToSuperview()
-            view.height.equalTo(14)
         }
     }
     
@@ -117,6 +116,7 @@ extension HeaderView {
         }
     }
     
+    // 테마 버튼
     private func setUpThemeButton() {
         self.addSubview(themeButton)
         

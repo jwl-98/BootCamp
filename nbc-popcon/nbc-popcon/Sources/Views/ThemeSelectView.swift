@@ -11,6 +11,7 @@ import ALRadioButtons
 
 class ThemeSelectView: UIView {
     
+    
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "테마 선택"
@@ -21,6 +22,7 @@ class ThemeSelectView: UIView {
         return titleLabel
     }()
     
+    // 테마 선택 라디오 버튼 그룹
     private let radioButtons: ALRadioGroup = {
         let items: [ALRadioItem] = ThemeMode
             .allCases
@@ -32,7 +34,7 @@ class ThemeSelectView: UIView {
         radioGroup.titleFont = ThemeFonts.p
         radioGroup.axis = .vertical
         radioGroup.selectedIndex = 0
-        radioGroup.addTarget(nil, action: #selector(buttonTapped), for: .valueChanged)
+        radioGroup.addTarget(nil, action: #selector(radioValueChanged), for: .valueChanged)
         radioGroup.buttonBackgroundColor = .clear
         
         return radioGroup
@@ -47,14 +49,25 @@ class ThemeSelectView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+
+//MARK: - 라디오 버튼 액션
+
+extension ThemeSelectView {
     
-    @objc private func buttonTapped(_ sender: ALRadioGroup) {
+    @objc private func radioValueChanged(_ sender: ALRadioGroup) {
         let index = sender.selectedIndex
         let themeMode = ThemeMode.allCases[index]
         
         ThemeMode.onThemeChoice?(themeMode)
     }
-    
+}
+
+//MARK: - UI 설정
+
+extension ThemeSelectView {
+
     private func setUpUI() {
         [titleLabel, radioButtons].forEach {
             addSubview($0)
@@ -68,20 +81,6 @@ class ThemeSelectView: UIView {
         
         radioButtons.snp.makeConstraints { buttons in
             buttons.top.equalTo(titleLabel).inset(ThemeNumbers.padding * 3)
-        }
-    }
-    
-}
-
-
-class TestViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let view = ThemeSelectView()
-        self.view.addSubview(view)
-        view.snp.makeConstraints {
-            $0.bottom.trailing.leading.top.equalToSuperview().inset(ThemeNumbers.padding)
         }
     }
 }
