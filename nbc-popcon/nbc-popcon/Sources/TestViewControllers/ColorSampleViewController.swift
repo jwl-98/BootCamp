@@ -62,7 +62,7 @@ class ColorSampleViewController: PopconViewController {
             viewOpaque,
             viewLink,
             viewFill
-        ].map { view.addSubview($0) }
+        ].forEach { view.addSubview($0) }
         
         viewLabel.snp.makeConstraints { make in
             make.leading.trailing.equalTo(view)
