@@ -9,9 +9,17 @@ import UIKit
 
 struct ThemeColors {
     // 기본적용 색상값
-    static let black: UIColor = UIColor.systemBackground
-    static let white: UIColor = UIColor.label
+    
+    // 라이트에서 화이트, 다크에서 블랙
+    static let label: UIColor = UIColor.systemBackground
+    // 라이트에서 블랙, 다크에서 화이트
+    static let bg: UIColor = UIColor.label
+    // 라이트에서 밝은 회색, 다크에서 어두운 회색
     static let fill: UIColor = UIColor.systemFill
+    
+    // 아래 화이트와 블랙은 고정값.
+    static let white: UIColor = UIColor.white
+    static let black: UIColor = UIColor.black
 
     static let grey1: UIColor = UIColor.systemGray
     static let grey2: UIColor = UIColor.systemGray2
