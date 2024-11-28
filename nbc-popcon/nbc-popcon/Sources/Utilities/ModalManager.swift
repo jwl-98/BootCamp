@@ -17,15 +17,15 @@ struct ModalManager {
         }
         
         let modalVC = GlobalModalViewController(target: content)
-        modalVC.view.backgroundColor = ThemeColors.white
-        modalVC.modalPresentationStyle = .fullScreen
+        modalVC.modalPresentationStyle = .overFullScreen
+        modalVC.modalTransitionStyle = .crossDissolve
         
         // 구버젼 호환성을 위해 xcode에서 아래 코드 삽입을 추천.
         if #available(iOS 13.0, *) {
             modalVC.isModalInPresentation = true
         }
         
-        topVC.present(modalVC, animated: false, completion: nil)
+        topVC.present(modalVC, animated: true, completion: nil)
         
         return modalVC
     }

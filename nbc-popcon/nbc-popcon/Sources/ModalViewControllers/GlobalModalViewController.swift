@@ -89,7 +89,7 @@ class GlobalModalViewController: UIViewController {
     }
     
     func closeModal() {
-        self.dismiss(animated: false)
+        self.dismiss(animated: true)
     }
     
     @objc func tabCloseBtn() {
