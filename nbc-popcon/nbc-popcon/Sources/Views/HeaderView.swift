@@ -153,7 +153,7 @@ extension HeaderView {
     // 테마 선택 버튼 설정
     @objc private func themeButtonTapped() {
         let themeSelectView = ThemeSelectView()
-        ModalManager.createGlobalModal(themeSelectView)
+        let _ = ModalManager.createGlobalModal(themeSelectView)
     }
 }
 

@@ -9,13 +9,24 @@ import UIKit
 import SnapKit
 
 //기존 cartView
+/*
+ 1. cell이 입력을 키오스크에 전달하기 위한 클로저를 dequeue시에 할당한다.
+ 2. 
+ */
 class CartModalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
-    let kiosk = Kiosk()
+//    let kiosk = Kiosk()
     let orderButtonsView = ButtonsView()
-    var totalPrice: Int = 40000
-    var totalCount: Int = 7
+    var totalPrice: Int = 0
+    var totalCount: Int = 0
+    
+    private var cartItems: [CartItem] = []
+    
+    var onItemQuantityChanged: ((Int, Int) -> Void)?
+    var onRemoveCartItem: ((Int) -> Void)?
+    var onOrderCompleted: (() -> Void)?
+    var onCartClear: (() -> Void)?
     
     //MARK: - 컴포넌트 생성
     
@@ -27,7 +38,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         view.layer.cornerRadius = 20
         return view
     }()
-
+    
     // 닫기 Button
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -42,7 +53,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         let view = UIView()
         return view
     }()
-  
+    
     // 장바구니 목록을 보여주는 TableView
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -100,19 +111,21 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         setupViewLayout()
         configureTableView()
         addMethod()
+        loadDummyData()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupViewLayout()
         configureTableView()
         addMethod()
+        loadDummyData()
     }
     
     //MARK: - 레이아웃
     
     private func setupViewLayout() {
-      
+        
         closeButtonView.addSubview(closeButton)
         summaryView.addSubview(countTotalItemLabel)
         summaryView.addSubview(totalItemPriceLabel)
@@ -208,8 +221,8 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //let cartItems = kiosk.getCartItems()
-        return 1
+        
+        return cartItems.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -217,14 +230,123 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
+        guard let cartItemButtonCell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
         
         //let cartItems = kiosk.getCartItems() // Kiosk에서 cartItems 가져오기
         //let item = cartItems[indexPath.row]  // 현재 행의 아이템 가져오기
-        //cell.configure(with: item)          // 데이터 전달
         
-        cell.selectionStyle = .none // 셀 선택 색상 제거
-        return cell
+        
+        /*
+         cell.configure(with: item)          // 데이터 전달
+         let index = indexPath.row
+         
+                 cartItemButtonCell.configure(cartItems[index])
+         cartItemButtonCell.selectionStyle = .none // 셀 선택 색상 제거
+         
+         if let onItemQuantityChanged = self.onItemQuantityChanged {
+         cartItemButtonCell.onItemQuantityChanged = { quantity in
+         onItemQuantityChanged(index, quantity) }
+         }
+         
+         if let onRemoveCartItem = self.onRemoveCartItem {
+         cartItemButtonCell.onRemoveCartItem = {
+         onRemoveCartItem(index) }
+         }
+         */
+        let index = indexPath.row
+        
+        
+        if let onItemQuantityChanged = self.onItemQuantityChanged {
+        cartItemButtonCell.onItemQuantityChanged = { quantity in
+        onItemQuantityChanged(index, quantity) }
+        }
+        
+        if let onRemoveCartItem = self.onRemoveCartItem {
+        cartItemButtonCell.onRemoveCartItem = {
+        onRemoveCartItem(index) }
+        }
+        
+        var item = cartItems[indexPath.row]
+        cartItemButtonCell.configureData(item)
+        
+        cartItemButtonCell.onItemQuantityChanged = { [weak self] newQuantity in
+            guard let self = self else { return }
+            item.quantity = newQuantity
+            
+            self.cartItems[indexPath.row] = item
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+        return cartItemButtonCell
+    }
+}
+
+//MARK: - 버튼 액션
+extension CartModalViewController {
+    func configureButtonAction() {
+        if let onCartClear = self.onCartClear {
+            orderButtonsView.onCancelOrder = {
+                self.closeModal()
+                onCartClear()
+            }
+        }
+        if let onOrderCompleted = self.onOrderCompleted {
+            orderButtonsView.onCompleteOrder = {
+                self.closeModal()
+                onOrderCompleted()
+            }
+        }
+        
+        orderButtonsView.setAction()
+    }
+}
+
+
+
+//MARK: - 바인딩 메서드
+extension CartModalViewController {
+    
+    func updateCart(_ items: [CartItem]) {
+        self.cartItems = items
+        self.tableView.reloadData()
     }
     
+    func updateSummary(totalCount: Int, totalPrice: Int) {
+        self.totalCount = totalCount
+        self.totalPrice = totalPrice
+        //UI업데이트 메서드 필요
+    }
+    
+    
+    private func loadDummyData() {
+        let dummyMenuItem1 = MenuItem(
+            name: "Popcorn",
+            price: 5000,
+            symbolId: "wifi",
+            description: "Delicious popcorn",
+            categoryName: "Snacks"
+        )
+        let dummyMenuItem2 = MenuItem(
+            name: "Soda",
+            price: 2000,
+            symbolId: "cup.and.saucer.fill",
+            description: "Refreshing soda",
+            categoryName: "Drinks"
+        )
+        let dummyMenuItem3 = MenuItem(
+            name: "241",
+            price: 2000,
+            symbolId: "cup.and.saucer.fill",
+            description: "Refreshing soda",
+            categoryName: "Drinks"
+        )
+        let dummyCartItem1 = CartItem(menuitem: dummyMenuItem1, quantity: 4)
+        let dummyCartItem2 = CartItem(menuitem: dummyMenuItem2, quantity: 3)
+        let dummyCartItem3 = CartItem(menuitem: dummyMenuItem3, quantity: 1)
+
+        // 더미 데이터를 cartItems 배열에 추가
+        cartItems = [dummyCartItem1, dummyCartItem2, dummyCartItem3]
+
+        // 테이블 뷰 갱신
+        tableView.reloadData()
+    }
 }

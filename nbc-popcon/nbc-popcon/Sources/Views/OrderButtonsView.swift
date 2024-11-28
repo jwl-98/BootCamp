@@ -19,8 +19,7 @@ class ButtonsView: UIView {
         addSubview(buttonStackView)
         
         setStackViewAutoLayOut()
-        completeButtonAction()
-        cancelButtonAction()
+
     }
     
     required init?(coder: NSCoder) {
@@ -82,19 +81,23 @@ class ButtonsView: UIView {
 
 extension ButtonsView {
     
-    private func completeButtonAction() {
-        self.purchaseButton.addTarget(
-            self,
-            action: #selector(completeButtonTapped(_:)),
-            for: .touchUpInside
-        )
+    func setAction() {
+        completeButtonAction()
+        cancelButtonAction()
+    }
+    
+     private func completeButtonAction() {
+         self.purchaseButton.addTarget(self,
+                                       action: #selector(completeButtonTapped(_:)),
+                                       for: .touchUpInside
+         )
     }
     
     @objc  func completeButtonTapped(_ sender: UIButton) {
         
         //버튼효과
         sender.alpha = 0.5
-        print(#function)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             sender.alpha = 1.0
         }

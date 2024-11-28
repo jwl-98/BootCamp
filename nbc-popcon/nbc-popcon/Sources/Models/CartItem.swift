@@ -8,7 +8,20 @@
 import Foundation
 
 struct CartItem {
-    let name: String
-    let price: Int
+    
+    let menuitem: MenuItem
+    
     var quantity: Int
+    
+    var totalPrice: Int {
+        self.menuitem.price * quantity
+    }
+    
+    mutating func add() {
+        self.quantity += 1
+    }
+    
+    mutating func update(_ quantity: Int) {
+        self.quantity = quantity
+    }
 }

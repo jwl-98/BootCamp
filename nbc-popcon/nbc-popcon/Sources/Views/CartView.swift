@@ -9,9 +9,16 @@ import UIKit
 import SnapKit
 
 class CartView: UIView {
-    var totalPrice: Int = 40000
-    var totalCount: Int = 7
+    var totalPrice: Int = 0
+    var totalCount: Int = 0
     
+    var onItemQuantityChanged: ((Int, Int) -> Void)?
+    var onRemoveCartItem: ((Int) -> Void)?
+    var onCompleteOrder: (() -> Void)?
+    var onClearCartItem: (() -> Void)?
+
+    lazy var modalVC = CartModalViewController()
+
     //  장바구니 요약 View (장바구니 갯수 + 합계금액)
     private let footerView: UIView = {
         let view = UIView()
@@ -91,8 +98,26 @@ class CartView: UIView {
         guard let topVC = AppHelpers.getTopViewController() else {
             return
         }
+                
+        if let onItemQuantityChanged = self.onItemQuantityChanged {
+            modalVC.onItemQuantityChanged = { (index, quantity) in onItemQuantityChanged(index, quantity) }
+        }
         
-        let modalVC = CartModalViewController()
+        if let onRemoveCartItem = self.onRemoveCartItem {
+            modalVC.onRemoveCartItem = { index in
+                onRemoveCartItem(index) }
+        }
+        
+        if let onClearCartItem = self.onClearCartItem {
+            modalVC.onCartClear = onClearCartItem
+        }
+        
+        if let onCompleteOrder = self.onCompleteOrder {
+            modalVC.onOrderCompleted = onCompleteOrder
+        }
+        
+        modalVC.configureButtonAction()
+ 
         modalVC.modalPresentationStyle = .overFullScreen
         
         if #available(iOS 13.0, *) {
@@ -101,6 +126,16 @@ class CartView: UIView {
         
         topVC.present(modalVC, animated: true, completion: nil)
     }
+}
+
+
+//MARK: - UpdateCartView ( binding )
+extension CartView {
+    func updateCartItems(_ items: [CartItem]) {
+        modalVC.updateCart(items)
+    }
     
-    
+    func updateSummary(totalCount: Int, totalPrice: Int) {
+        modalVC.updateSummary(totalCount: totalCount, totalPrice: totalPrice)
+    }
 }

@@ -12,8 +12,11 @@ class CartItemButtonCell: UITableViewCell {
     
     private let kiosk = Kiosk()
     private var itemQuantity = 1.0
-    var onItemQuantityChanged: ((_ newQuantity: Int) -> Void)?
     
+    private var cartItem: CartItem?
+    
+    var onItemQuantityChanged: ((_ newQuantity: Int) -> Void)?
+    var onRemoveCartItem: (() -> Void)?
     
     // 상품 imageView
     private let cartItemImageView: UIImageView = {
@@ -22,6 +25,9 @@ class CartItemButtonCell: UITableViewCell {
         imageView.image = UIImage(systemName: "trash")?.withRenderingMode(.alwaysOriginal)
         imageView.contentMode = .scaleAspectFill
 
+        imageView.tintColor = ThemeColors.black
+        //imageView.backgroundColor = .gray
+        
         return imageView
     }()
     
@@ -136,12 +142,14 @@ class CartItemButtonCell: UITableViewCell {
         return view
     }()
     
+    
     //MARK: - setting
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTableViewCellLayout()
         actionMethod()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -244,22 +252,39 @@ extension CartItemButtonCell {
     
     private func actionMethod() {
         stepperAction()
+        totalDeleteButtonAction()
     }
     
     // stepper 버튼 액션
     private func stepperAction() {
         self.stepper.addTarget(self, action: #selector(pressedStepper), for: .valueChanged)
     }
-    @objc func pressedStepper(_ sender: UIStepper) {
-        let newValue = sender.value
+    
+    @objc private func pressedStepper(_ sender: UIStepper) {
+        let newValue = Int(sender.value)
+        //키오스크에 수정된 값을 전달
+        onItemQuantityChanged?(newValue)
+//        self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
+    }
+    
+    private func totalDeleteButtonAction() {
+        self.totalDeleteButton.addTarget(self, action: #selector(pressdTotalDeleteButton), for: .touchUpInside)
+    }
+    
+    @objc private func pressdTotalDeleteButton(_ sender: UIButton) {
+        onRemoveCartItem?()
+    }
+    
+    // 테이블뷰 셀의 데이터를 추가
+    func configureData(_ cartItem: CartItem) {
+        self.cartItem = cartItem
         
-        if newValue > itemQuantity {
-            itemQuantity = newValue
-            self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
-        } else if newValue < itemQuantity {
-            itemQuantity = newValue
-            self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
-        }
+        cartItemLabel.text = cartItem.menuitem.name
+        cartItemImageView.image = UIImage(systemName: cartItem.menuitem.symbolId)
+        cartItemPriceLabel.text = "\(cartItem.menuitem.price) 원"
+        cartItemQuantityLabel.text = "주문수량 : \(cartItem.quantity) 개"
+        cartItemTotalPriceLabel.text = "= \(cartItem.totalPrice) 원"
+        stepper.value = Double(cartItem.quantity)
     }
 }
 
@@ -268,3 +293,15 @@ extension CartItemButtonCell {
 //#Preview {
 //    ViewController()
 //}
+
+/*
+ itemQuantity = Double(newValue)
+ self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
+ func configureCell(item: CartItem) {
+     cartItemImageView.image = UIImage(systemName: "\(item.name)")
+     cartItemLabel.text = "\(item.name)"
+     cartItemPriceLabel.text = "\(item.price)"
+     cartItemQuantityLabel.text = "주문수량 : \(Int(item.quantity)) 개"
+     //cartItemTotalPriceLabel.text = "= \() 원"
+ }
+ */

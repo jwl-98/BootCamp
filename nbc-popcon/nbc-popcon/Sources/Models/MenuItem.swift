@@ -6,7 +6,7 @@
     //
 import Foundation
 
-struct MenuItem {
+struct MenuItem: Equatable {
     let name: String            // 사용자에게 노출되는 심볼의 이름
     let price: Int              // 가격
     let symbolId: String        // 실제 심볼을 사용하기 위한 심볼 고유 아이디값

@@ -107,8 +107,7 @@ class MenuView: UIView {
         collectionView.delegate = self
         
         collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.width.bottom.equalToSuperview()
+            $0.top.width.bottom.equalToSuperview()
         }
     }
 }
