@@ -8,7 +8,77 @@
 import UIKit
 import SnapKit
 
-class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
+class CartView: UIView {
+    var totalPrice: Int = 40000
+    var totalCount: Int = 7
+    
+    //  장바구니 요약 View (장바구니 갯수 + 합계금액)
+    private let footerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.red
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // 부분만 cornerRadius
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    // 장바구니 갯수 Label
+    lazy var countTotalItemLabel: UILabel = {
+        let label = UILabel()
+        label.text = "장바구니 : \(totalCount) 개"
+        label.textColor = ThemeColors.white
+        label.font = ThemeFonts.h3
+        label.textAlignment = .left
+        return label
+    }()
+    
+    // 합계금액 Label
+    lazy var totalItemPriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "합계금액 : \(totalPrice) 원"
+        label.textColor = ThemeColors.white
+        label.font = ThemeFonts.h3bold
+        label.textAlignment = .right
+        return label
+    }()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViewLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func setupViewLayout() {
+        
+        addSubview(footerView)
+        footerView.addSubview(countTotalItemLabel)
+        footerView.addSubview(totalItemPriceLabel)
+        
+        footerView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(100)
+            $0.bottom.equalToSuperview()
+        }
+        //  장바구니 갯수 Label Layout
+        countTotalItemLabel.snp.makeConstraints {
+            $0.leading.equalTo(footerView.snp.leading).inset(ThemeNumbers.paddingSmall)
+            $0.top.equalTo(footerView.snp.top).inset(10)
+            $0.height.equalTo(50)
+        }
+        
+        //  합계 금액 Label Layout
+        totalItemPriceLabel.snp.makeConstraints {
+            $0.trailing.equalTo(footerView.snp.trailing).inset(ThemeNumbers.paddingSmall)
+            $0.top.equalTo(footerView.snp.top).inset(10)
+            $0.height.equalTo(50)
+        }
+    }
+}
+/*
+ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
     
@@ -228,10 +298,6 @@ class CartView: UIView, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-//    func setupDismissAction() {
-//        closeButton.addTarget(self, action: #selector(hideBottomSheetAction), for: .touchUpInside)
-//        
-//    }
-    
 }
 
+*/
