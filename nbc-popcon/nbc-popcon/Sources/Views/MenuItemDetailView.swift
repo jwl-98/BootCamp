@@ -8,7 +8,6 @@
 import UIKit
 
 import SnapKit
-// 기능 소개 1분 - 1분 30초
 class MenuItemDetailView: UIView {
     var symbolImage: UIImageView = {
         let image = UIImageView()
