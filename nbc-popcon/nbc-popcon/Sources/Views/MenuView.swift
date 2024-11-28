@@ -29,9 +29,17 @@ class MenuView: UIView {
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
 
-        segmentedControl.setTitleTextAttributes([.font: ThemeFonts.p], for: .normal)
+        segmentedControl.setTitleTextAttributes([.font: ThemeFonts.small], for: .normal)
+        
+        segmentedControl.backgroundColor = ThemeColors.bg
 
         return segmentedControl
+    }()
+    
+    private let segmentedControlBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColors.bg.withAlphaComponent(0.8)
+        return view
     }()
     
     // 카테고리에 맞는 아이템을 보여주는 CollectionView
@@ -43,12 +51,15 @@ class MenuView: UIView {
         layout.itemSize.height = itemSize
         layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing
         layout.minimumLineSpacing = ThemeNumbers.itemSpacing
+        layout.headerReferenceSize = CGSize(width: 0, height: 95)
         layout.footerReferenceSize = CGSize(width: 0, height: 80)
+        
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
         collectionView.backgroundColor = ThemeColors.bg
         collectionView.showsVerticalScrollIndicator = false
+        
         
         return collectionView
     }()
@@ -58,8 +69,8 @@ class MenuView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        [segmentedControl, collectionView].forEach {
+                
+        [collectionView, segmentedControlBackgroundView, segmentedControl].forEach {
             self.addSubview($0)
         }
         
@@ -74,8 +85,14 @@ class MenuView: UIView {
     // MARK: - SegmentedControl 레이아웃 설정
     private func configureSegmentedControl() {
         
+        segmentedControlBackgroundView.snp.makeConstraints { view in
+            view.top.equalToSuperview()
+            view.height.equalTo(62 + ThemeNumbers.paddingBig)
+            view.leading.trailing.equalToSuperview()
+        }
+        
         segmentedControl.snp.makeConstraints { view in
-            view.top.equalToSuperview().inset(ThemeNumbers.itemSpacing)
+            view.top.equalToSuperview().inset(ThemeNumbers.paddingBig)
             view.leading.trailing.equalToSuperview()
             view.height.equalTo(32)
         }
@@ -90,7 +107,7 @@ class MenuView: UIView {
         collectionView.delegate = self
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(segmentedControl.snp.bottom).offset(ThemeNumbers.itemSpacing)
+            $0.top.equalToSuperview()
             $0.width.bottom.equalToSuperview()
         }
     }
