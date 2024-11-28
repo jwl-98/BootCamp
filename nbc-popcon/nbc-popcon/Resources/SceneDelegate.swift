@@ -23,10 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         
         if let viewController = window.rootViewController as? ViewController {
-            viewController.setThemeToggle(self.toggleTheme)
-            print(1)
+            viewController.setThemeToggle(self.switchTheme)
         }
-        
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -57,18 +56,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-    func toggleTheme() {
+    private func switchTheme() {
         guard let window = self.window else {
             return }
         switch window.overrideUserInterfaceStyle {
         case .dark:
             window.overrideUserInterfaceStyle = .light
-            print("dark")
             return
         default:
             window.overrideUserInterfaceStyle = .dark
-            print("light")
         }
+        
         
     }
 }

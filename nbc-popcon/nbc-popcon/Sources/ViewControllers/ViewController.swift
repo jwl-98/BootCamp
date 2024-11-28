@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func setThemeToggle(_ closer: @escaping () -> Void) {
+    func setThemeToggle(_ closer: (() -> Void)?) {
         headerView.onThemeToggle = { [weak self] in
             self?.headerView.onThemeToggle = closer
         }
