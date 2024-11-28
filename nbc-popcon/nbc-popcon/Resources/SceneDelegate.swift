@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
-        
+               
         if let viewController = window.rootViewController as? ViewController {
             viewController.setThemeToggle(self.switchTheme)
         }
