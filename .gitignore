@@ -10,7 +10,6 @@
 xcuserdata/
 xcuserdata/**/*
 project.xcworkspace/
-test-vcs/*
 
 
 .DS_Store

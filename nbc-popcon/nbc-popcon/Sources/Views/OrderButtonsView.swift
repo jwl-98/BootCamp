@@ -24,6 +24,7 @@ class ButtonsView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+
     }
     
     lazy var cancelButton: UIButton = {
@@ -88,10 +89,7 @@ extension ButtonsView {
     }
     
     private func cancelButtonAction() {
-        self.cancelButton.addTarget(self,
-                                    action: #selector(cancelButtonTapped(_:)),
-                                    for: .touchUpInside
-        )
+        self.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
     }
     
     @objc func cancelButtonTapped(_ sender: UIButton) {
@@ -103,3 +101,4 @@ extension ButtonsView {
         onCancelOrder?()
     }
 }
+

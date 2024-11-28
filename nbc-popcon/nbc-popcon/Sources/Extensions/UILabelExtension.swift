@@ -13,7 +13,7 @@ extension UILabel {
     /// 기본값을 설정하였으므로 아래 둘 중 하나를 선택하여 사용.
     /// - Parameters:
     ///   - lineSpacing: 각 줄 사이의 간격을 의미합니다.
-    ///   - lineHeightMultiple: 각 줄의 line height 값을 입력한 값만큼 곱하여 변경합니다. 글자의 위 아래 양 끝점이 늘어난다고 생각하면 됩니다.
+    ///   - lineHeightMultiple: 각 줄의 line height 값을 입력한 값만큼 곱하여 변경합니다. 글자의 위로 < 글자크기 x 입력숫자 >만큼 공간이 늘어난다고 생각하면 됩니다.
     func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
         guard let labelText = self.text else { return }
 
@@ -39,7 +39,6 @@ extension UILabel {
     /*
      위 메소드는 다음과 같은 형식으로 사용합니다.
      let label = UILabel()
-     let stringValue = "How to\ncontrol\nthe\nline spacing\nin UILabel"
 
      label.setLineSpacing(lineSpacing: 2.0)
      
