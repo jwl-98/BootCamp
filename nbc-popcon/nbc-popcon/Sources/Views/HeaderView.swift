@@ -29,9 +29,18 @@ class HeaderView: UIView {
         callButton.setImage(callImage, for: .normal)
         callButton.contentMode = .scaleAspectFit
         callButton.backgroundColor = .clear
-        callButton.tintColor = ThemeColors.white
+        callButton.tintColor = ThemeColors.label
         
         return callButton
+    }()
+    
+    private let themeButton: UIButton = {
+        let themeButton = UIButton()
+        let gearImage = UIImage(systemName: "gear")
+        themeButton.setImage(gearImage, for: .normal)
+        themeButton.tintColor = ThemeColors.label
+        
+        return themeButton
     }()
     
     
@@ -62,6 +71,7 @@ extension HeaderView {
     private func setUpUI() {
         setUpTitleLabel()
         setUpCallButton()
+        setUpThemeButton()
         
         self.backgroundColor = ThemeColors.red
     }
@@ -82,13 +92,28 @@ extension HeaderView {
         
         callButton.snp.makeConstraints { button in
             button.centerY.equalTo(titleLabel)
-            button.trailing.equalToSuperview().inset(ThemeManager.shared.numbers.padding)
+            button.leading.equalToSuperview().inset(ThemeNumbers.padding)
             button.height.width.equalTo(25)
         }
         
         callButton.imageView?.snp.makeConstraints { imageView in
             imageView.size.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    private func setUpThemeButton() {
+        self.addSubview(themeButton)
+        
+        themeButton.snp.makeConstraints { button in
+            button.centerY.equalTo(titleLabel)
+            button.trailing.equalToSuperview().inset(ThemeNumbers.padding)
+            button.height.width.equalTo(25)
+        }
+        
+        themeButton.imageView?.snp.makeConstraints { imageView in
+            imageView.size.centerX.centerY.equalToSuperview()
+        }
+
     }
 }
 
