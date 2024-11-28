@@ -16,8 +16,9 @@ struct ThemeManager {
 
     struct Colors {
         // 기본적용 색상값
-        let black: UIColor = UIColor.black
-        let white: UIColor = UIColor.white
+        let black: UIColor = UIColor.systemBackground
+        let white: UIColor = UIColor.label
+        let fill: UIColor = UIColor.systemFill
 
         let grey1: UIColor = UIColor.systemGray
         let grey2: UIColor = UIColor.systemGray2
@@ -26,14 +27,13 @@ struct ThemeManager {
         let grey5: UIColor = UIColor.systemGray5
         let grey6: UIColor = UIColor.systemGray6
 
-        let red: UIColor = UIColor.red
-        let blue: UIColor = UIColor.blue
-        let yellow: UIColor = UIColor.yellow
-        let green: UIColor = UIColor.green
-        let orange: UIColor = UIColor.orange
-        
-        let clear: UIColor = UIColor.clear
+        let red: UIColor = UIColor.systemRed
+        let blue: UIColor = UIColor.systemBlue
+        let yellow: UIColor = UIColor.systemYellow
+        let green: UIColor = UIColor.systemGreen
+        let orange: UIColor = UIColor.systemOrange
     
+        let clear: UIColor = UIColor.clear
     }
 
     struct Fonts {
@@ -56,6 +56,7 @@ struct ThemeManager {
     
     struct Numbers {
         let padding: CGFloat = 20
+        let paddingBig: CGFloat = 30
         let paddingSmall: CGFloat = 15
         let radius: CGFloat = 10
         let itemSpacing: CGFloat = 10

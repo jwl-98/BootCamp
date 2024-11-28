@@ -58,7 +58,7 @@ class SeongtoTestViewController: PopconViewController {
         
         label.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(300)
+            $0.top.equalToSuperview().offset(100)
         }
         
         button.snp.makeConstraints {
@@ -83,7 +83,33 @@ class SeongtoTestViewController: PopconViewController {
     }
     
     @objc func tapAction2() {
-        AppHelpers.showAlert(title: "hello", message: "world")
+//        guard let topVC = AppHelpers.getTopViewController() else {
+//            return
+//        }
+//        
+//        let newVC = UIViewController()
+//        newVC.modalPresentationStyle = .overFullScreen
+//        newVC.view.backgroundColor = ThemeColors.black.withAlphaComponent(0.5)
+//        newVC.modalTransitionStyle = .crossDissolve
+//        
+//        let miniLabel = UILabel()
+//        miniLabel.text = "Hello"
+//        miniLabel.backgroundColor = .red
+//        newVC.view.addSubview(miniLabel)
+//        
+//        miniLabel.snp.makeConstraints { make in
+//            make.center.equalToSuperview()
+//            make.width.equalTo(100)
+//            make.height.equalTo(100)
+//        }
+//        
+//        
+//        topVC.present(newVC, animated: true, completion: nil)
+//        
+//        
+        
+        
+        let modalView = ModalManager.createGlobalModal( MenuView() )
     }
 }
 
