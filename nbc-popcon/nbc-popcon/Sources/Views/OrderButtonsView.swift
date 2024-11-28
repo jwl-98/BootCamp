@@ -31,9 +31,10 @@ class ButtonsView: UIView {
         let button = UIButton()
         
         button.setTitle("취소하기", for: .normal)
-        button.titleLabel?.textColor = #colorLiteral(red: 0.505881846, green: 0.5058827996, blue: 0.527366817, alpha: 1)
+        button.setTitleColor(ThemeColors.grey1, for: .normal)
+        button.titleLabel?.font = ThemeFonts.bold
         button.layer.cornerRadius = 20
-        button.backgroundColor = themeManager.colors.clear
+        button.backgroundColor = ThemeColors.white
         button.frame.size.width = 70
 
         return button
@@ -43,9 +44,10 @@ class ButtonsView: UIView {
         let button = UIButton()
         
         button.setTitle("결제하기", for: .normal)
-        button.titleLabel?.font = themeManager.fonts.bold
+        button.titleLabel?.font = ThemeFonts.bold
+        button.setTitleColor(ThemeColors.white, for: .normal)
         button.layer.cornerRadius = 20
-        button.backgroundColor = #colorLiteral(red: 0.2066813409, green: 0.7795598507, blue: 0.3491449356, alpha: 1)
+        button.backgroundColor = ThemeColors.green
         button.frame.size.width = 70
 
         return button
@@ -64,6 +66,7 @@ class ButtonsView: UIView {
         buttonStackView.snp.makeConstraints {
             $0.leading.equalTo(self.snp.leading).inset(0)
             $0.trailing.equalTo(self.snp.trailing).inset(0)
+            $0.top.equalToSuperview().inset(30)
             $0.height.equalTo(50)
         }
     }
