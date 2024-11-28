@@ -18,10 +18,9 @@ class MenuView: UIView {
     
     // MARK: - 바인딩 메서드
     var onCategorySelected: ((String) -> Void)? = nil
-    
     // 메뉴 아이템 선택 액션 - ViewController.setupBindings()를 통해 할당
     var onMenuItemSelected:((MenuItem) -> Void)? = nil
-    
+
     private var items: [MenuItem] = []
     
     // MARK: - 컴포넌트 생성
@@ -45,11 +44,13 @@ class MenuView: UIView {
         layout.itemSize.height = itemSize
         layout.minimumInteritemSpacing = ThemeNumbers.itemSpacing
         layout.minimumLineSpacing = ThemeNumbers.itemSpacing
+        layout.footerReferenceSize = CGSize(width: 0, height: 80)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MenuItemButtonCell.self, forCellWithReuseIdentifier: "MenuItemButtonCell")
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
+        
         return collectionView
     }()
     
@@ -111,7 +112,7 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemButtonCell", for: indexPath) as? MenuItemButtonCell else { return UICollectionViewCell() }
         cell.configure(items[indexPath.item])
-        
+
         return cell
     }
     
@@ -121,8 +122,8 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         let menuItem = items[indexPath.item]
         onCollectionViewCellSelected(menuItem)
     }
+    
 }
-
 
 // MARK: - 바인딩 메서드
 
@@ -141,7 +142,8 @@ extension MenuView {
         self.items = items
         self.collectionView.reloadData()
     }
-    
+
+
 }
 
 // MARK: - SegmentedControl 액션 메서드

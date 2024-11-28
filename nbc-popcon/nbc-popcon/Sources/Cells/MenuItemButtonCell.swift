@@ -11,6 +11,8 @@ import SnapKit
 
 class MenuItemButtonCell : UICollectionViewCell {
 
+    var menuItem: MenuItem?
+
     // MARK: - 컴포넌트 생성
 
     // 셀의 아이템 요소를 저장할 stackView
@@ -27,7 +29,6 @@ class MenuItemButtonCell : UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.tintColor = .black
 
         return imageView
     }()
@@ -53,6 +54,7 @@ class MenuItemButtonCell : UICollectionViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: 30)
         let buttonImage = UIImage(systemName: "magnifyingglass.circle.fill", withConfiguration:  config)
         button.setImage(buttonImage, for: .normal)
+        button.addTarget(self, action: #selector(showDetailModal), for: .touchUpInside)
 
         return button
     }()
@@ -80,6 +82,7 @@ class MenuItemButtonCell : UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
 
         setupUI()
     }
@@ -149,10 +152,21 @@ class MenuItemButtonCell : UICollectionViewCell {
     // MARK: - 셀 별로 세부 설정
 
     func configure(_ menuItem: MenuItem) {
+        self.menuItem = menuItem
+
         nameLabel.text = menuItem.name
-        priceLabel.text = "\(menuItem.price)원"
-        imageView.image = UIImage(systemName: menuItem.symbolId)
-
-
+        priceLabel.text = PriceFormat.wonFormat(menuItem.price)
+        imageView.image = UIImage(systemName: menuItem.symbolId)?.withRenderingMode(.alwaysOriginal)
     }
+
+    // MARK: - 메뉴 아이템 버튼 클릭 시 실행
+
+    @objc
+    func showDetailModal() {
+        let menuItemDetailView = MenuItemDetailView()
+        ModalManager.createGlobalModal(menuItemDetailView)
+        menuItemDetailView.configure(item: menuItem!)
+    }
+
+
 }
