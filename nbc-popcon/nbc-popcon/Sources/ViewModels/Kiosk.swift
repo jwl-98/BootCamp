@@ -75,7 +75,7 @@ class Kiosk {
     
     /// 장바구니 아이템 수량 변경 - CartView에서 스탭퍼를 통해 사용
     func updateCartItemQuantity(at index: Int, quantity: Int) {
-        if quantity <= 0 {
+        if quantity <= 1 {
             cartItems.remove(at: index)
         } else {
             cartItems[index].update(quantity)

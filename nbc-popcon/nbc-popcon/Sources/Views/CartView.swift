@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 class CartView: UIView {
-    var totalPrice: Int = 40000
-    var totalCount: Int = 7
+    var totalPrice: Int = 0
+    var totalCount: Int = 0
     
     var onItemQuantityChanged: ((Int, Int) -> Void)?
     var onRemoveCartItem: ((Int) -> Void)?

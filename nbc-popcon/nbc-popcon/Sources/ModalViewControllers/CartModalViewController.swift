@@ -16,17 +16,12 @@ import SnapKit
 class CartModalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // totalCount -> 각 아이템의 갯수의 합
     // totalPrice -> (각 아이템의 갯수 * 단가) + 합
-    let kiosk = Kiosk()
+//    let kiosk = Kiosk()
     let orderButtonsView = ButtonsView()
     var totalPrice: Int = 0
     var totalCount: Int = 0
     
     private var cartItems: [CartItem] = []
-    
-    let kiosk = Kiosk()
-    let orderButtonsView = ButtonsView()
-    var totalPrice: Int = 0
-    var totalCount: Int = 0
     
     var onItemQuantityChanged: ((Int, Int) -> Void)?
     var onRemoveCartItem: ((Int) -> Void)?
@@ -239,10 +234,10 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         /*
-         //cell.configure(with: item)          // 데이터 전달
+         cell.configure(with: item)          // 데이터 전달
          let index = indexPath.row
          
-         //        cartItemButtonCell.configure(cartItems[index])
+                 cartItemButtonCell.configure(cartItems[index])
          cartItemButtonCell.selectionStyle = .none // 셀 선택 색상 제거
          
          if let onItemQuantityChanged = self.onItemQuantityChanged {
@@ -255,6 +250,18 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
          onRemoveCartItem(index) }
          }
          */
+        let index = indexPath.row
+        
+        
+        if let onItemQuantityChanged = self.onItemQuantityChanged {
+        cartItemButtonCell.onItemQuantityChanged = { quantity in
+        onItemQuantityChanged(index, quantity) }
+        }
+        
+        if let onRemoveCartItem = self.onRemoveCartItem {
+        cartItemButtonCell.onRemoveCartItem = {
+        onRemoveCartItem(index) }
+        }
         
         var item = cartItems[indexPath.row]
         cartItemButtonCell.configureData(item)
@@ -273,12 +280,12 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
 //MARK: - 버튼 액션
 extension CartModalViewController {
     func configureButtonAction() {
-        orderButtonsView.onCancelOrder = { [weak self] in
-            self?.onCartClear
+        if let onCartClear = self.onCartClear {
+            orderButtonsView.onCancelOrder = onCartClear
         }
         
-        orderButtonsView.onCompleteOrder = { [weak self] in
-            self?.onOrderCompleted
+        if let onOrderCompleted = self.onOrderCompleted {
+            orderButtonsView.onCompleteOrder = onOrderCompleted
         }
     }
 }

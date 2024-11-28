@@ -131,10 +131,6 @@ class CartItemButtonCell: UITableViewCell {
         return view
     }()
     
-    //dequeue시 데이터 입력
-    func configure(_ cartItem: CartItem) {
-        self.cartItem = cartItem
-    }
     
     //MARK: - setting
     
@@ -250,6 +246,7 @@ extension CartItemButtonCell {
     
     private func actionMethod() {
         stepperAction()
+        totalDeleteButtonAction()
     }
     
     // stepper 버튼 액션
