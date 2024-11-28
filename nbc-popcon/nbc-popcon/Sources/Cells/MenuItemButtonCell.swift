@@ -169,9 +169,7 @@ class MenuItemButtonCell : UICollectionViewCell {
 
     @objc
     func showDetailModal() {
-        let menuItemDeatilView = MenuItemDetailView()
         delegate?.didSelectButton(self, menuItem!)
-        menuItemDeatilView.configure(item: menuItem!)
     }
 
 

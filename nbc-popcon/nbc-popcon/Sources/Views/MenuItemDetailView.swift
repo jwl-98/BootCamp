@@ -12,7 +12,6 @@ import SnapKit
 class MenuItemDetailView: UIView {
     var symbolImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .yellow
 
         return image
     }()
@@ -109,14 +108,12 @@ class MenuItemDetailView: UIView {
 
     func configure(item: MenuItem) {
 
-        print(item)
-        symbolIdLabel.text = "a"
-
-        symbolNameLabel.text = "item.name"
-        symbolCategoryLabel.text = "\(item.category) \(item.symbolId)"
+        symbolImage.image = UIImage(systemName: item.symbolId)
+        symbolIdLabel.text = item.symbolId
+        symbolNameLabel.text = item.name
+        symbolCategoryLabel.text = "\(item.category)"
         symbolPriceLabel.text = "\(item.price)"
         symbolDescriptionLabel.text = item.description
-        print("왜 안돼")
     }
 
     private func setupUI() {

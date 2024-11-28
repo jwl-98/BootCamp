@@ -151,6 +151,7 @@ class ViewController: UIViewController {
         detailModalVC.modalTransitionStyle = .crossDissolve
         present(detailModalVC, animated: true)
 
+        detailModalVC.configure(menuItem: menuItem)
     }
 }
 

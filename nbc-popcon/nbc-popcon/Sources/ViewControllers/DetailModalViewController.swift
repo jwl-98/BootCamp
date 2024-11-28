@@ -27,6 +27,10 @@ class DetailModalViewController: UIViewController {
         }
     }
 
+    func configure(menuItem: MenuItem) {
+        menuItemDetailView.configure(item: menuItem)
+    }
+
 
     /*
     // MARK: - Navigation
