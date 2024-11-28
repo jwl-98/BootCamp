@@ -57,6 +57,9 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     // 장바구니 목록을 보여주는 TableView
     private let tableView: UITableView = {
         let tableView = UITableView()
+        
+        tableView.separatorStyle = .none
+        
         return tableView
     }()
     
