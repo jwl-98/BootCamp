@@ -48,7 +48,7 @@ struct MenuItem {
                 name: "비디오 통화",
                 price: 1800,
                 symbolId: "video.fill",
-                description: "비디오 카메라를 나타내는 아이콘으로, 영상 통화를 의미합니다.",
+                description: "비디오 카메라를 나타내는 아이콘입니다.",
                 categoryName: "통신"
             ),
             MenuItem(
@@ -126,7 +126,7 @@ struct MenuItem {
             MenuItem(
                 name: "배터리",
                 price: 2900,
-                symbolId: "battery.100",
+                symbolId: "battery.100percent.bolt",
                 description: "배터리의 충전 상태를 나타내는 아이콘입니다.",
                 categoryName: "사물 및 도구"
             ),
@@ -178,20 +178,20 @@ struct MenuItem {
                 name: "심전도",
                 price: 3600,
                 symbolId: "waveform.path.ecg",
-                description: "심전도 그래프를 나타내는 아이콘으로, 심장 박동을 의미합니다.",
+                description: "심전도 그래프를 나타내는 아이콘입니다.",
                 categoryName: "건강"
             ),
             MenuItem(
                 name: "약",
                 price: 3700,
                 symbolId: "pills.fill",
-                description: "알약 형태의 약을 나타내는 아이콘으로, 약물 복용을 상징합니다.",
+                description: "알약 형태의 약을 나타내는 아이콘입니다.",
                 categoryName: "건강"
             ),
             MenuItem(
                 name: "체온계",
                 price: 3800,
-                symbolId: "thermometer",
+                symbolId: "thermometer.sun.fill",
                 description: "온도를 측정하는 체온계를 나타내는 아이콘입니다.",
                 categoryName: "건강"
             ),
@@ -199,7 +199,7 @@ struct MenuItem {
                 name: "운동",
                 price: 3900,
                 symbolId: "figure.walk",
-                description: "걷는 동작을 하는 사람을 나타내는 아이콘으로, 운동을 상징합니다.",
+                description: "걷는 동작을 하는 사람을 나타내는 아이콘입니다.",
                 categoryName: "건강"
             ),
             MenuItem(

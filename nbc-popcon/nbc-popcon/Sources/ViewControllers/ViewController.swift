@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     private let headerView = HeaderView() // 헤더 뷰 (카테고리 선택 포함)
     private let menuView = MenuView() // 메뉴 리스트 뷰
     private let cartView = CartView() // 장바구니 뷰 (ButtonsView 포함)
-    
+
     // MARK: - ViewModel
     
     private let kiosk = Kiosk() // Kiosk ViewModel
@@ -58,6 +58,7 @@ class ViewController: UIViewController {
             make.top.equalTo(menuView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+
     }
     
     // MARK: - Bindings
@@ -74,7 +75,7 @@ class ViewController: UIViewController {
         kiosk.onUpdateAllCategory = { [weak self] categories in
             self?.menuView.configureCategory(categories)
         }
-        
+
         // **MenuView에서 카테고리 변경 시 처리**
         menuView.onCategorySelected = { [weak self] rawValue in
             self?.kiosk.selectCategory(at: rawValue)
