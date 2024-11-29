@@ -22,12 +22,8 @@ class CartItemButtonCell: UITableViewCell {
     private let cartItemImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.image = UIImage(systemName: "trash")?.withRenderingMode(.alwaysOriginal)
         imageView.contentMode = .scaleAspectFill
 
-        imageView.tintColor = ThemeColors.black
-//        imageView.backgroundColor = .gray
-        
         return imageView
     }()
     
@@ -35,7 +31,6 @@ class CartItemButtonCell: UITableViewCell {
     private let cartItemLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "상품 이름"
         label.font = ThemeFonts.h3
         label.textColor = ThemeColors.label
         label.textAlignment = .right
@@ -47,7 +42,6 @@ class CartItemButtonCell: UITableViewCell {
     private let cartItemPriceLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "10,000 원"
         label.font = ThemeFonts.h3
         label.textColor = ThemeColors.blue
         label.textAlignment = .right
@@ -282,9 +276,9 @@ extension CartItemButtonCell {
         let totalPriceFormatted = PriceFormat.wonFormat(cartItem.totalPrice)
      
         cartItemLabel.text = cartItem.menuitem.name
-        cartItemImageView.image = UIImage(systemName: cartItem.menuitem.symbolId)
+        cartItemImageView.image = UIImage(systemName: cartItem.menuitem.symbolId)?.withRenderingMode(.alwaysOriginal)
         cartItemPriceLabel.text = itemPrice
-        cartItemQuantityLabel.text = "주문수량 : \(cartItem.quantity) 개"
+        cartItemQuantityLabel.text = "수량 : \(cartItem.quantity) 개"
         cartItemTotalPriceLabel.text = "= " + totalPriceFormatted
         stepper.value = Double(cartItem.quantity)
     }

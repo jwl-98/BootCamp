@@ -226,7 +226,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 200
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -246,6 +246,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let item = cartItems[indexPath.row]
         cartItemButtonCell.configureData(item)
+        cartItemButtonCell.selectionStyle = .none
 
         return cartItemButtonCell
     }
