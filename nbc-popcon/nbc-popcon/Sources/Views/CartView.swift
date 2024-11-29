@@ -136,6 +136,20 @@ extension CartView {
     }
     
     func updateSummary(totalCount: Int, totalPrice: Int) {
+        
         modalVC.updateSummary(totalCount: totalCount, totalPrice: totalPrice)
+        
+        updateLabel(totalCount: totalCount, totalPrice: totalPrice)
+    }
+    
+    private func updateLabel(totalCount: Int, totalPrice: Int) {
+        
+        self.totalCount = totalCount
+        self.totalPrice = totalPrice
+        
+        let totalPriceFormatted = PriceFormat.wonFormat(totalPrice)
+        
+        self.countTotalItemLabel.text = "장바구니 : \(totalCount) 개"
+        self.totalItemPriceLabel.text = "합계금액 : " + totalPriceFormatted
     }
 }
