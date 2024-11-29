@@ -109,7 +109,7 @@ class SeongtoTestViewController: PopconViewController {
 //        
         
         
-        let _ = ModalManager.createGlobalModal( MenuView() )
+        let _ = ModalManager.createGlobalModal( GlobalTestView() )
     }
 }
 
