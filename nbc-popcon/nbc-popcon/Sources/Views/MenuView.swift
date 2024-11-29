@@ -136,6 +136,13 @@ extension MenuView: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let onCollectionViewCellSelected = self.onMenuItemSelected else { return }
         let menuItem = items[indexPath.item]
         onCollectionViewCellSelected(menuItem)
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.contentView.alpha = 0.5
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            cell?.contentView.alpha = 1.0
+        }
     }
     
 }

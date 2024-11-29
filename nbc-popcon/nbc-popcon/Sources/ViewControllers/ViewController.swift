@@ -115,7 +115,6 @@ class ViewController: UIViewController {
         cartView.onCompleteOrder = { [weak self] in
             guard let message = self?.kiosk.completeOrder() else {
                 return }
-            print(message)
             self?.showAlert(title: "주문 완료", message: message)
         }
         
