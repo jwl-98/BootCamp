@@ -23,14 +23,13 @@ class GlobalModalViewController: UIViewController {
     
     init(target: UIView){
         self.targetView = target
+        
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
     func setupUI() {
         bgView.backgroundColor = ThemeColors.label.withAlphaComponent(0.6)
@@ -60,8 +59,6 @@ class GlobalModalViewController: UIViewController {
         view.addSubview(bgView)
         
         
-        
-        
         bgView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
@@ -83,7 +80,6 @@ class GlobalModalViewController: UIViewController {
             make.top.equalToSuperview().inset(ThemeNumbers.padding)
             make.bottom.equalTo(closeBtn.snp.top).offset(-20)
         }
-        
         
         
     }
