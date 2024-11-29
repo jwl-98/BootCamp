@@ -26,7 +26,7 @@ class CartItemButtonCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
 
         imageView.tintColor = ThemeColors.black
-        //imageView.backgroundColor = .gray
+//        imageView.backgroundColor = .gray
         
         return imageView
     }()
@@ -264,7 +264,6 @@ extension CartItemButtonCell {
         let newValue = Int(sender.value)
         //키오스크에 수정된 값을 전달
         onItemQuantityChanged?(newValue)
-//        self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
     }
     
     private func totalDeleteButtonAction() {
@@ -279,29 +278,14 @@ extension CartItemButtonCell {
     func configureData(_ cartItem: CartItem) {
         self.cartItem = cartItem
         
+        let itemPrice = PriceFormat.wonFormat(cartItem.menuitem.price)
+        let totalPriceFormatted = PriceFormat.wonFormat(cartItem.totalPrice)
+     
         cartItemLabel.text = cartItem.menuitem.name
         cartItemImageView.image = UIImage(systemName: cartItem.menuitem.symbolId)
-        cartItemPriceLabel.text = "\(cartItem.menuitem.price) 원"
+        cartItemPriceLabel.text = itemPrice
         cartItemQuantityLabel.text = "주문수량 : \(cartItem.quantity) 개"
-        cartItemTotalPriceLabel.text = "= \(cartItem.totalPrice) 원"
+        cartItemTotalPriceLabel.text = "= " + totalPriceFormatted
         stepper.value = Double(cartItem.quantity)
     }
 }
-
-
-
-//#Preview {
-//    ViewController()
-//}
-
-/*
- itemQuantity = Double(newValue)
- self.cartItemQuantityLabel.text = "주문수량 : \(Int(itemQuantity)) 개"
- func configureCell(item: CartItem) {
-     cartItemImageView.image = UIImage(systemName: "\(item.name)")
-     cartItemLabel.text = "\(item.name)"
-     cartItemPriceLabel.text = "\(item.price)"
-     cartItemQuantityLabel.text = "주문수량 : \(Int(item.quantity)) 개"
-     //cartItemTotalPriceLabel.text = "= \() 원"
- }
- */

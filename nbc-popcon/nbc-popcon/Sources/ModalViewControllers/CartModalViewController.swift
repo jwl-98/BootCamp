@@ -232,29 +232,7 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cartItemButtonCell = tableView.dequeueReusableCell(withIdentifier: "CartItemButtonCell", for: indexPath) as? CartItemButtonCell else { return UITableViewCell() }
         
-        //let cartItems = kiosk.getCartItems() // Kiosk에서 cartItems 가져오기
-        //let item = cartItems[indexPath.row]  // 현재 행의 아이템 가져오기
-        
-        
-        /*
-         cell.configure(with: item)          // 데이터 전달
-         let index = indexPath.row
-         
-                 cartItemButtonCell.configure(cartItems[index])
-         cartItemButtonCell.selectionStyle = .none // 셀 선택 색상 제거
-         
-         if let onItemQuantityChanged = self.onItemQuantityChanged {
-         cartItemButtonCell.onItemQuantityChanged = { quantity in
-         onItemQuantityChanged(index, quantity) }
-         }
-         
-         if let onRemoveCartItem = self.onRemoveCartItem {
-         cartItemButtonCell.onRemoveCartItem = {
-         onRemoveCartItem(index) }
-         }
-         */
         let index = indexPath.row
-        
         
         if let onItemQuantityChanged = self.onItemQuantityChanged {
         cartItemButtonCell.onItemQuantityChanged = { quantity in
@@ -266,22 +244,16 @@ class CartModalViewController: UIViewController, UITableViewDelegate, UITableVie
         onRemoveCartItem(index) }
         }
         
-        var item = cartItems[indexPath.row]
+        let item = cartItems[indexPath.row]
         cartItemButtonCell.configureData(item)
-        
-        cartItemButtonCell.onItemQuantityChanged = { [weak self] newQuantity in
-            guard let self = self else { return }
-            item.quantity = newQuantity
-            
-            self.cartItems[indexPath.row] = item
-            self.tableView.reloadRows(at: [indexPath], with: .none)
-        }
+
         return cartItemButtonCell
     }
 }
 
 //MARK: - 버튼 액션
 extension CartModalViewController {
+    
     func configureButtonAction() {
         if let onCartClear = self.onCartClear {
             orderButtonsView.onCancelOrder = {
@@ -314,6 +286,14 @@ extension CartModalViewController {
         self.totalCount = totalCount
         self.totalPrice = totalPrice
         //UI업데이트 메서드 필요
+        updateLabel()
+    }
+    
+    private func updateLabel() {
+        let totalPriceFormatted = PriceFormat.wonFormat(totalPrice)
+        
+        countTotalItemLabel.text = "장바구니 : \(totalCount) 개"
+        totalItemPriceLabel.text = "합계금액 : " + totalPriceFormatted
     }
     
     
