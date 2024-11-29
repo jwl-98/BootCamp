@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		231674F62CF86EC400655AD9 /* ALRadioButtons in Frameworks */ = {isa = PBXBuildFile; productRef = 231674F52CF86EC400655AD9 /* ALRadioButtons */; };
+		E9B9871C2CF46A0A006FFF70 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9B9871B2CF46A0A006FFF70 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E2A5FA172CF45B1700916DD1 /* nbc-popcon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nbc-popcon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9B9871C2CF46A0A006FFF70 /* SnapKit in Frameworks */,
+				231674F62CF86EC400655AD9 /* ALRadioButtons in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = "nbc-popcon";
 			packageProductDependencies = (
+				E9B9871B2CF46A0A006FFF70 /* SnapKit */,
+				231674F52CF86EC400655AD9 /* ALRadioButtons */,
 			);
 			productName = "nbc-popcon";
 			productReference = E2A5FA172CF45B1700916DD1 /* nbc-popcon.app */;
@@ -107,6 +116,10 @@
 			);
 			mainGroup = E2A5FA0E2CF45B1700916DD1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E9B9871A2CF46A0A006FFF70 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				231674F42CF86EC400655AD9 /* XCRemoteSwiftPackageReference "ALRadioButtons" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E2A5FA182CF45B1700916DD1 /* Products */;
 			projectDirPath = "";
@@ -145,6 +158,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6924CABL23;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nbc-popcon/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -157,7 +171,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "JW.nbc-popcon";
+				PRODUCT_BUNDLE_IDENTIFIER = "jerry.nbc-popcon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -176,6 +190,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6924CABL23;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nbc-popcon/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -188,7 +203,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "JW.nbc-popcon";
+				PRODUCT_BUNDLE_IDENTIFIER = "jerry.nbc-popcon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -341,6 +356,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		231674F42CF86EC400655AD9 /* XCRemoteSwiftPackageReference "ALRadioButtons" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alxrguz/ALRadioButtons";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
+		E9B9871A2CF46A0A006FFF70 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		231674F52CF86EC400655AD9 /* ALRadioButtons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 231674F42CF86EC400655AD9 /* XCRemoteSwiftPackageReference "ALRadioButtons" */;
+			productName = ALRadioButtons;
+		};
+		E9B9871B2CF46A0A006FFF70 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9B9871A2CF46A0A006FFF70 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E2A5FA0F2CF45B1700916DD1 /* Project object */;
 }
